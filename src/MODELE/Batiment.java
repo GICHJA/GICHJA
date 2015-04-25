@@ -15,5 +15,13 @@ public class Batiment {
     private int id_batiment;
     private List<Service> listservice;
     
+    public int getId_batiment()
+    {
+        return id_batiment ;
+    }
     
+    public void setId_batiment (int x)
+    {
+        this.id_batiment = x ;
+    }
 }
