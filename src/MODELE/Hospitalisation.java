@@ -9,8 +9,22 @@ package MODELE;
  *
  * @author Adrien
  */
-class Hospitalisation {
+public class Hospitalisation {
     
     private int lit;
+    
+    Hospitalisation(){
+        
+    }
+    
+    public int getLit()
+    {
+        return lit;
+    }
+    
+    public void setLit(int x)
+    {
+        this.lit=x;
+    }
     
 }

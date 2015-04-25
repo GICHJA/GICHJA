@@ -11,11 +11,48 @@ import java.util.List;
  *
  * @author Adrien
  */
-class Infirmier extends Employe{
+public class Infirmier extends Employe{
     
     private String rotation;
     private int salaire;
     private List<Chambre> listchambresurveillant;
     
+    Infirmier(){
+        
+    }   
     
+    public String getRotation()
+    {
+        return rotation;
+    }
+    
+    public void setRotation(String rotation)
+    {
+        this.rotation=rotation ;
+    }
+    
+    public int getSalaire()
+    {
+        return salaire;
+    }
+    
+    public void setSalaire(int salaire)
+    {
+        this.salaire=salaire ;
+    }
+    
+    public List<Chambre> getListchambresurveillant()
+    {
+        return listchambresurveillant  ;
+    }
+    
+    public void setListchambresurveillant (List<Chambre> list)
+    {
+        this.listchambresurveillant = list ;
+    }
+    
+    public void ajoutChambre(Chambre chambre)
+    {
+        this.listchambresurveillant.add(chambre);
+    }
 }

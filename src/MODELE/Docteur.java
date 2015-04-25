@@ -9,8 +9,23 @@ package MODELE;
  *
  * @author Adrien
  */
-class Docteur {
+public class Docteur extends Employe{
     
     private String specialite;
+    
+    Docteur(){
+        
+    }
+   
+    public String getSpecialite()
+    {
+        return specialite ;
+    }
+    
+    public void setSpecialite (String spe)
+    {
+        this.specialite = spe ;
+    }
+    
     
 }

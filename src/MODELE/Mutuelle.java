@@ -17,5 +17,44 @@ public class Mutuelle {
     private String nom;
     private List <Malade> listmalade;
     
+    Mutuelle(){
+        
+    }
+    
+    
+    public int getId_mutuelle()
+    {
+        return id_mutuelle;
+    }
+    
+    public void setId_mutuelle(int id)
+    {
+        this.id_mutuelle=id;
+    }
+    
+    public String getNom()
+    {
+        return nom ;
+    }
+    
+    public void setNom (String x)
+    {
+        this.nom = x ;
+    }
+    
+    public List <Malade> getListmalade()
+    {
+        return listmalade;
+    }
+    
+    public void setListmalade(List<Malade> list)
+    {
+        this.listmalade=list;
+    }
+    
+    public void ajoutMalade(Malade malade)
+    {
+        this.listmalade.add(malade);
+    }
     
 }

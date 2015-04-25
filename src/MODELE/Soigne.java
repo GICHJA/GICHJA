@@ -9,6 +9,22 @@ package MODELE;
  *
  * @author Adrien
  */
-class Soigne {
+public class Soigne {
+    
+    private int id_soigne;
+    
+    Soigne(){
+        
+    }
+    
+    public int getId_soigne()
+    {
+        return id_soigne;
+    }
+    
+    public void setId_soigne (int id)
+    {
+        this.id_soigne=id ;
+    }
     
 }
