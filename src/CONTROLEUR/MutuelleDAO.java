@@ -10,5 +10,25 @@ import MODELE.Mutuelle;
  * @author Davy
  */
 public class MutuelleDAO extends DAO <Mutuelle> {
+
+    @Override
+    public Mutuelle find(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mutuelle create(Mutuelle obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Mutuelle update(Mutuelle obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Mutuelle obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -10,5 +10,25 @@ import MODELE.Chambre;
  * @author Davy
  */
 public class ChambreDAO extends DAO <Chambre> {
+
+    @Override
+    public Chambre find(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Chambre create(Chambre obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Chambre update(Chambre obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Chambre obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
