@@ -36,6 +36,15 @@ public class Connexion {
     public ArrayList<String> requetesMaj = new ArrayList<String>(); // liste des requêtes de MAJ
 
     /**
+     * Constructeur de sauvegarde pour connection ultérieur
+     */
+    public Connexion()
+    {
+        
+    }
+    
+    
+    /**
      * Constructeur avec 4 paramètres : username et password ECE, login et password de la BDD
      */
     public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {

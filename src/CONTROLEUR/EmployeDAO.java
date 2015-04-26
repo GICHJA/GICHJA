@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
-
+import MODELE.Employe;
 /**
  *
  * @author Davy
  */
-public class EmployeDAO extends DAO <T> {
+public class EmployeDAO extends DAO <Employe> {
     
     int newattr;
     

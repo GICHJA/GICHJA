@@ -12,10 +12,12 @@ import java.sql.SQLException;
  * @author Adrien
  * @param <T>
  */
-public class DAO <T> extends Connexion {
+public class DAO <T> {
 
-    public DAO(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
-        super(usernameECE, passwordECE, loginDatabase, passwordDatabase);
-    }
+    public Connexion connect = new Connexion();
+            
+           
+    
+ 
     
 }

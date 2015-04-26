@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
+import MODELE.Hospitalisation;
 
 /**
  *
  * @author Davy
  */
-public class HospitalisationDAO extends DAO <T> {
+public class HospitalisationDAO extends DAO <Hospitalisation> {
     
 }

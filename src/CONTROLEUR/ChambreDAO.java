@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
-
+import MODELE.Chambre;
 /**
  *
  * @author Davy
  */
-public class ChambreDAO extends DAO <T> {
+public class ChambreDAO extends DAO <Chambre> {
     
 }

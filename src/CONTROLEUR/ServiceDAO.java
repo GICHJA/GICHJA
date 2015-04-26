@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
-
+import MODELE.Service;
 /**
  *
  * @author Davy
  */
-public class ServiceDAO extends DAO <T> {
+public class ServiceDAO extends DAO <Service> {
     
 }
