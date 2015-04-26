@@ -11,22 +11,40 @@ package MODELE;
  */
 public class Hospitalisation {
     
+    /**
+    * Variable integer qui corresepond au lit reservé pour l'Hospitalisation
+    */
     private int lit;
     
+        /**
+         * Constructeur
+        */
     public Hospitalisation(int lit){
         this.lit = lit;
     }
     
+    /**
+    * Fonction setLit
+     * Retourne l'entier correspondant au lit reservé pour l'hospitalisation
+    */
     public int getLit()
     {
         return lit;
     }
     
+    /**
+    * Fonction setLit
+     * @param x 
+     * Entier Correspondant au lit reservé pour l'hospitalisation
+    */
     public void setLit(int x)
     {
         this.lit=x;
     }
     
+    /**
+    * Fonction D'affichage
+    */
     public void affiche()
     {
         
