@@ -13,9 +13,29 @@ import java.sql.SQLException;
  * @param <T>
  */
 public abstract class DAO <T> {
-
-    public Connexion connect = new Connexion();
     
+    private Connexion maconnexion;
+    
+    
+        public Connexion get_connexion()
+        {
+            return maconnexion;
+        }
+    
+        public void set_connexion(Connexion maconnexion)
+        {
+            this.maconnexion = maconnexion;
+        }
+        
+                        
+    	/**
+	 * Permet de Crée la list d'objet
+	 * @return
+	 */
+	public abstract void init();
+	
+        
+                
     	/**
 	 * Permet de récupérer un objet via son ID
 	 * @param id
@@ -47,3 +67,4 @@ public abstract class DAO <T> {
  
     
 }
+

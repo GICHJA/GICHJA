@@ -13,8 +13,8 @@ public class Hospitalisation {
     
     private int lit;
     
-    Hospitalisation(){
-        
+    public Hospitalisation(int lit){
+        this.lit = lit;
     }
     
     public int getLit()
@@ -25,6 +25,12 @@ public class Hospitalisation {
     public void setLit(int x)
     {
         this.lit=x;
+    }
+    
+    public void affiche()
+    {
+        
+        System.out.print("Lit d'hospitalisation : " + lit);
     }
     
 }

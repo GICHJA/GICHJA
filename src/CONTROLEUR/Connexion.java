@@ -142,6 +142,14 @@ public class Connexion {
     }
 
     /**
+     * Methode qui retourne la resultat de la requete en parametre
+     */
+     public ResultSet result(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        return stmt.executeQuery(requete);
+     }
+    
+    /**
      * Methode qui retourne l'ArrayList des champs de la requete en parametre
      */
     public ArrayList remplirChampsRequete(String requete) throws SQLException {

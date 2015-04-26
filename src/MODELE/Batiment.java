@@ -19,6 +19,7 @@ public class Batiment {
         
     }
     
+    
     public List<Service> getListservice()
     {
         return listservice ;

@@ -5,7 +5,12 @@
  */
 package projet_java_2015;
 
+import CONTROLEUR.ChambreDAO;
 import CONTROLEUR.Connexion;
+import CONTROLEUR.DAO;
+import CONTROLEUR.HospitalisationDAO;
+import MODELE.Chambre;
+import MODELE.Hospitalisation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,19 +41,19 @@ public class PROJET_JAVA_2015 {
         
         try{
         maconnexion = new Connexion(nameECE, passwECE,loginBDD, passwdBDD);
+        DAO<Hospitalisation> HospitalisationDAO;
+            HospitalisationDAO = new HospitalisationDAO();
+        HospitalisationDAO.set_connexion(maconnexion);
+        HospitalisationDAO.init();
+        //Chambre test = new Chambre();
+        //ChambreDAO.create(test);
+        
         }
         catch(SQLException | ClassNotFoundException ex) {
             
         }
         
-        
-        ArrayList remplirChampsRequete = maconnexion.remplirChampsRequete("select * from chambre");
-        
-        for(Object s : remplirChampsRequete)
-        {
-            System.out.print(s);
-            
-        }
+       
     }
     
 }

@@ -17,8 +17,8 @@ public class Chambre {
     private int nb_lit;
     private List<Hospitalisation> listhospitalisation;
     
-    Chambre(){
-        
+    public Chambre(int nblit){
+        this.nb_lit= nb_lit;
     }
     
     public List<Hospitalisation> getListhospitalisation()

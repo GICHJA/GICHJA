@@ -5,11 +5,27 @@
  */
 package CONTROLEUR;
 import MODELE.Chambre;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Davy
  */
 public class ChambreDAO extends DAO <Chambre> {
+    
+    private ArrayList tablechambre = null;
+    private Chambre listchambre = null;
+    
+    
+     @Override
+    public void init() {
+        
+        
+    }
+    
+    
 
     @Override
     public Chambre find(long id) {
@@ -18,7 +34,7 @@ public class ChambreDAO extends DAO <Chambre> {
 
     @Override
     public Chambre create(Chambre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return obj;
     }
 
     @Override
@@ -30,5 +46,6 @@ public class ChambreDAO extends DAO <Chambre> {
     public void delete(Chambre obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+   
 }
