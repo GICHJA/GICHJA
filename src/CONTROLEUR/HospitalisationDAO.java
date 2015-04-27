@@ -85,7 +85,29 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }    
      }
-    
+
+    @Override
+    public int nbrelem() {
+        int nbr = 1 ; 
+        ResultSet result = null;
+        
+          try {
+                String Search = "select COUNT(*) as nbr from hospitalisation";
+             result = this.get_connexion().result("select COUNT(*) AS nbr FROM hospitalisation");
+        
+             if(result.first())
+             {
+                nbr = result.getInt("nbr");
+             }
+        
+        
+         
+                } catch (SQLException ex) {
+            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        return nbr;
+  }
 }
 
 

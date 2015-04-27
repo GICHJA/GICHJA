@@ -58,7 +58,7 @@ public class Hospitalisation {
     public void affiche()
     {
         
-        System.out.print("Lit d'hospitalisation : " + lit);
+        System.out.print("Lit d'hospitalisation : " + lit +"\n");
     }
     
 }
