@@ -4,26 +4,12 @@
  * and open the template in the editor.
  */
 package MODELE;
+import java.util.Date; //https://docs.oracle.com/javase/7/docs/api/java/util/Date.html
 
 /**
  *
  * @author Davy
  */
-
-class Date
-{
-    int jour;
-    int mois;
-    int annee;
-    
-    Date(int jour, int mois, int annee)
-    {
-        this.jour=jour;
-        this.mois=mois;
-        this.annee=annee;
-    }
-    
-}
 
 public class RendezVous 
 {

@@ -18,10 +18,8 @@ public class Malade {
     private String prenom;
     private String tel;
     private String adresse;
-    
-    private List <Soigne> listsoigne;
-    private List <Hospitalisation> listhospitalisation;
-    
+    private List <RendezVous> listrdv;
+
     Malade(){
         
     }
@@ -76,34 +74,20 @@ public class Malade {
         this.adresse = x ;
     }
     
-     public List<Soigne> getListsoigne()
+     public List<RendezVous> getListrdv()
     {
-        return this.listsoigne ;
+        return this.listrdv ;
     }
     
-    public void setList_soigne (List<Soigne> list)
+    public void setList_rdv (List<RendezVous> list)
     {
-        this.listsoigne = list ;
+        this.listrdv = list ;
     }
     
-    public List<Hospitalisation> getListhospitalisation()
-    {
-        return listhospitalisation ;
-    }
     
-    public void setListhospitalisation (List<Hospitalisation> list)
+    public void ajoutrdv(RendezVous rdv)
     {
-        this.listhospitalisation = list ;
-    }
-    
-    public void ajoutHospitalisation(Hospitalisation hospitalisation)
-    {
-        this.listhospitalisation.add(hospitalisation);
-    }
-    
-    public void ajoutSoigne(Soigne soigne)
-    {
-        this.listsoigne.add(soigne);
+        this.listrdv.add(rdv);
     }
     
 }

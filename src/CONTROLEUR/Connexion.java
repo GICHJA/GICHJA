@@ -186,6 +186,8 @@ public class Connexion {
         // Retourner l'ArrayList
         return liste;
     }
+    
+    
 
     /**
      * Méthode qui execute une requete de MAJ en parametre

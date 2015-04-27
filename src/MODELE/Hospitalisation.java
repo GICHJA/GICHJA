@@ -14,6 +14,7 @@ public class Hospitalisation {
     /**
     * Variable integer qui corresepond au lit reservé pour l'Hospitalisation
     */
+    private int id_hospitalisation;
     private int lit;
     
         /**

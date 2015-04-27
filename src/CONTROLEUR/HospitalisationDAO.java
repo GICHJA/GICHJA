@@ -44,6 +44,7 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
 
     @Override
     public void init() {
+        
         ResultSet result = null;
         
                 try {
@@ -65,15 +66,7 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
                 }
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for(Hospitalisation obj : listHospitalisation )
-        {
-            obj.affiche();
-        }
-            
-        
-        
+        }    
      }
     
 }
