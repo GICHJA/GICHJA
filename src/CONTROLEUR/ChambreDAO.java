@@ -36,21 +36,22 @@ public class ChambreDAO extends DAO<Chambre> {
         List<Hospitalisation> listhospitalisation;
         listhospitalisation = new LinkedList();
         try {
-            String Search = "select * from chambre WHERE no_chambre = " + id_chambre;
+            String Search = "select * from chambre, hospitalisation WHERE chambre.id_chambre = " + id_chambre + " AND  chambre.id_chambre =  hospitalisation.id_chambre";
             result = this.get_connexion().result(Search);
-            result2 = this.get_connexion().result("select id_hospitalisation from hospitalisation WHERE no_chambre = " + id_chambre);
 
-            while (result2.next()) {
-                HospitalisationDAO devDAO = new HospitalisationDAO();
+            if (result.first() && result.getInt("id_hospitalisation")!= 0 ) {
+                     result.beforeFirst();
+                while (result.next()) {
+                    HospitalisationDAO devDAO = new HospitalisationDAO();
+                    devDAO.set_connexion(this.get_connexion());
+                    listhospitalisation.add(devDAO.find(result.getInt("id_hospitalisation")));
 
-                listhospitalisation.add(devDAO.find(result.getInt("id_hospitalisation")));
-
+                }
+                // result = this.get_connexion().result(Search);
+                result.first();
+                chambre = new Chambre(id_chambre,
+                        result.getInt("nb_lits"), listhospitalisation);
             }
-            
-            result.first();
-            chambre = new Chambre(id_chambre,
-                    result.getInt("nb_lits"), listhospitalisation);
-
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,7 +75,7 @@ public class ChambreDAO extends DAO<Chambre> {
 
     @Override
     public int nbrelem() {
-                int nbr = 1;
+        int nbr = 1;
         ResultSet result = null;
 
         try {
@@ -91,7 +92,5 @@ public class ChambreDAO extends DAO<Chambre> {
 
         return nbr;
     }
-    
-    
 
 }

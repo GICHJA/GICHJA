@@ -146,7 +146,9 @@ public class Connexion {
      */
      public ResultSet result(String requete) throws SQLException {
         // récupération de l'ordre de la requete
-        return stmt.executeQuery(requete);
+            Statement stmt2;
+         stmt2 = conn.createStatement();
+        return stmt2.executeQuery(requete);
      }
     
     /**

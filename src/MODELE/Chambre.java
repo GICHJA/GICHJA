@@ -56,18 +56,19 @@ public class Chambre {
     public void ajoutHospitalisation(Hospitalisation hospitalisation) {
         this.listhospitalisation.add(hospitalisation);
     }
-    
-    public void affiche()
-    {
+
+    public void affiche() {
         System.out.println("****Chambre**** \n "
-                + "Numéro chambre :  " +id_chambre + "\n "
-                + "Nombre de lit disponible :" +  nb_lit + "\n "
+                + "Numéro chambre :  " + id_chambre + "\n "
+                + "Nombre de lit disponible :" + nb_lit + "\n "
                 + "List Hospitalisation dans la chambre : \n");
-        
-        listhospitalisation.stream().forEach((s) -> {
-            s.affiche();
-        });
-        
+
+        if (listhospitalisation != null) {
+            listhospitalisation.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+
     }
 
 }

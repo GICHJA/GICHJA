@@ -34,10 +34,10 @@ public class PROJET_JAVA_2015 {
         Scanner clavier;
         clavier = new Scanner(System.in);
         
-        nameECE = clavier.nextLine();
+        nameECE = "prieux";
         passwECE = clavier.nextLine();
-        loginBDD = clavier.nextLine();
-        passwdBDD = clavier.nextLine();
+        loginBDD = "prieux-rw";
+        passwdBDD = "hEpFkmQh";
         
         try{
         maconnexion = new Connexion(nameECE, passwECE,loginBDD, passwdBDD);
