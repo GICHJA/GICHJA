@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
+
 import MODELE.Hospitalisation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +18,8 @@ import java.util.logging.Logger;
  *
  * @author Davy
  */
-public class HospitalisationDAO extends DAO <Hospitalisation> {
-    
+public class HospitalisationDAO extends DAO<Hospitalisation> {
+
     private ArrayList tableHospitalisation = new ArrayList();
     private List<Hospitalisation> listHospitalisation = new LinkedList();
 
@@ -26,17 +27,16 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
     public Hospitalisation find(int id) {
         ResultSet result = null;
         Hospitalisation hospitalisation = new Hospitalisation();
-            try {
-                String Search = "select * from hospitalisation WHERE id_hospitalisation = " + id ;
-             result = this.get_connexion().result("select * from hospitalisation WHERE id_hospitalisation = " + id );
+        try {
+            String Search = "select * from hospitalisation WHERE id_hospitalisation = " + id;
+            result = this.get_connexion().result("select * from hospitalisation WHERE id_hospitalisation = " + id);
 
-        
-        if(result.first())
-            hospitalisation = new Hospitalisation(id, 
-                                                  result.getInt("lit"));
-        
-         
-                } catch (SQLException ex) {
+            if (result.first()) {
+                hospitalisation = new Hospitalisation(id,
+                        result.getInt("lit"));
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return hospitalisation;
@@ -59,55 +59,49 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
 
     @Override
     public void init() {
-        
+
         ResultSet result = null;
-        
-                try {
+
+        try {
             tableHospitalisation = this.get_connexion().remplirChampsRequete("select * from hospitalisation");
             result = this.get_connexion().result("select * from hospitalisation");
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
+        
         try {
             while (result.next()) {
                 int lit;
                 int id;
-                    lit = result.getInt("lit");
-                    id = result.getInt("id_hospitalisation");	
-                    Hospitalisation obj;
-                    obj = new Hospitalisation(id,lit);
-                    listHospitalisation.add(obj);
-                    
-                    
-                }
+                lit = result.getInt("lit");
+                id = result.getInt("id_hospitalisation");
+                Hospitalisation obj;
+                obj = new Hospitalisation(id, lit);
+                listHospitalisation.add(obj);
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-     }
+        }
+    }
 
     @Override
     public int nbrelem() {
-        int nbr = 1 ; 
+        int nbr = 1;
         ResultSet result = null;
-        
-          try {
-                String Search = "select COUNT(*) as nbr from hospitalisation";
-             result = this.get_connexion().result("select COUNT(*) AS nbr FROM hospitalisation");
-        
-             if(result.first())
-             {
+
+        try {
+            String Search = "select COUNT(*) as nbr from hospitalisation";
+            result = this.get_connexion().result("select COUNT(*) AS nbr FROM hospitalisation");
+
+            if (result.first()) {
                 nbr = result.getInt("nbr");
-             }
-        
-        
-         
-                } catch (SQLException ex) {
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
         return nbr;
-  }
+    }
 }
-
-
