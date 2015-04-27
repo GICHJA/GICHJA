@@ -68,7 +68,7 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             while (result.next()) {
                 int lit;
@@ -86,17 +86,27 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
     }
 
     @Override
-    public int nbrelem() {
-        int nbr = 1;
+    public int[] nbrelem() {
+        int nbr[] = null;
         ResultSet result = null;
+        int i = 0;
 
         try {
             String Search = "select COUNT(*) as nbr from hospitalisation";
             result = this.get_connexion().result("select COUNT(*) AS nbr FROM hospitalisation");
 
             if (result.first()) {
-                nbr = result.getInt("nbr");
+                 nbr = new int[result.getInt("nbr")];
             }
+            
+            result = this.get_connexion().result("select id_hospitalisation FROM hospitalisation");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("id_hospitalisation");
+                i++;
+            }
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);

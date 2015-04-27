@@ -49,7 +49,7 @@ public class ChambreDAO extends DAO<Chambre> {
                 }
                 // result = this.get_connexion().result(Search);
                 result.first();
-                chambre = new Chambre(id_chambre,
+                chambre = new Chambre(result.getInt("no_chambre"),
                         result.getInt("nb_lits"), listhospitalisation);
             }
         } catch (SQLException ex) {
@@ -74,17 +74,28 @@ public class ChambreDAO extends DAO<Chambre> {
     }
 
     @Override
-    public int nbrelem() {
-        int nbr = 1;
+    public int[] nbrelem() {
+        int nbr[] = null ;
         ResultSet result = null;
+        int i = 0;
 
         try {
             String Search = "select COUNT(*) as nbr from chambre";
             result = this.get_connexion().result("select COUNT(*) AS nbr FROM chambre");
 
             if (result.first()) {
-                nbr = result.getInt("nbr");
+                nbr = new int[result.getInt("nbr")];
             }
+            
+            result = this.get_connexion().result("select id_chambre FROM chambre");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("id_chambre");
+                i++;
+            }
+            
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);

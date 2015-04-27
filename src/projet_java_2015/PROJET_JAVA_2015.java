@@ -37,14 +37,15 @@ public class PROJET_JAVA_2015 {
         nameECE = "prieux";
         passwECE = clavier.nextLine();
         loginBDD = "prieux-rw";
-        passwdBDD = "hEpFkmQh";
+        passwdBDD = clavier.nextLine();
         
         try{
         maconnexion = new Connexion(nameECE, passwECE,loginBDD, passwdBDD);
         DAO<Chambre> ChambreDAO = new ChambreDAO();
         ChambreDAO.set_connexion(maconnexion);
-        for(int i = 1; i < ChambreDAO.nbrelem() ; i++)
-			ChambreDAO.find(i).affiche();
+        int elem[] = ChambreDAO.nbrelem();
+        for(int i=0 ; i < elem.length ; i++)
+			ChambreDAO.find(elem[i]).affiche();
         
         }
         catch(SQLException | ClassNotFoundException ex) {

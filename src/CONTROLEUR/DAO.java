@@ -38,7 +38,7 @@ public abstract class DAO <T> {
 	 * Retourne le nombre d'élement present sur la base de donnée
 	 * @return
 	 */
-	public abstract int nbrelem();
+	public abstract int[] nbrelem();
 	
         
                 

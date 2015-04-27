@@ -68,6 +68,8 @@ public class Chambre {
                 s.affiche();
             });
         }
+        
+        System.out.println("\n********");
 
     }
 

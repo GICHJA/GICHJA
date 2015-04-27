@@ -37,7 +37,7 @@ public class MutuelleDAO extends DAO <Mutuelle> {
     }
     
         @Override
-    public int nbrelem() {
+    public int[] nbrelem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
