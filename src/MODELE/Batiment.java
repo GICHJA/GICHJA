@@ -12,36 +12,44 @@ import java.util.List;
  * @author Adrien
  */
 public class Batiment {
+
     private int id_batiment;
+    private String nom_batiment;
     private List<Service> listservice;
-    
-    Batiment(){
-        
+
+    public Batiment() {
+
     }
-    
-    
-    public List<Service> getListservice()
-    {
-        return listservice ;
+
+    public Batiment(int id_batiment, String nom_batiment, List<Service> listservice) {
+        this.id_batiment = id_batiment;
+        this.nom_batiment = nom_batiment;
+        this.listservice = listservice;
     }
-    
-    public void setId_batiment (List<Service> list)
-    {
-        this.listservice = list ;
+
+    public List<Service> getListservice() {
+        return listservice;
     }
-    
-    public int getId_batiment()
-    {
-        return id_batiment ;
+
+    public void setId_batiment(List<Service> list) {
+        this.listservice = list;
     }
-    
-    public void setId_batiment (int x)
-    {
-        this.id_batiment = x ;
+
+    public int getId_batiment() {
+        return id_batiment;
     }
-    
-    public void ajoutService(Service service)
-    {
+
+    public void setId_batiment(int x) {
+        this.id_batiment = x;
+    }
+
+    public void ajoutService(Service service) {
         this.listservice.add(service);
+    }
+
+    public void affiche() {
+       
+        System.out.println(id_batiment + " +" + nom_batiment);
+
     }
 }

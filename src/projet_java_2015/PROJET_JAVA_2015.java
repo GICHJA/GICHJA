@@ -5,10 +5,12 @@
  */
 package projet_java_2015;
 
+import CONTROLEUR.BatimentDAO;
 import CONTROLEUR.ChambreDAO;
 import CONTROLEUR.Connexion;
 import CONTROLEUR.DAO;
 import CONTROLEUR.HospitalisationDAO;
+import MODELE.Batiment;
 import MODELE.Chambre;
 import MODELE.Hospitalisation;
 import java.sql.SQLException;
@@ -46,6 +48,11 @@ public class PROJET_JAVA_2015 {
         int elem[] = ChambreDAO.nbrelem();
         for(int i=0 ; i < elem.length ; i++)
 			ChambreDAO.find(elem[i]).affiche();
+        
+        DAO<Batiment> BatimentDAO = new BatimentDAO();
+        BatimentDAO.set_connexion(maconnexion);
+        for(int i= 1 ; i <= 2 ; i++)
+            BatimentDAO.find(i).affiche();
         
         }
         catch(SQLException | ClassNotFoundException ex) {

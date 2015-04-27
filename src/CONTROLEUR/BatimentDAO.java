@@ -5,6 +5,13 @@
  */
 package CONTROLEUR;
 import MODELE.Batiment;
+import MODELE.Service;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Davy
@@ -12,8 +19,31 @@ import MODELE.Batiment;
 public class BatimentDAO extends DAO <Batiment> {
 
     @Override
-    public Batiment find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Batiment find(int id_batiment) {
+        ResultSet result = null, result2 = null;
+        Batiment batiment = new Batiment();
+        List<Service> listService;
+        listService = new LinkedList();
+        try {
+            String Search = "select * from batiment, service WHERE batiment.id_batiment = "+id_batiment+" AND  batiment.id_batiment =  service.id_batiment";
+            result = this.get_connexion().result(Search);
+
+            if (result.first() ) {
+                     result.beforeFirst();
+                while (result.next() && result.getInt("id_service")!= 0 ) {
+                    ServiceDAO devDAO = new ServiceDAO();
+                    devDAO.set_connexion(this.get_connexion());
+                    listService.add(devDAO.find(result.getInt("id_service")));
+
+                }
+                result.first();
+                batiment = new Batiment(result.getInt("id_batiment"), result.getString("nom_batiment"), 
+                        listService);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return batiment;
     }
 
     @Override

@@ -39,15 +39,14 @@ public class ChambreDAO extends DAO<Chambre> {
             String Search = "select * from chambre, hospitalisation WHERE chambre.id_chambre = " + id_chambre + " AND  chambre.id_chambre =  hospitalisation.id_chambre";
             result = this.get_connexion().result(Search);
 
-            if (result.first() && result.getInt("id_hospitalisation")!= 0 ) {
+            if (result.first()  ) {
                      result.beforeFirst();
-                while (result.next()) {
+                while (result.next() && result.getInt("id_hospitalisation")!= 0) {
                     HospitalisationDAO devDAO = new HospitalisationDAO();
                     devDAO.set_connexion(this.get_connexion());
                     listhospitalisation.add(devDAO.find(result.getInt("id_hospitalisation")));
 
                 }
-                // result = this.get_connexion().result(Search);
                 result.first();
                 chambre = new Chambre(result.getInt("no_chambre"),
                         result.getInt("nb_lits"), listhospitalisation);

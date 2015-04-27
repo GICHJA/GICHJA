@@ -29,7 +29,7 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         Hospitalisation hospitalisation = new Hospitalisation();
         try {
             String Search = "select * from hospitalisation WHERE id_hospitalisation = " + id;
-            result = this.get_connexion().result("select * from hospitalisation WHERE id_hospitalisation = " + id);
+            result = this.get_connexion().result(Search);
 
             if (result.first()) {
                 hospitalisation = new Hospitalisation(id,
