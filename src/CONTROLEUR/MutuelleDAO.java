@@ -12,7 +12,7 @@ import MODELE.Mutuelle;
 public class MutuelleDAO extends DAO <Mutuelle> {
 
     @Override
-    public Mutuelle find(long id) {
+    public Mutuelle find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

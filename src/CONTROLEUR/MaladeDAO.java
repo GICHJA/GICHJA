@@ -13,7 +13,7 @@ import MODELE.Malade;
 public class MaladeDAO extends DAO <Malade> {
 
     @Override
-    public Malade find(long id) {
+    public Malade find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

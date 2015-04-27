@@ -23,8 +23,23 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
     private List<Hospitalisation> listHospitalisation = new LinkedList();
 
     @Override
-    public Hospitalisation find(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Hospitalisation find(int id) {
+        ResultSet result = null;
+        Hospitalisation hospitalisation = new Hospitalisation();
+            try {
+                String Search = "select * from hospitalisation WHERE id_hospitalisation = " + id ;
+             result = this.get_connexion().result("select * from hospitalisation WHERE id_hospitalisation = " + id );
+
+        
+        if(result.first())
+            hospitalisation = new Hospitalisation(id, 
+                                                  result.getInt("lit"));
+        
+         
+                } catch (SQLException ex) {
+            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hospitalisation;
     }
 
     @Override
@@ -57,9 +72,11 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
         try {
             while (result.next()) {
                 int lit;
+                int id;
                     lit = result.getInt("lit");
+                    id = result.getInt("id_hospitalisation");	
                     Hospitalisation obj;
-                    obj = new Hospitalisation(lit);
+                    obj = new Hospitalisation(id,lit);
                     listHospitalisation.add(obj);
                     
                     
@@ -70,3 +87,5 @@ public class HospitalisationDAO extends DAO <Hospitalisation> {
      }
     
 }
+
+

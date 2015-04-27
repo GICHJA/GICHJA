@@ -20,8 +20,17 @@ public class Hospitalisation {
         /**
          * Constructeur
         */
-    public Hospitalisation(int lit){
+    public Hospitalisation(int id_hospitalisation,int lit){
         this.lit = lit;
+        this.id_hospitalisation = id_hospitalisation;
+    }
+    
+           /**
+         * Constructeur vide
+        */
+    public Hospitalisation(){
+        this.lit = 0;
+        this.id_hospitalisation = 0;
     }
     
     /**

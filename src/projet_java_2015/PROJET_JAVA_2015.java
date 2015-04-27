@@ -41,12 +41,10 @@ public class PROJET_JAVA_2015 {
         
         try{
         maconnexion = new Connexion(nameECE, passwECE,loginBDD, passwdBDD);
-        DAO<Hospitalisation> HospitalisationDAO;
-            HospitalisationDAO = new HospitalisationDAO();
+        DAO<Hospitalisation> HospitalisationDAO = new HospitalisationDAO();
         HospitalisationDAO.set_connexion(maconnexion);
-        HospitalisationDAO.init();
-        //Chambre test = new Chambre();
-        //ChambreDAO.create(test);
+        for(int i = 1; i <= 2; i++)
+			HospitalisationDAO.find(i).affiche();
         
         }
         catch(SQLException | ClassNotFoundException ex) {

@@ -12,7 +12,7 @@ import MODELE.Service;
 public class ServiceDAO extends DAO <Service> {
 
     @Override
-    public Service find(long id) {
+    public Service find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

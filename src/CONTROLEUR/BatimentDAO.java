@@ -12,7 +12,7 @@ import MODELE.Batiment;
 public class BatimentDAO extends DAO <Batiment> {
 
     @Override
-    public Batiment find(long id) {
+    public Batiment find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
