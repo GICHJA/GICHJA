@@ -20,7 +20,7 @@ public class RendezVous
     private Date date_dep ;
     private String motif;
     private Hospitalisation hospitalisation;
-    private Soigne soigne; 
+    private Docteur soigne; 
     
     public RendezVous(){
              this.no_rdv = 0;
@@ -31,7 +31,7 @@ public class RendezVous
         this.soigne = null;
     }
 
-    public RendezVous(int no_rdv, Date date_arr, Date date_dep, String motif, Hospitalisation hospitalisation, Soigne soigne) {
+    public RendezVous(int no_rdv, Date date_arr, Date date_dep, String motif, Hospitalisation hospitalisation, Docteur soigne) {
         this.no_rdv = no_rdv;
         this.date_arr = date_arr;
         this.date_dep = date_dep;
@@ -39,8 +39,6 @@ public class RendezVous
         this.hospitalisation = hospitalisation;
         this.soigne = soigne;
     }
-    
-    
     
     
     public int getNo_rdv()
@@ -93,12 +91,12 @@ public class RendezVous
         this.hospitalisation=hospitalisation;
     }
     
-    public Soigne getSoigne()
+    public Docteur getSoigne()
     {
         return soigne;
     }
     
-    public void setSoigne(Soigne soigne)
+    public void setSoigne(Docteur soigne)
     {
         this.soigne=soigne;
     }
