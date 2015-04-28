@@ -12,16 +12,16 @@ import java.util.List;
  * @author Adrien
  */
 public class Malade {
-    
+
     private int id_malade;
     private String nom;
     private String prenom;
     private String tel;
     private String adresse;
-    private List <RendezVous> listrdv;
+    private List<RendezVous> listrdv;
 
-    public Malade(){
-              this.id_malade = 0;
+    public Malade() {
+        this.id_malade = 0;
         this.nom = "";
         this.prenom = "";
         this.tel = "";
@@ -37,73 +37,57 @@ public class Malade {
         this.adresse = adresse;
         this.listrdv = listrdv;
     }
-    
-    
-    
-    public int getId_malade()
-    {
-        return id_malade ;
+
+    public int getId_malade() {
+        return id_malade;
     }
-    
-    public void setId_malade(int id)
-    {
-        this.id_malade=id ;
+
+    public void setId_malade(int id) {
+        this.id_malade = id;
     }
-    
-    public String getNom()
-    {
-        return nom ;
+
+    public String getNom() {
+        return nom;
     }
-    
-    public void setNom (String x)
-    {
-        this.nom = x ;
+
+    public void setNom(String x) {
+        this.nom = x;
     }
-    
-    public String getPrenom()
-    {
-        return prenom ;
+
+    public String getPrenom() {
+        return prenom;
     }
-    
-    public void setPrenom (String x)
-    {
-        this.prenom = x ;
+
+    public void setPrenom(String x) {
+        this.prenom = x;
     }
-    
-    public String getTel()
-    {
-        return tel ;
+
+    public String getTel() {
+        return tel;
     }
-    
-    public void setTel (String x)
-    {
-        this.tel = x ;
+
+    public void setTel(String x) {
+        this.tel = x;
     }
-    
-    public String getAdresse()
-    {
-        return adresse ;
+
+    public String getAdresse() {
+        return adresse;
     }
-    
-    public void setAdresse (String x)
-    {
-        this.adresse = x ;
+
+    public void setAdresse(String x) {
+        this.adresse = x;
     }
-    
-     public List<RendezVous> getListrdv()
-    {
-        return this.listrdv ;
+
+    public List<RendezVous> getListrdv() {
+        return this.listrdv;
     }
-    
-    public void setList_rdv (List<RendezVous> list)
-    {
-        this.listrdv = list ;
+
+    public void setList_rdv(List<RendezVous> list) {
+        this.listrdv = list;
     }
-    
-    
-    public void ajoutrdv(RendezVous rdv)
-    {
+
+    public void ajoutrdv(RendezVous rdv) {
         this.listrdv.add(rdv);
     }
-    
+
 }

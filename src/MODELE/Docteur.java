@@ -23,8 +23,8 @@ public class Docteur extends Employe{
     }
 
 
-    public Docteur(String specialite, List<Soigne> listsoigne, int id_employe, String nom, String prenom, String tel) {
-        super(id_employe, nom, prenom, tel);
+    public Docteur(String specialite, List<Soigne> listsoigne, int id_employe, String nom, String prenom, String adresse, String tel) {
+        super(id_employe, nom, prenom,adresse , tel);
         this.specialite = specialite;
         this.listsoigne = listsoigne;
     }

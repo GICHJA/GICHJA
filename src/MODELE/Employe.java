@@ -27,10 +27,11 @@ public class Employe {
         this.tel = "";
     }
 
-    public Employe(int id_employe, String nom, String prenom, String tel) {
+    public Employe(int id_employe, String nom, String prenom,String adresse, String tel) {
         this.id_employe = id_employe;
         this.nom = nom;
         this.prenom = prenom;
+       this.adresse = adresse;
         this.tel = tel;
     }
 

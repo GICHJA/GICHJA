@@ -4,18 +4,42 @@
  * and open the template in the editor.
  */
 package CONTROLEUR;
+
 import MODELE.Employe;
+import MODELE.Hospitalisation;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Davy
  */
-public class EmployeDAO extends DAO <Employe> {
-    
+public class EmployeDAO extends DAO<Employe> {
+
     int newattr;
 
     @Override
     public Employe find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        Employe employe = new Employe();
+        try {
+            String Search = "select * from employe WHERE numero = " + id;
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                employe = new Employe(id,
+                        result.getString("nom"),
+                        result.getString("prenom"),
+                        result.getString("adresse"),
+                        result.getString("tel"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return employe;
     }
 
     @Override
@@ -38,7 +62,7 @@ public class EmployeDAO extends DAO <Employe> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-     @Override
+    @Override
     public int[] nbrelem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
