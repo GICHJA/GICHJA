@@ -20,9 +20,26 @@ public class Service {
     private List<Hospitalisation> listhospitalisation;
     private List<Chambre> listchambre;
     
-    Service(){
-        
+    public Service(){
+             this.id_service = 0;
+        this.nom = "";
+        this.directeur = null;
+        this.listinfirmier = null;
+        this.listhospitalisation = null;
+        this.listchambre = null;   
     }
+
+    public Service(int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Hospitalisation> listhospitalisation, List<Chambre> listchambre) {
+        this.id_service = id_service;
+        this.nom = nom;
+        this.directeur = directeur;
+        this.listinfirmier = listinfirmier;
+        this.listhospitalisation = listhospitalisation;
+        this.listchambre = listchambre;
+    }
+    
+    
+    
     
     public int getId_service()
     {

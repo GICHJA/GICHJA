@@ -13,9 +13,15 @@ public class Soigne {
     
     private int id_soigne;
     
-    Soigne(){
-        
+    public Soigne(){
+        this.id_soigne = 0;
     }
+
+    public Soigne(int id_soigne) {
+        this.id_soigne = id_soigne;
+    }
+    
+    
     
     public int getId_soigne()
     {

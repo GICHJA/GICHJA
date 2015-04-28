@@ -12,79 +12,79 @@ import java.util.List;
  * @author Adrien
  */
 public class Employe {
+
     private int id_employe;
     private String nom;
     private String prenom;
     private String tel;
     private String adresse;
     private List<Soigne> listsoigne;
-    
-    Employe(){
-        
+
+    public Employe() {
+        this.id_employe = 0;
+        this.nom = "";
+        this.prenom = "";
+        this.tel = "";
+        this.listsoigne = null;
     }
-    
-    public int getId_employe()
-    {
-        return id_employe ;
+
+    public Employe(int id_employe, String nom, String prenom, String tel, List<Soigne> listsoigne) {
+        this.id_employe = id_employe;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.listsoigne = listsoigne;
     }
-    
-    public void setId_employe (int x)
-    {
-        this.id_employe = x ;
+
+    public int getId_employe() {
+        return id_employe;
     }
-    
-    public String getNom()
-    {
-        return nom ;
+
+    public void setId_employe(int x) {
+        this.id_employe = x;
     }
-    
-    public void setNom (String x)
-    {
-        this.nom = x ;
+
+    public String getNom() {
+        return nom;
     }
-    
-    public String getPrenom()
-    {
-        return prenom ;
+
+    public void setNom(String x) {
+        this.nom = x;
     }
-    
-    public void setPrenom (String x)
-    {
-        this.prenom = x ;
+
+    public String getPrenom() {
+        return prenom;
     }
-    
-    public String getTel()
-    {
-        return tel ;
+
+    public void setPrenom(String x) {
+        this.prenom = x;
     }
-    
-    public void setTel (String x)
-    {
-        this.tel = x ;
+
+    public String getTel() {
+        return tel;
     }
-    
-    public String getAdresse()
-    {
-        return adresse ;
+
+    public void setTel(String x) {
+        this.tel = x;
     }
-    
-    public void setAdresse (String x)
-    {
-        this.adresse = x ;
+
+    public String getAdresse() {
+        return adresse;
     }
-    
-     public List<Soigne> getListsoigne()
-    {
-        return this.listsoigne ;
+
+    public void setAdresse(String x) {
+        this.adresse = x;
     }
-    
-    public void setList_soigne (List<Soigne> list)
-    {
-        this.listsoigne = list ;
+
+    public List<Soigne> getListsoigne() {
+        return this.listsoigne;
     }
-    
-    public void ajoutSoigne(Soigne soigne)
-    {
+
+    public void setList_soigne(List<Soigne> list) {
+        this.listsoigne = list;
+    }
+
+    public void ajoutSoigne(Soigne soigne) {
         this.listsoigne.add(soigne);
     }
 }

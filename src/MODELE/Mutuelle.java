@@ -12,49 +12,49 @@ import java.util.List;
  * @author Adrien
  */
 public class Mutuelle {
-    
+
     private int id_mutuelle;
     private String nom;
-    private List <Malade> listmalade;
-    
-    Mutuelle(){
-        
+    private List<Malade> listmalade;
+
+    public Mutuelle() {
+        this.id_mutuelle = 0;
+        this.nom = "";
+        this.listmalade = null;
     }
-    
-    
-    public int getId_mutuelle()
-    {
+
+    public Mutuelle(int id_mutuelle, String nom, List<Malade> listmalade) {
+        this.id_mutuelle = id_mutuelle;
+        this.nom = nom;
+        this.listmalade = listmalade;
+    }
+
+    public int getId_mutuelle() {
         return id_mutuelle;
     }
-    
-    public void setId_mutuelle(int id)
-    {
-        this.id_mutuelle=id;
+
+    public void setId_mutuelle(int id) {
+        this.id_mutuelle = id;
     }
-    
-    public String getNom()
-    {
-        return nom ;
+
+    public String getNom() {
+        return nom;
     }
-    
-    public void setNom (String x)
-    {
-        this.nom = x ;
+
+    public void setNom(String x) {
+        this.nom = x;
     }
-    
-    public List <Malade> getListmalade()
-    {
+
+    public List<Malade> getListmalade() {
         return listmalade;
     }
-    
-    public void setListmalade(List<Malade> list)
-    {
-        this.listmalade=list;
+
+    public void setListmalade(List<Malade> list) {
+        this.listmalade = list;
     }
-    
-    public void ajoutMalade(Malade malade)
-    {
+
+    public void ajoutMalade(Malade malade) {
         this.listmalade.add(malade);
     }
-    
+
 }

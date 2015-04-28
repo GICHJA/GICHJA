@@ -22,9 +22,25 @@ public class RendezVous
     private Hospitalisation hospitalisation;
     private Soigne soigne; 
     
-    RendezVous(){
-        
+    public RendezVous(){
+             this.no_rdv = 0;
+        this.date_arr = new Date();
+        this.date_dep = new Date();
+        this.motif = "";
+        this.hospitalisation = null;
+        this.soigne = null;
     }
+
+    public RendezVous(int no_rdv, Date date_arr, Date date_dep, String motif, Hospitalisation hospitalisation, Soigne soigne) {
+        this.no_rdv = no_rdv;
+        this.date_arr = date_arr;
+        this.date_dep = date_dep;
+        this.motif = motif;
+        this.hospitalisation = hospitalisation;
+        this.soigne = soigne;
+    }
+    
+    
     
     
     public int getNo_rdv()

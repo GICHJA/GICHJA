@@ -20,9 +20,25 @@ public class Malade {
     private String adresse;
     private List <RendezVous> listrdv;
 
-    Malade(){
-        
+    public Malade(){
+              this.id_malade = 0;
+        this.nom = "";
+        this.prenom = "";
+        this.tel = "";
+        this.adresse = "";
+        this.listrdv = null;
     }
+
+    public Malade(int id_malade, String nom, String prenom, String tel, String adresse, List<RendezVous> listrdv) {
+        this.id_malade = id_malade;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.listrdv = listrdv;
+    }
+    
+    
     
     public int getId_malade()
     {

@@ -18,6 +18,9 @@ public class Batiment {
     private List<Service> listservice;
 
     public Batiment() {
+         this.id_batiment = 0;
+        this.nom_batiment = "";
+        this.listservice = null;
 
     }
 

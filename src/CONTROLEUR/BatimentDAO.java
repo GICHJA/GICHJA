@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *
- * @author Davy
+ * @author Adrien
  */
 public class BatimentDAO extends DAO <Batiment> {
 

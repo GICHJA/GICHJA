@@ -14,8 +14,14 @@ public class Docteur extends Employe{
     private String specialite;
     
     Docteur(){
-        
+         this.specialite = "";
     }
+
+    public Docteur(String specialite) {
+        this.specialite = specialite;
+    }
+    
+    
    
     public String getSpecialite()
     {
@@ -26,6 +32,8 @@ public class Docteur extends Employe{
     {
         this.specialite = spe ;
     }
+    
+    
     
     
 }
