@@ -11,59 +11,66 @@ import java.util.List;
  *
  * @author Adrien
  */
-public class Infirmier extends Employe{
-    
+public class Infirmier extends Employe {
+
     private String rotation;
     private double salaire;
     private List<Chambre> listchambresurveillant;
-    
-    public Infirmier(){
-                super();
+
+    public Infirmier() {
+        super();
         this.rotation = "";
         this.salaire = 0;
         this.listchambresurveillant = null;
-    }   
+    }
 
-    public Infirmier(String rotation, double salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom,String adresse, String tel) {
-        super(id_employe, nom, prenom,adresse , tel);
+    public Infirmier(String rotation, double salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom, String adresse, String tel) {
+        super(id_employe, nom, prenom, adresse, tel);
         this.rotation = rotation;
         this.salaire = salaire;
         this.listchambresurveillant = listchambresurveillant;
     }
-    
-    
-    public String getRotation()
-    {
+
+    public String getRotation() {
         return rotation;
     }
-    
-    public void setRotation(String rotation)
-    {
-        this.rotation=rotation ;
+
+    public void setRotation(String rotation) {
+        this.rotation = rotation;
     }
-    
-    public double getSalaire()
-    {
+
+    public double getSalaire() {
         return salaire;
     }
-    
-    public void setSalaire(double salaire)
-    {
-        this.salaire=salaire ;
+
+    public void setSalaire(double salaire) {
+        this.salaire = salaire;
     }
-    
-    public List<Chambre> getListchambresurveillant()
-    {
-        return listchambresurveillant  ;
+
+    public List<Chambre> getListchambresurveillant() {
+        return listchambresurveillant;
     }
-    
-    public void setListchambresurveillant (List<Chambre> list)
-    {
-        this.listchambresurveillant = list ;
+
+    public void setListchambresurveillant(List<Chambre> list) {
+        this.listchambresurveillant = list;
     }
-    
-    public void ajoutChambre(Chambre chambre)
-    {
+
+    public void ajoutChambre(Chambre chambre) {
         this.listchambresurveillant.add(chambre);
+    }
+
+    public void affiche() {
+        
+         super.affiche();
+        
+               System.out.println("inf : rotation - " + rotation +  " salaire - " +salaire +  "\n");
+        
+        if (listchambresurveillant != null) {
+            listchambresurveillant.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+        
+        
     }
 }

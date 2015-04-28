@@ -12,19 +12,19 @@ import java.util.List;
  * @author Adrien
  */
 public class Service {
-    
+
     private String id_service;
     private String nom;
     private Docteur directeur;
     private List<Infirmier> listinfirmier;
     private List<Chambre> listchambre;
-    
-    public Service(){
-             this.id_service = null;
+
+    public Service() {
+        this.id_service = null;
         this.nom = "";
         this.directeur = null;
         this.listinfirmier = null;
-        this.listchambre = null;   
+        this.listchambre = null;
     }
 
     public Service(String id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre) {
@@ -34,70 +34,73 @@ public class Service {
         this.listinfirmier = listinfirmier;
         this.listchambre = listchambre;
     }
-    
-    
-    
-    
-    public String getId_service()
-    {
+
+    public String getId_service() {
         return id_service;
     }
-    
-    public void setId_service(String id)
-    {
-        this.id_service=id;
+
+    public void setId_service(String id) {
+        this.id_service = id;
     }
-    
-    public String getNom()
-    {
-        return nom ;
+
+    public String getNom() {
+        return nom;
     }
-    
-    public void setNom (String x)
-    {
-        this.nom = x ;
+
+    public void setNom(String x) {
+        this.nom = x;
     }
-    
-    public Docteur getDirecteur ()
-    {
+
+    public Docteur getDirecteur() {
         return directeur;
     }
-    
-    public void setDirecteur(Docteur dir)
-    {
-        this.directeur=dir ;
+
+    public void setDirecteur(Docteur dir) {
+        this.directeur = dir;
     }
-    
-    
-    public List<Chambre> getListchambre()
-    {
-        return listchambre  ;
+
+    public List<Chambre> getListchambre() {
+        return listchambre;
     }
-    
-    public void setListchambre (List<Chambre> list)
-    {
-        this.listchambre = list ;
+
+    public void setListchambre(List<Chambre> list) {
+        this.listchambre = list;
     }
-    
-    public List<Infirmier> getListinfirmier()
-    {
+
+    public List<Infirmier> getListinfirmier() {
         return listinfirmier;
     }
-    
-    public void setListinfirmier(List <Infirmier> list)
-    {
-        this.listinfirmier=list ;
+
+    public void setListinfirmier(List<Infirmier> list) {
+        this.listinfirmier = list;
     }
-    
- 
-    public void ajoutChambre(Chambre chambre)
-    {
+
+    public void ajoutChambre(Chambre chambre) {
         this.listchambre.add(chambre);
     }
-    
-    public void ajoutInfirmier(Infirmier infirmier)
-    {
+
+    public void ajoutInfirmier(Infirmier infirmier) {
         this.listinfirmier.add(infirmier);
     }
-    
+
+    public void affiche() {
+
+        System.out.println("Service  : id_service - " + id_service + " nom -  " + nom + "\n");
+
+        if (listinfirmier != null) {
+            listinfirmier.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+        
+             if (listchambre != null) {
+            listchambre.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+          
+             directeur.affiche();
+
+}
+
 }

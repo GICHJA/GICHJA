@@ -52,7 +52,16 @@ public class Batiment {
 
     public void affiche() {
        
-        System.out.println(id_batiment + " +" + nom_batiment);
+        System.out.println("Bat : id_batiment - " + id_batiment + " +  nom_batiment - " + nom_batiment + "\n");
+        
+        if (listservice != null) {
+            listservice.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+        
+      
+        
 
     }
 }

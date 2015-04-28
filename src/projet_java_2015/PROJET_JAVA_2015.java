@@ -10,9 +10,11 @@ import CONTROLEUR.ChambreDAO;
 import CONTROLEUR.Connexion;
 import CONTROLEUR.DAO;
 import CONTROLEUR.HospitalisationDAO;
+import CONTROLEUR.ServiceDAO;
 import MODELE.Batiment;
 import MODELE.Chambre;
 import MODELE.Hospitalisation;
+import MODELE.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -43,21 +45,26 @@ public class PROJET_JAVA_2015 {
         
         try{
         maconnexion = new Connexion(nameECE, passwECE,loginBDD, passwdBDD);
-        DAO<Chambre> ChambreDAO = new ChambreDAO();
+    /*    DAO<Chambre> ChambreDAO = new ChambreDAO();
         ChambreDAO.set_connexion(maconnexion);
         int elem[] = ChambreDAO.nbrelem();
         for(int i=0 ; i < elem.length ; i++)
-			ChambreDAO.find(elem[i]).affiche();
+			ChambreDAO.find(elem[i]).affiche();*/
         
-        DAO<Batiment> BatimentDAO = new BatimentDAO();
-        BatimentDAO.set_connexion(maconnexion);
-        for(int i= 1 ; i <= 2 ; i++)
-            BatimentDAO.find(i).affiche();
+        DAO<Service> ServiceDAO = new ServiceDAO();
+        ServiceDAO.set_connexion(maconnexion);
+        for(int i= 1 ; i <= 3 ; i++)
+        {
+            ServiceDAO.find(i).affiche();
+            System.out.println("\n *************************************************** \n ");
         
+        }
         }
         catch(SQLException | ClassNotFoundException ex) {
             
         }
+        
+        
         
    return;
         

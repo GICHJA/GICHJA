@@ -33,7 +33,9 @@ public class RendezVousDAO extends DAO<RendezVous> {
             result = this.get_connexion().result(Search);
 
                 if (result.first()) {
-                obj = new RendezVous(id,result.getDate("datearr"),result.getDate("atedep"),result.getString("motif"));
+                obj = new RendezVous(id,result.getString("datearr"),result.getString("datedep"),result.getString("motif"));
+                
+                
             }
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre*/
             

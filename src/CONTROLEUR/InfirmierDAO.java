@@ -48,7 +48,7 @@ public class InfirmierDAO extends DAO<Infirmier>{
 
                 }
                 result.first();
-                obj = new Infirmier(result.getString("Infirmier"), result.getDouble("salaire"),
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
                                        listobj, id, result.getString("nom")  
                         ,result.getString("prenom"),result.getString("adresse")
                         ,result.getString("tel"));

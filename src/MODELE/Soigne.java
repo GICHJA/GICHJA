@@ -33,4 +33,9 @@ public class Soigne {
         this.id_soigne=id ;
     }
     
+    public void affiche() {
+        
+        
+    }
+    
 }

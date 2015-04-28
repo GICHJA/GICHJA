@@ -89,5 +89,20 @@ public class Malade {
     public void ajoutrdv(RendezVous rdv) {
         this.listrdv.add(rdv);
     }
+    
+    public void affiche() {
+        
+                
+        System.out.println("Malade  : id_malade - " + id_malade + " nom -  " + nom + " prenom -  " + prenom + " tel -  " + tel + " adresse -  "
+                + adresse + "\n");
+
+        if (listrdv != null) {
+            listrdv.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }
+        
+
+    }
 
 }

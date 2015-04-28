@@ -18,7 +18,6 @@ public class Employe {
     private String prenom;
     private String tel;
     private String adresse;
-    
 
     public Employe() {
         this.id_employe = 0;
@@ -27,11 +26,11 @@ public class Employe {
         this.tel = "";
     }
 
-    public Employe(int id_employe, String nom, String prenom,String adresse, String tel) {
+    public Employe(int id_employe, String nom, String prenom, String adresse, String tel) {
         this.id_employe = id_employe;
         this.nom = nom;
         this.prenom = prenom;
-       this.adresse = adresse;
+        this.adresse = adresse;
         this.tel = tel;
     }
 
@@ -75,5 +74,10 @@ public class Employe {
         this.adresse = x;
     }
 
+    public void affiche() {
+
+        System.out.println("Emp : id_employe - " + id_employe + " nom - " + nom + " prenom- " + prenom +" tel- " + tel +" adresse -" + adresse + "\n");
+
+    }
 
 }

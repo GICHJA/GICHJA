@@ -58,10 +58,10 @@ public class Chambre {
     }
 
     public void affiche() {
-        System.out.println("****Chambre**** \n "
-                + "Numéro chambre :  " + id_chambre + "\n "
-                + "Nombre de lit disponible :" + nb_lit + "\n "
-                + "List Hospitalisation dans la chambre : \n");
+       
+        
+        System.out.println("Bat : id_chambre - " + id_chambre + " +  nb_lit - " + nb_lit + "\n");
+                
 
         if (listhospitalisation != null) {
             listhospitalisation.stream().forEach((s) -> {
@@ -69,7 +69,6 @@ public class Chambre {
             });
         }
         
-        System.out.println("\n********");
 
     }
 
