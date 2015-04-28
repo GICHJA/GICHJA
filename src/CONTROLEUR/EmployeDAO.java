@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Davy
+ * @author Adrien
  */
 public class EmployeDAO extends DAO<Employe> {
 
