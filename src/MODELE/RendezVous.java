@@ -19,26 +19,24 @@ public class RendezVous
     private Date date_arr;
     private Date date_dep ;
     private String motif;
-    private Hospitalisation hospitalisation;
-    private Docteur soigne; 
+    //private Hospitalisation hospitalisation;
+    //private Docteur soigne; 
     
-    public RendezVous(){
-             this.no_rdv = 0;
-        this.date_arr = new Date();
-        this.date_dep = new Date();
+        public RendezVous() {
+        this.no_rdv = 0;
+        this.date_arr = new  Date();
+        this.date_dep = new  Date();
         this.motif = "";
-        this.hospitalisation = null;
-        this.soigne = null;
     }
 
-    public RendezVous(int no_rdv, Date date_arr, Date date_dep, String motif, Hospitalisation hospitalisation, Docteur soigne) {
+    public RendezVous(int no_rdv, Date date_arr, Date date_dep, String motif) {
         this.no_rdv = no_rdv;
         this.date_arr = date_arr;
         this.date_dep = date_dep;
         this.motif = motif;
-        this.hospitalisation = hospitalisation;
-        this.soigne = soigne;
     }
+    
+
     
     
     public int getNo_rdv()
@@ -79,26 +77,6 @@ public class RendezVous
     public void setMotif(String motif)
     {
         this.motif=motif;
-    }
-    
-    public Hospitalisation getHospitalisation()
-    {
-        return hospitalisation;
-    }
-    
-    public void setHospitalisation(Hospitalisation hospitalisation)
-    {
-        this.hospitalisation=hospitalisation;
-    }
-    
-    public Docteur getSoigne()
-    {
-        return soigne;
-    }
-    
-    public void setSoigne(Docteur soigne)
-    {
-        this.soigne=soigne;
     }
     
     

@@ -28,43 +28,15 @@ public class RendezVousDAO extends DAO<RendezVous> {
     public RendezVous find(int id) {
         ResultSet result = null;
         RendezVous obj = new RendezVous();
-        Hospitalisation obj2= new Hospitalisation();
-        
-        Docteur directeur = new Docteur();
         try {
-        /*    String Search = "SELECT * FROM service, infirmier WHERE id_service = " + id + " AND infirmier.code_service = service.code";
+            String Search = "SELECT * FROM rendezvous WHERE no_rdv = " + id + "";
             result = this.get_connexion().result(Search);
 
-            if (result.first()) {
-                result.beforeFirst();
-                while (result.next() && result.getInt("numero") != 0) {
-                    InfirmierDAO objDAO = new InfirmierDAO();
-                    objDAO.set_connexion(this.get_connexion());
-                    listobj.add(objDAO.find(result.getInt("numero")));
-
-                }
+                if (result.first()) {
+                obj = new RendezVous(id,result.getDate("datearr"),result.getDate("atedep"),result.getString("motif"));
             }
-
-            Search = "SELECT * FROM service, chambre WHERE id_service = " + id + " AND chambre.code_service = service.code";
-            result = this.get_connexion().result(Search);
-
-            if (result.first()) {
-                result.beforeFirst();
-                while (result.next() && result.getInt("no_chambre") != 0) {
-                    ChambreDAO objDAO2 = new ChambreDAO();
-                    objDAO2.set_connexion(this.get_connexion());
-                    listobj2.add(objDAO2.find(result.getInt("no_chambre")));
-
-                }
-
-                result.first();
-                DocteurDAO objDAO3 = new DocteurDAO();
-                objDAO3.set_connexion(this.get_connexion());
-                directeur = objDAO3.find(result.getInt("directeur"));
-                obj = new Service(result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
-
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre*/
-            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
