@@ -14,19 +14,19 @@ import java.util.List;
 public class Docteur extends Employe{
     
     private String specialite;
-    private List<Soigne> listsoigne;
-    
-    Docteur(){
+    private List<RendezVous> listrdv;
+ 
+    public Docteur(){
           super();
         this.specialite = "";
-        this.listsoigne = null;
+        this.listrdv = null;
     }
 
 
-    public Docteur(String specialite, List<Soigne> listsoigne, int id_employe, String nom, String prenom, String adresse, String tel) {
+    public Docteur(String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel) {
         super(id_employe, nom, prenom,adresse , tel);
         this.specialite = specialite;
-        this.listsoigne = listsoigne;
+        this.listrdv = listrdv;
     }
     
     
@@ -43,16 +43,16 @@ public class Docteur extends Employe{
         this.specialite = spe ;
     }
     
-        public List<Soigne> getListsoigne() {
-        return this.listsoigne;
+        public List<RendezVous> getListsoigne() {
+        return this.listrdv;
     }
 
-    public void setList_soigne(List<Soigne> list) {
-        this.listsoigne = list;
+    public void setList_soigne(List<RendezVous> list) {
+        this.listrdv = list;
     }
 
-    public void ajoutSoigne(Soigne soigne) {
-        this.listsoigne.add(soigne);
+    public void ajoutSoigne(RendezVous rdv) {
+        this.listrdv.add(rdv);
     }
     
     
