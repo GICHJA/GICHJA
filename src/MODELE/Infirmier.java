@@ -14,7 +14,7 @@ import java.util.List;
 public class Infirmier extends Employe{
     
     private String rotation;
-    private int salaire;
+    private double salaire;
     private List<Chambre> listchambresurveillant;
     
     public Infirmier(){
@@ -24,7 +24,7 @@ public class Infirmier extends Employe{
         this.listchambresurveillant = null;
     }   
 
-    public Infirmier(String rotation, int salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom,String adresse, String tel) {
+    public Infirmier(String rotation, double salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom,String adresse, String tel) {
         super(id_employe, nom, prenom,adresse , tel);
         this.rotation = rotation;
         this.salaire = salaire;
@@ -42,12 +42,12 @@ public class Infirmier extends Employe{
         this.rotation=rotation ;
     }
     
-    public int getSalaire()
+    public double getSalaire()
     {
         return salaire;
     }
     
-    public void setSalaire(int salaire)
+    public void setSalaire(double salaire)
     {
         this.salaire=salaire ;
     }

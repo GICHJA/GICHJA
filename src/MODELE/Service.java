@@ -13,40 +13,37 @@ import java.util.List;
  */
 public class Service {
     
-    private int id_service;
+    private String id_service;
     private String nom;
     private Docteur directeur;
     private List<Infirmier> listinfirmier;
-    private List<Hospitalisation> listhospitalisation;
     private List<Chambre> listchambre;
     
     public Service(){
-             this.id_service = 0;
+             this.id_service = null;
         this.nom = "";
         this.directeur = null;
         this.listinfirmier = null;
-        this.listhospitalisation = null;
         this.listchambre = null;   
     }
 
-    public Service(int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Hospitalisation> listhospitalisation, List<Chambre> listchambre) {
+    public Service(String id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre) {
         this.id_service = id_service;
         this.nom = nom;
         this.directeur = directeur;
         this.listinfirmier = listinfirmier;
-        this.listhospitalisation = listhospitalisation;
         this.listchambre = listchambre;
     }
     
     
     
     
-    public int getId_service()
+    public String getId_service()
     {
         return id_service;
     }
     
-    public void setId_service(int id)
+    public void setId_service(String id)
     {
         this.id_service=id;
     }
@@ -71,15 +68,6 @@ public class Service {
         this.directeur=dir ;
     }
     
-    public List<Hospitalisation> getListhospitalisation()
-    {
-        return listhospitalisation ;
-    }
-    
-    public void setListhospitalisation (List<Hospitalisation> list)
-    {
-        this.listhospitalisation = list ;
-    }
     
     public List<Chambre> getListchambre()
     {
@@ -101,11 +89,7 @@ public class Service {
         this.listinfirmier=list ;
     }
     
-    public void ajoutHospitalisation(Hospitalisation hospitalisation)
-    {
-        this.listhospitalisation.add(hospitalisation);
-    }
-    
+ 
     public void ajoutChambre(Chambre chambre)
     {
         this.listchambre.add(chambre);
