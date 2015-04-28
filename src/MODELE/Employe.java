@@ -18,22 +18,20 @@ public class Employe {
     private String prenom;
     private String tel;
     private String adresse;
-    private List<Soigne> listsoigne;
+    
 
     public Employe() {
         this.id_employe = 0;
         this.nom = "";
         this.prenom = "";
         this.tel = "";
-        this.listsoigne = null;
     }
 
-    public Employe(int id_employe, String nom, String prenom, String tel, List<Soigne> listsoigne) {
+    public Employe(int id_employe, String nom, String prenom, String tel) {
         this.id_employe = id_employe;
         this.nom = nom;
         this.prenom = prenom;
         this.tel = tel;
-        this.listsoigne = listsoigne;
     }
 
     public int getId_employe() {
@@ -76,15 +74,5 @@ public class Employe {
         this.adresse = x;
     }
 
-    public List<Soigne> getListsoigne() {
-        return this.listsoigne;
-    }
 
-    public void setList_soigne(List<Soigne> list) {
-        this.listsoigne = list;
-    }
-
-    public void ajoutSoigne(Soigne soigne) {
-        this.listsoigne.add(soigne);
-    }
 }

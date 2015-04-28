@@ -24,8 +24,8 @@ public class Infirmier extends Employe{
         this.listchambresurveillant = null;
     }   
 
-    public Infirmier(String rotation, int salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom, String tel, List<Soigne> listsoigne) {
-        super(id_employe, nom, prenom, tel, listsoigne);
+    public Infirmier(String rotation, int salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom, String tel) {
+        super(id_employe, nom, prenom, tel);
         this.rotation = rotation;
         this.salaire = salaire;
         this.listchambresurveillant = listchambresurveillant;
