@@ -27,10 +27,34 @@ public class InfirmierDAO extends DAO<Infirmier>{
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                int nbr[] = null;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from infirmier";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+
+            result = this.get_connexion().result("select numero FROM infirmier");
+
+            while (result.next()) {
+                nbr[i] = result.getInt("numero");
+                i++;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InfirmierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
 
     @Override
+    @SuppressWarnings("empty-statement")
     public Infirmier find(int id) {
         ResultSet result = null;
         Infirmier obj = new Infirmier();
@@ -54,6 +78,14 @@ public class InfirmierDAO extends DAO<Infirmier>{
                         ,result.getString("tel"));
                 
                 //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
+            }else{
+             Search = "SELECT * FROM employe , infirmier  WHERE infirmier.numero = "+id+" AND  employe.numero = infirmier.numero ";
+            result = this.get_connexion().result(Search);
+                result.first();
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                                       null, id, result.getString("nom")  
+                        ,result.getString("prenom"),result.getString("adresse")
+                        ,result.getString("tel"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
