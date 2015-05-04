@@ -64,6 +64,32 @@ public class EmployeDAO extends DAO<Employe> {
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                     int nbr[] = null ;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from employe";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+            
+            result = this.get_connexion().result("select numero FROM employe");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("numero");
+                i++;
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
 }

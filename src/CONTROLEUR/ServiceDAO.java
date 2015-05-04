@@ -91,7 +91,33 @@ public class ServiceDAO extends DAO<Service> {
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                        int nbr[] = null ;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from service";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+            
+            result = this.get_connexion().result("select id_service FROM service");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("id_service");
+                i++;
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RendezVousDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
 
 }

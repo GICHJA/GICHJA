@@ -71,7 +71,33 @@ public class MutuelleDAO extends DAO<Mutuelle> {
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                         int nbr[] = null ;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from mutuelle";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+            
+            result = this.get_connexion().result("select id_mutuelle FROM mutuelle");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("id_mutuelle");
+                i++;
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
 
 }

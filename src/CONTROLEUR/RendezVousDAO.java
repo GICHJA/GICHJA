@@ -67,7 +67,33 @@ public class RendezVousDAO extends DAO<RendezVous> {
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                 int nbr[] = null ;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from rendezvous";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+            
+            result = this.get_connexion().result("select no_rdv FROM rendezvous");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("no_rdv");
+                i++;
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RendezVousDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
 
 }

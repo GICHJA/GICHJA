@@ -69,7 +69,33 @@ public class BatimentDAO extends DAO <Batiment> {
 
     @Override
     public int[] nbrelem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+              int nbr[] = null ;
+        ResultSet result = null;
+        int i = 0;
+
+        try {
+            String Search = "select COUNT(*) as nbr from batiment";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                nbr = new int[result.getInt("nbr")];
+            }
+            
+            result = this.get_connexion().result("select id_batiment FROM batiment");
+            
+            while(result.next())
+            {
+                nbr[i] = result.getInt("id_batiment");
+                i++;
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BatimentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return nbr;
     }
     
 }
