@@ -23,6 +23,7 @@ import MODELE.Malade;
 import MODELE.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -58,30 +59,42 @@ public class PROJET_JAVA_2015 {
              for(int i=0 ; i < elem.length ; i++)
              ChambreDAO.find(elem[i]).affiche();*/
 
-        /*    DAO<Batiment> BatimentDAO = new BatimentDAO();
+            /*    DAO<Batiment> BatimentDAO = new BatimentDAO();
+             BatimentDAO.set_connexion(maconnexion);
+             for (int i = 1; i <= 2; i++) {
+
+             BatimentDAO.find(i).affiche();
+             System.out.println("\n *************************************************** \n ");
+
+             }*/
+
+            /*        DAO<Malade> MaladeDAO = new MaladeDAO();
+             MaladeDAO.set_connexion(maconnexion);
+             int elem[] = MaladeDAO.nbrelem();
+             for (int i = 0; i < elem.length; i++) {
+             System.out.println("\n ---- > " + elem[i] + " <----  \n");
+             MaladeDAO.find(elem[i]).affiche();
+             System.out.println("\n *************************************************** \n ");
+
+             }
+             } catch (SQLException | ClassNotFoundException ex) {
+
+             } }*/
+            DAO<Batiment> BatimentDAO = new BatimentDAO();
             BatimentDAO.set_connexion(maconnexion);
-            for (int i = 1; i <= 2; i++) {
+            Batiment test = new Batiment();
+            test.setNom_batiment("Bonjour");
+            Batiment testend = BatimentDAO.create(test);
+            testend.affiche();
+            
+            BatimentDAO.delete(testend);
+            
 
-                BatimentDAO.find(i).affiche();
-                System.out.println("\n *************************************************** \n ");
-
-            }*/
-
-            DAO<Malade> MaladeDAO = new MaladeDAO();
-            MaladeDAO.set_connexion(maconnexion);
-            int elem[] = MaladeDAO.nbrelem();
-            for (int i = 0; i < elem.length; i++) {
-                System.out.println("\n ---- > " + elem[i] + " <----  \n");
-                MaladeDAO.find(elem[i]).affiche();
-                System.out.println("\n *************************************************** \n ");
-
-            }
         } catch (SQLException | ClassNotFoundException ex) {
 
         }
 
         return;
-
     }
 
 }

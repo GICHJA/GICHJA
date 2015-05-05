@@ -30,6 +30,19 @@ public class Batiment {
         this.listservice = listservice;
     }
 
+    public String getNom_batiment() {
+        return nom_batiment;
+    }
+
+    public void setNom_batiment(String nom_batiment) {
+        this.nom_batiment = nom_batiment;
+    }
+
+    public void setListservice(List<Service> listservice) {
+        this.listservice = listservice;
+    }
+    
+    
     public List<Service> getListservice() {
         return listservice;
     }
