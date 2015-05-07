@@ -21,6 +21,8 @@ import MODELE.Hospitalisation;
 import MODELE.Infirmier;
 import MODELE.Malade;
 import MODELE.Service;
+import VUE.JConnexion;
+import VUE.JControleur;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,9 @@ public class PROJET_JAVA_2015 {
     private static String loginBDD;
     private static String passwdBDD;
     private static Connexion maconnexion;
+    private static JControleur jControleur;
+    private static JConnexion jconnexion;
+
 
     /**
      * @param args the command line arguments
@@ -46,55 +51,58 @@ public class PROJET_JAVA_2015 {
         Scanner clavier;
         clavier = new Scanner(System.in);
 
-        nameECE = "prieux";
-        passwECE = clavier.nextLine();
-        loginBDD = "prieux-rw";
-        passwdBDD = clavier.nextLine();
+        //nameECE = "romano";
+        // passwECE = clavier.nextLine();
+        //loginBDD = "romano-rw";
+        //passwdBDD = clavier.nextLine(); //UZzWhDla
 
-        try {
-            maconnexion = new Connexion(nameECE, passwECE, loginBDD, passwdBDD);
+      
+            //maconnexion = new Connexion(nameECE, passwECE, loginBDD, passwdBDD);
             /*    DAO<Chambre> ChambreDAO = new ChambreDAO();
              ChambreDAO.set_connexion(maconnexion);
              int elem[] = ChambreDAO.nbrelem();
              for(int i=0 ; i < elem.length ; i++)
              ChambreDAO.find(elem[i]).affiche();*/
-
             /*    DAO<Batiment> BatimentDAO = new BatimentDAO();
-             BatimentDAO.set_connexion(maconnexion);
-             for (int i = 1; i <= 2; i++) {
-
-             BatimentDAO.find(i).affiche();
-             System.out.println("\n *************************************************** \n ");
-
-             }*/
+            BatimentDAO.set_connexion(maconnexion);
+            for (int i = 1; i <= 2; i++) {
+            BatimentDAO.find(i).affiche();
+            System.out.println("\n *************************************************** \n ");
+            }*/
 
             /*        DAO<Malade> MaladeDAO = new MaladeDAO();
-             MaladeDAO.set_connexion(maconnexion);
-             int elem[] = MaladeDAO.nbrelem();
-             for (int i = 0; i < elem.length; i++) {
-             System.out.println("\n ---- > " + elem[i] + " <----  \n");
-             MaladeDAO.find(elem[i]).affiche();
-             System.out.println("\n *************************************************** \n ");
-
-             }
-             } catch (SQLException | ClassNotFoundException ex) {
-
-             } }*/
+            MaladeDAO.set_connexion(maconnexion);
+            int elem[] = MaladeDAO.nbrelem();
+            for (int i = 0; i < elem.length; i++) {
+            System.out.println("\n ---- > " + elem[i] + " <----  \n");
+            MaladeDAO.find(elem[i]).affiche();
+            System.out.println("\n *************************************************** \n ");
+            }
+            } catch (SQLException | ClassNotFoundException ex) {
+            } }*/
+           
+             jconnexion = new JConnexion();
+            
+            
+            do {
+                    
+                    }while(jconnexion.getConnexionValide() == 0);
+            
+            System.out.println ("ok");
+            jControleur = new JControleur();
+             System.out.println ("ok1");
             DAO<Batiment> BatimentDAO = new BatimentDAO();
-            BatimentDAO.set_connexion(maconnexion);
+            BatimentDAO.set_connexion(jconnexion.getConnexion());
             Batiment test = new Batiment();
             test.setNom_batiment("Bonjour");
             Batiment testend = BatimentDAO.create(test);
             testend.affiche();
-            
             BatimentDAO.delete(testend);
             
 
-        } catch (SQLException | ClassNotFoundException ex) {
-
-        }
 
         return;
-    }
+    
 
+}
 }

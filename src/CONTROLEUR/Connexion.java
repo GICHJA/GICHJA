@@ -26,6 +26,7 @@ public class Connexion {
     private Statement stmt;
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
+    private int connexionok;
     /**
      * ArrayList public pour les requêtes de sélection
      */
@@ -43,6 +44,9 @@ public class Connexion {
         
     }
     
+     public int getconnexionok() {
+        return connexionok;
+    }
     
     /**
      * Constructeur avec 4 paramètres : username et password ECE, login et password de la BDD
@@ -56,7 +60,7 @@ public class Connexion {
 
         if (ssh.connect()) {
             System.out.println("Connexion reussie");
-
+            connexionok = 1;    
             // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
             String urlDatabase = "jdbc:mysql://localhost:3305/" + usernameECE;
 
