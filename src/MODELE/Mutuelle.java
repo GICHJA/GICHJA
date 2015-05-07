@@ -61,11 +61,7 @@ public class Mutuelle {
 
         System.out.println("Mutuelle  : id_mutuelle - " + id_mutuelle + " nom -  " + nom + "\n");
 
-        /*if (listmalade != null) {
-            listmalade.stream().forEach((s) -> {
-                s.affiche();
-            });
-        }*/
+       if(listmalade != null)
         for (Malade s : listmalade){
             s.affiche();
         }

@@ -120,11 +120,7 @@ public class Malade {
         System.out.println("Malade  : id_malade - " + id_malade + " nom -  " + nom + " prenom -  " + prenom + " tel -  " + tel + " adresse -  "
                 + adresse + "\n");
 
-        /*if (listrdv != null) {
-            listrdv.stream().forEach((s) -> {
-                s.affiche();
-            });
-        }*/
+        if(listrdv != null)
         for (RendezVous s : listrdv){
             s.affiche();
         }
