@@ -102,7 +102,11 @@ public class Chambre {
         System.out.println("Bat : id_chambre - " + id_chambre + " +  nb_lit - " + nb_lit + "\n");
                 
 
-        if(listhospitalisation != null)
+        /*if (listhospitalisation != null) {
+            listhospitalisation.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }*/
         for (Hospitalisation s : listhospitalisation){
             s.affiche();
         }

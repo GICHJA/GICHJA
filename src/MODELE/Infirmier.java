@@ -95,7 +95,11 @@ public class Infirmier extends Employe {
         
                System.out.println("inf : rotation - " + rotation +  " salaire - " +salaire +  "\n");
         
-       if(listchambresurveillant != null)
+        /*if (listchambresurveillant != null) {
+            listchambresurveillant.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }*/
         for (Chambre s : listchambresurveillant){
             s.affiche();
         }

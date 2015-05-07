@@ -136,7 +136,11 @@ public class Service {
             s.affiche();
         }
         
-       if(listchambre != null)
+             /*if (listchambre != null) {
+            listchambre.stream().forEach((s) -> {
+                s.affiche();
+            });
+        }*/
         for (Chambre s : listchambre){
             s.affiche();
         }
