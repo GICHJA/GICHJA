@@ -81,12 +81,13 @@ public class PROJET_JAVA_2015 {
             } catch (SQLException | ClassNotFoundException ex) {
             } }*/
            
-             jconnexion = new JConnexion();
+            jconnexion = new JConnexion();
             
+            System.out.println("coucou");
             
-            do {
-                    
-                    }while(jconnexion.getConnexionValide() == 0);
+            do{
+                
+              }while(jconnexion.getConnexionValide() == 0);
             
             System.out.println ("ok");
             jControleur = new JControleur();
