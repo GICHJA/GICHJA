@@ -127,16 +127,22 @@ public class Service {
 
         System.out.println("Service  : id_service - " + id_service + " nom -  " + nom + "\n");
 
-        if (listinfirmier != null) {
+        /*if (listinfirmier != null) {
             listinfirmier.stream().forEach((s) -> {
                 s.affiche();
             });
+        }*/
+        for (Infirmier s : listinfirmier){
+            s.affiche();
         }
         
-             if (listchambre != null) {
+             /*if (listchambre != null) {
             listchambre.stream().forEach((s) -> {
                 s.affiche();
             });
+        }*/
+        for (Chambre s : listchambre){
+            s.affiche();
         }
           
              directeur.affiche();

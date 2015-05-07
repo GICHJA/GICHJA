@@ -68,12 +68,14 @@ public class Docteur extends Employe {
 
         System.out.println("Doc : specialite - " + specialite + "\n");
 
-        if (listrdv != null) {
+        /*if (listrdv != null) {
             listrdv.stream().forEach((s) -> {
                 s.affiche();
             });
+        }*/
+        for (RendezVous s : listrdv){
+            s.affiche();
         }
-
     }
 
 }

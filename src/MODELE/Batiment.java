@@ -67,14 +67,15 @@ public class Batiment {
        
         System.out.println("Bat : id_batiment - " + id_batiment + " +  nom_batiment - " + nom_batiment + "\n");
         
-        if (listservice != null) {
+        /*if (listservice != null) {
             listservice.stream().forEach((s) -> {
                 s.affiche();
             });
+        }*/
+        if (listservice != null){
+            for (Service s : listservice){
+            s.affiche();
+            }
         }
-        
-     //test 
-        
-
-    }
+    }     
 }
