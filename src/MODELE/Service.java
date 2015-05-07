@@ -13,35 +13,75 @@ import java.util.List;
  */
 public class Service {
 
-    private String id_service;
+    private int id_service;
     private String nom;
     private Docteur directeur;
+    private int no_directeur;
+    private String code; 
+    private int id_batiment;
     private List<Infirmier> listinfirmier;
     private List<Chambre> listchambre;
 
+    
     public Service() {
-        this.id_service = null;
+        this.id_service =0;
         this.nom = "";
         this.directeur = null;
         this.listinfirmier = null;
         this.listchambre = null;
     }
 
-    public Service(String id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre) {
+    public Service(int id_service, String code ,String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre) {
         this.id_service = id_service;
+        this.code=code;
         this.nom = nom;
         this.directeur = directeur;
         this.listinfirmier = listinfirmier;
         this.listchambre = listchambre;
     }
-
-    public String getId_service() {
+/*
+    public Service(int id_service, String nom, Docteur directeur, int no_directeur, String code, int id_batiment) {
+        this.id_service = id_service;
+        this.nom = nom;
+        this.directeur = directeur;
+        this.no_directeur = no_directeur;
+        this.code = code;
+        this.id_batiment = id_batiment;
+    }
+    */
+    
+    public int getId_service() {
         return id_service;
     }
 
-    public void setId_service(String id) {
+    public void setId_service(int id) {
         this.id_service = id;
     }
+
+    public int getNo_directeur() {
+        return no_directeur;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public int getId_batiment() {
+        return id_batiment;
+    }
+
+    public void setNo_directeur(int no_directeur) {
+        this.no_directeur = no_directeur;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setId_batiment(int id_batiment) {
+        this.id_batiment = id_batiment;
+    }
+    
 
     public String getNom() {
         return nom;

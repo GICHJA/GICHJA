@@ -29,7 +29,6 @@ public class BatimentDAO extends DAO<Batiment> {
         try {
             String Search = "select * from batiment, service WHERE batiment.id_batiment = " + id_batiment + " AND  batiment.id_batiment =  service.id_batiment";
             result = this.get_connexion().result(Search);
-
             if (result.first()) {
                 result.beforeFirst();
                 while (result.next() && result.getInt("id_service") != 0) {

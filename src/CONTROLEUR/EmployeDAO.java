@@ -44,7 +44,19 @@ public class EmployeDAO extends DAO<Employe> {
 
     @Override
     public Employe create(Employe obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO employe VALUES ( '" + nextid + "','" + obj.getNom() + "','" + obj.getPrenom() + "','" + obj.getAdresse() + "','" + obj.getTel() + "' )  ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -54,7 +66,22 @@ public class EmployeDAO extends DAO<Employe> {
 
     @Override
     public void delete(Employe obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from employe WHERE employe.numero = " + obj.getId_employe() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM employe WHERE employe.numero = " + obj.getId_employe() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -64,7 +91,7 @@ public class EmployeDAO extends DAO<Employe> {
 
     @Override
     public int[] nbrelem() {
-                     int nbr[] = null ;
+        int nbr[] = null;
         ResultSet result = null;
         int i = 0;
 
@@ -75,16 +102,13 @@ public class EmployeDAO extends DAO<Employe> {
             if (result.first()) {
                 nbr = new int[result.getInt("nbr")];
             }
-            
+
             result = this.get_connexion().result("select numero FROM employe");
-            
-            while(result.next())
-            {
+
+            while (result.next()) {
                 nbr[i] = result.getInt("numero");
                 i++;
             }
-            
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(EmployeDAO.class.getName()).log(Level.SEVERE, null, ex);

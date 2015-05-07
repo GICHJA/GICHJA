@@ -15,6 +15,45 @@ public class Chambre {
 
     private int id_chambre;
     private int nb_lit;
+    String code_service ;
+    int no_chambre;
+    int  surveillant;
+
+    public Chambre(int id_chambre,String code_service,  int no_chambre, int surveillant,int nb_lit) {
+        this.id_chambre = id_chambre;
+        this.nb_lit = nb_lit;
+        this.code_service = code_service;
+        this.no_chambre = no_chambre;
+        this.surveillant = surveillant;
+   
+    }
+    public void setId_chambre(int id_chambre) {
+        this.id_chambre = id_chambre;
+    }
+
+    public void setCode_service(String code_service) {
+        this.code_service = code_service;
+    }
+
+    public void setNo_chambre(int no_chambre) {
+        this.no_chambre = no_chambre;
+    }
+
+    public void setSurveillant(int surveillant) {
+        this.surveillant = surveillant;
+    }
+
+    public String getCode_service() {
+        return code_service;
+    }
+
+    public int getNo_chambre() {
+        return no_chambre;
+    }
+
+    public int getSurveillant() {
+        return surveillant;
+    }
     private List<Hospitalisation> listhospitalisation;
 
     public Chambre(int id_chambre, int nb_lit, List<Hospitalisation> listhospitalisation) {

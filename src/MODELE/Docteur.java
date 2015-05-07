@@ -13,8 +13,22 @@ import java.util.List;
  */
 public class Docteur extends Employe {
 
+    private int numero;
     private String specialite;
     private List<RendezVous> listrdv;
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Docteur(int numero, String specialite) {
+        this.numero = numero;
+        this.specialite = specialite;
+    }
 
     public Docteur() {
         super();
@@ -51,16 +65,15 @@ public class Docteur extends Employe {
     public void affiche() {
 
         super.affiche();
-        
-               System.out.println("Doc : specialite - " + specialite + "\n");
-        
+
+        System.out.println("Doc : specialite - " + specialite + "\n");
+
         if (listrdv != null) {
             listrdv.stream().forEach((s) -> {
                 s.affiche();
             });
         }
-        
-        
+
     }
 
 }

@@ -39,9 +39,9 @@ public class ChambreDAO extends DAO<Chambre> {
             String Search = "select * from chambre, hospitalisation WHERE chambre.id_chambre = " + id_chambre + " AND  chambre.id_chambre =  hospitalisation.id_chambre";
             result = this.get_connexion().result(Search);
 
-            if (result.first()  ) {
-                     result.beforeFirst();
-                while (result.next() && result.getInt("id_hospitalisation")!= 0) {
+            if (result.first()) {
+                result.beforeFirst();
+                while (result.next() && result.getInt("id_hospitalisation") != 0) {
                     HospitalisationDAO devDAO = new HospitalisationDAO();
                     devDAO.set_connexion(this.get_connexion());
                     listhospitalisation.add(devDAO.find(result.getInt("id_hospitalisation")));
@@ -59,7 +59,19 @@ public class ChambreDAO extends DAO<Chambre> {
 
     @Override
     public Chambre create(Chambre obj) {
-        return obj;
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO chambre VALUES ( '" + nextid + "','" + obj.getCode_service() + "','" + obj.getSurveillant() + "','" + obj.getNo_chambre() + "' ) ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -69,12 +81,27 @@ public class ChambreDAO extends DAO<Chambre> {
 
     @Override
     public void delete(Chambre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from chambre WHERE chambre.id_chambre = " + obj.getId_chambre() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM chambre WHERE chambre.id_chambre = " + obj.getId_chambre() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public int[] nbrelem() {
-        int nbr[] = null ;
+        int nbr[] = null;
         ResultSet result = null;
         int i = 0;
 
@@ -85,16 +112,13 @@ public class ChambreDAO extends DAO<Chambre> {
             if (result.first()) {
                 nbr = new int[result.getInt("nbr")];
             }
-            
+
             result = this.get_connexion().result("select id_chambre FROM chambre");
-            
-            while(result.next())
-            {
+
+            while (result.next()) {
                 nbr[i] = result.getInt("id_chambre");
                 i++;
             }
-            
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);

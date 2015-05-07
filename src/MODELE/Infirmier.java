@@ -13,10 +13,23 @@ import java.util.List;
  */
 public class Infirmier extends Employe {
 
+    private int numero;
+    private String code_service;
     private String rotation;
     private double salaire;
     private List<Chambre> listchambresurveillant;
 
+    public Infirmier(int numero, String code_service, String rotation, double salaire, List<Chambre> listchambresurveillant) {
+        this.numero = numero;
+        this.code_service = code_service;
+        this.rotation = rotation;
+        this.salaire = salaire;
+        this.listchambresurveillant = listchambresurveillant;
+    }
+
+    
+    
+    
     public Infirmier() {
         super();
         this.rotation = "";
@@ -31,6 +44,23 @@ public class Infirmier extends Employe {
         this.listchambresurveillant = listchambresurveillant;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getCode_service() {
+        return code_service;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public void setCode_service(String code_service) {
+        this.code_service = code_service;
+    }
+
+    
     public String getRotation() {
         return rotation;
     }

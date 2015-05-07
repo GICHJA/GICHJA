@@ -18,6 +18,8 @@ public class Malade {
     private String prenom;
     private String tel;
     private String adresse;
+    private int id_mutuelle;
+    
     private List<RendezVous> listrdv;
 
     public Malade() {
@@ -37,6 +39,17 @@ public class Malade {
         this.adresse = adresse;
         this.listrdv = listrdv;
     }
+
+    public Malade(int id_malade, String nom, String prenom,String adresse, String tel,  int id_mutuelle) {
+        this.id_malade = id_malade;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.id_mutuelle = id_mutuelle;
+    }
+    
+    
 
     public int getId_malade() {
         return id_malade;
@@ -78,6 +91,17 @@ public class Malade {
         this.adresse = x;
     }
 
+    public int getId_mutuelle() {
+        return id_mutuelle;
+    }
+
+    public void setId_mutuelle(int id_mutuelle) {
+        this.id_mutuelle = id_mutuelle;
+    }
+
+    
+    
+    
     public List<RendezVous> getListrdv() {
         return this.listrdv;
     }

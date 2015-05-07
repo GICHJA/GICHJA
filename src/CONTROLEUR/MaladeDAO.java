@@ -54,7 +54,19 @@ public class MaladeDAO extends DAO<Malade> {
 
     @Override
     public Malade create(Malade obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO malade VALUES ( '" + nextid + "','" + obj.getNom() + "','" + obj.getPrenom() + "','" + obj.getAdresse() + "','" + obj.getTel() + "','" + obj.getId_mutuelle() + "' ) ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -64,7 +76,22 @@ public class MaladeDAO extends DAO<Malade> {
 
     @Override
     public void delete(Malade obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from malade WHERE malade.numero = " + obj.getId_malade() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM malade WHERE malade.numero = " + obj.getId_malade() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

@@ -94,7 +94,19 @@ public class DocteurDAO extends DAO<Docteur> {
 
     @Override
     public Docteur create(Docteur obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO docteur VALUES ( '" + nextid + "','" + obj.getSpecialite() + "','";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -104,7 +116,22 @@ public class DocteurDAO extends DAO<Docteur> {
 
     @Override
     public void delete(Docteur obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from docteur WHERE docteur.numero = " + obj.getNumero() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM batiment WHERE docteur.numero = " + obj.getNumero() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

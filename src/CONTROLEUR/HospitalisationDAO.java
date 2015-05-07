@@ -44,7 +44,19 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
 
     @Override
     public Hospitalisation create(Hospitalisation obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO hospitalisation VALUES ( '" + nextid + "','" + obj.getNo_malade() + "','" + obj.getCode_service() + "','" + obj.getNo_chambre() + "','" + obj.getLit() + "','" + obj.getId_chambre() + "' ) ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -54,7 +66,22 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
 
     @Override
     public void delete(Hospitalisation obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from hospitalisation WHERE hospitalisation.id_hospitalisation = " + obj.getId_hospitalisation() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM hospitalisation WHERE hospitalisation.id_hospitalisation = " + obj.getId_hospitalisation() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -96,17 +123,15 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
             result = this.get_connexion().result("select COUNT(*) AS nbr FROM hospitalisation");
 
             if (result.first()) {
-                 nbr = new int[result.getInt("nbr")];
+                nbr = new int[result.getInt("nbr")];
             }
-            
+
             result = this.get_connexion().result("select id_hospitalisation FROM hospitalisation");
-            
-            while(result.next())
-            {
+
+            while (result.next()) {
                 nbr[i] = result.getInt("id_hospitalisation");
                 i++;
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);

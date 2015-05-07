@@ -32,13 +32,12 @@ public class RendezVousDAO extends DAO<RendezVous> {
             String Search = "SELECT * FROM rendezvous WHERE no_rdv = " + id + "";
             result = this.get_connexion().result(Search);
 
-                if (result.first()) {
-                obj = new RendezVous(id,result.getString("datearr"),result.getString("datedep"),result.getString("motif"));
-                
-                
+            if (result.first()) {
+                obj = new RendezVous(id, result.getString("datearr"), result.getString("datedep"), result.getString("motif"));
+
             }
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre*/
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,7 +46,19 @@ public class RendezVousDAO extends DAO<RendezVous> {
 
     @Override
     public RendezVous create(RendezVous obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "INSERT INTO rendezvous VALUES ( '" + nextid + "','" + obj.getNo_malade() + "','" + obj.getNo_docteur() + "','" + obj.getDate_arr() + "','" + obj.getDate_dep() + "','" + obj.getMotif() + "' ) ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.find(nextid);
     }
 
     @Override
@@ -57,8 +68,22 @@ public class RendezVousDAO extends DAO<RendezVous> {
 
     @Override
     public void delete(RendezVous obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from rendezvous WHERE rendezvous.no_rdv = " + obj.getNo_rdv() + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM batiment WHERE rendezvous.no_rdv = " + obj.getNo_rdv() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }    }
 
     @Override
     public void init() {
@@ -67,7 +92,7 @@ public class RendezVousDAO extends DAO<RendezVous> {
 
     @Override
     public int[] nbrelem() {
-                                 int nbr[] = null ;
+        int nbr[] = null;
         ResultSet result = null;
         int i = 0;
 
@@ -78,16 +103,13 @@ public class RendezVousDAO extends DAO<RendezVous> {
             if (result.first()) {
                 nbr = new int[result.getInt("nbr")];
             }
-            
+
             result = this.get_connexion().result("select no_rdv FROM rendezvous");
-            
-            while(result.next())
-            {
+
+            while (result.next()) {
                 nbr[i] = result.getInt("no_rdv");
                 i++;
             }
-            
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(RendezVousDAO.class.getName()).log(Level.SEVERE, null, ex);
