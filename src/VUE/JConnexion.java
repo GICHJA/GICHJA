@@ -24,7 +24,7 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
     private JPasswordField jp1, jp2;
     private JPanel princ, p1, p2, p3;
     private Connexion maconnexion;
-     private static JControleur jControleur;
+    private static JControleur jControleur;
 
     public JConnexion() {
         super("Interface ");
@@ -86,18 +86,15 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
 
         if (e.getActionCommand().equals("Connexion")) {
             try {
-                
+
                 maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
-                
-                if ( maconnexion.getconnexionok() == 1 ) 
-                {
-                jControleur = new JControleur();
-                jControleur.setVisible(true);
-                this.setVisible(false);
-                System.out.println("coucou");
+
+                if (maconnexion.getconnexionok() == 1) {
+                    jControleur = new JControleur(maconnexion);
+                    jControleur.setVisible(true);
+                    this.setVisible(false);
+
                 }
-                
-                
 
             } catch (SQLException ex) {
                 Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);

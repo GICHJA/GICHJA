@@ -4,6 +4,10 @@
  */
 package VUE;
 
+import CONTROLEUR.BatimentDAO;
+import CONTROLEUR.DAO;
+import MODELE.Batiment;
+import static VUE.JControleur.maconnexion;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -20,6 +24,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
     private JTextArea ja;
     private JPanel p1, p2, p3, p4, princ;
     //private JTabbedPane tabbedpane;
+    private Object jconnexion;
     
     public JRecherche(){
         
@@ -56,6 +61,9 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         this.jb8 = new JButton ("Soigné");
         p1.add(this.jb8);
         this.jb8.addActionListener(this);
+        this.jb9 = new JButton ("Batiment");
+        p1.add(this.jb9);
+        this.jb9.addActionListener(this);
         princ.add("North", p1);
         
         this.jl = new JLabel("Tapez votre recherche :");
@@ -85,7 +93,17 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.getActionCommand().equals("Batiment")) {
+            
+            DAO<Batiment> BatimentDAO = new BatimentDAO();
+            BatimentDAO.set_connexion(maconnexion);
+            Batiment test = new Batiment();
+            test.setNom_batiment("Bonjour");
+            Batiment testend = BatimentDAO.create(test);
+            testend.affiche();
+            BatimentDAO.delete(testend);
+            
+        }
     }
 
     @Override

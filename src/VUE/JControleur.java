@@ -26,14 +26,16 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
     private JUpdate update;
     private JReporting reporting;
     private JPanel  app1, app2, app3, app4;
-    private Connexion maconnexion;
+    public static Connexion maconnexion;
     private JTabbedPane tabbedpane;
    
     
     
-    public JControleur(){
+    public JControleur(Connexion maconnexion){
         
         super("Interface");
+        
+        this.maconnexion = maconnexion;
         
         tabbedpane = new JTabbedPane();
         menu = new JMenu();
@@ -44,6 +46,7 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
         app2 = new JPanel (new FlowLayout());
         app3 = new JPanel (new FlowLayout());
         app4 = new JPanel (new FlowLayout());
+        
         
         this.getContentPane().add("North", tabbedpane);
         
