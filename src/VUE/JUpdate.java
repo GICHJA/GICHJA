@@ -22,7 +22,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
     private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10, jb11;
     private JTextArea ja1, ja2;
-    private JPanel p1, p2, p3, princ, selection;
+    private JPanel p1, p2, p3, princ, selection ,affichagecentrale;
     //// SERVICE
     private JPanel p1service, p2service, p3service, princservice, insererservice;
     private JComboBox jcservice;
@@ -38,6 +38,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
         princ = new JPanel(new BorderLayout());
         selection = new JPanel(new BorderLayout());
+        affichagecentrale = new JPanel(new BorderLayout());
         p1 = new JPanel(new GridLayout(2, 4));
         p2 = new JPanel(new GridLayout(1, 2));
         p3 = new JPanel(new GridLayout(1, 3));
@@ -60,7 +61,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         this.jb6 = new JButton("Hospitalisation");
         p1.add(this.jb6);
         this.jb6.addActionListener(this);
-        this.jb7 = new JButton("Malade");
+        this.jb7 = new JButton("Docteur");
         p1.add(this.jb7);
         this.jb7.addActionListener(this);
         this.jb8 = new JButton("Soigné");
@@ -68,22 +69,25 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         this.jb8.addActionListener(this);
         selection.add("North", p1);
 
-        this.ja1 = new JTextArea("Tous les attributs\n\n\n\n\n");
-        p2.add(this.ja1);
-        this.ja2 = new JTextArea("Attributs entité choisie ou nouvelle entité");
-        p2.add(this.ja2);
-        selection.add("Center", p2);
+        affichagecentrale.setSize(10,41);
+        selection.add("South",affichagecentrale);
 
         this.jb9 = new JButton("Mettre à jour");
+        this.jb9.setBackground(Color.red);
+        this.jb9.setForeground(Color.white);
         p3.add(this.jb9);
         this.jb9.addActionListener(this);
         this.jb10 = new JButton("Insérer");
+        this.jb10.setBackground(Color.red);
+        this.jb10.setForeground(Color.white);
         p3.add(this.jb10);
         this.jb10.addActionListener(this);
         this.jb11 = new JButton("Supprimer");
+        this.jb11.setBackground(Color.red);
+        this.jb11.setForeground(Color.white);
         p3.add(this.jb11);
         this.jb11.addActionListener(this);
-        selection.add("South", p3);
+        selection.add("Center", p3);
 
         princ.add("North", selection);
         this.setContentPane(princ);
@@ -111,7 +115,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             princservice = new JPanel(new BorderLayout());
             princservice.add("North", jcservice);
             princservice.setVisible(true);
-            princ.add("South", princservice);
+            affichagecentrale.add("South", princservice);
             princ.revalidate();
 
         }
@@ -170,7 +174,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
                 p2service.add("South", this.jbvalide1);
 
-                princ.add("Center", p2service);
+                affichagecentrale.add("Center", p2service);
                 p2service.setVisible(true);
                 princ.revalidate();
                 /// princ.validate();
