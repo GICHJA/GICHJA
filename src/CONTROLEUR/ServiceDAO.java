@@ -41,7 +41,7 @@ public class ServiceDAO extends DAO<Service> {
                     listobj.add(objDAO.find(result.getInt("numero")));
 
                 }
-            }
+            
 
             Search = "SELECT * FROM service, chambre WHERE id_service = " + id + " AND chambre.code_service = service.code";
             result = this.get_connexion().result(Search);
@@ -60,8 +60,16 @@ public class ServiceDAO extends DAO<Service> {
                 objDAO3.set_connexion(this.get_connexion());
                 directeur = objDAO3.find(result.getInt("directeur"));
                 obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
-
+            }
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre
+            }else{
+                
+                Search = "SELECT * FROM service WHERE id_service = " + id + " ";
+            result = this.get_connexion().result(Search);
+            
+            result.first();
+                obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, null, null);
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,6 +110,25 @@ public class ServiceDAO extends DAO<Service> {
             if (result.first()) {
 
                 Search = "DELETE FROM service WHERE service.id_service = " + obj.getId_service() + " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void deleteint(int id) {
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from service WHERE service.id_service = " + id + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM service WHERE service.id_service = " + id + " ;";
                 this.get_connexion().executeUpdate(Search);
             }
 

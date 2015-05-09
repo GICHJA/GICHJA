@@ -26,6 +26,8 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     //// SERVICE
     private JPanel p1service, p2service, p3service, princservice, insererservice;
     private JComboBox jcservice;
+    private int selection_de_la_jcombox;
+    private int[] selection_de_la_jcombox_mais_ceci_est_lid;
     private String Cursor;
     ////    CE QU il faut pour creer
     private JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15;
@@ -84,7 +86,6 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         selection.add("South", p3);
 
         princ.add("North", selection);
-
         this.setContentPane(princ);
     }
 
@@ -96,28 +97,47 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             DAO<Service> ServiceDAO = new ServiceDAO();
             ServiceDAO.set_connexion(maconnexion);
             int elem[] = ServiceDAO.nbrelem();
-            String[] listservice = new String[elem.length];
-
+            jcservice = new JComboBox();
+            selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
+            //jcservice.removeAllItems();
             for (int i = 0; i < elem.length; i++) {
-                listservice[i] = ServiceDAO.find(i).getstringService();
+                Service service = ServiceDAO.find(elem[i]);
+                jcservice.addItem(service.getstringService());
+                selection_de_la_jcombox_mais_ceci_est_lid[i] = service.getId_service();
+
             }
-            jcservice = new JComboBox(listservice);
             jcservice.setActionCommand("jcservice");
             jcservice.addActionListener(this);
             princservice = new JPanel(new BorderLayout());
             princservice.add("North", jcservice);
+            princservice.setVisible(true);
             princ.add("South", princservice);
+            princ.revalidate();
 
         }
 
         if (e.getActionCommand().equals("jcservice")) {
-            jcservice.getSelectedItem();
+            selection_de_la_jcombox = jcservice.getSelectedIndex();
+        }
+
+        if (e.getActionCommand().equals("Supprimer")) {
+            if (Cursor == "Service") {
+                ServiceDAO servicedao = new ServiceDAO();
+                servicedao.set_connexion(maconnexion);
+                if (selection_de_la_jcombox != 0) {
+                    servicedao.deleteint(selection_de_la_jcombox_mais_ceci_est_lid[selection_de_la_jcombox]);
+                }
+                selection_de_la_jcombox = 0;
+                // princ.validate();
+                princservice.setVisible(false);
+            }
         }
 
         if (e.getActionCommand().equals("Insérer")) {
             if (Cursor == "Service") {
-                this.p1service = new JPanel(new GridLayout(4, 1));
-                this.p2service= new JPanel(new BorderLayout());
+                System.out.println("1");
+                this.p1service = new JPanel(new GridLayout(4, 2));
+                this.p2service = new JPanel(new BorderLayout());
 
                 this.jl1 = new JLabel("Code : ");
                 p1service.add(this.jl1);
@@ -145,13 +165,15 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
                 jbvalide1 = new JButton("Valider Insertion");
                 this.jbvalide1.addActionListener(this);
-                
-                p2service.add("Center",this.p1service);
-                
-                p2service.add("South",this.jbvalide1);
+
+                p2service.add("Center", this.p1service);
+
+                p2service.add("South", this.jbvalide1);
 
                 princ.add("Center", p2service);
-
+                p2service.setVisible(true);
+                princ.revalidate();
+                /// princ.validate();
             }
         }
 
@@ -161,8 +183,8 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             ServiceDAO.create(new Service(
                     jtf1.getText(), jtf2.getText(), Integer.parseInt(jtf3.getText()), Integer.parseInt(jtf4.getText()))
             );
-            
-
+            p2service.setVisible(false);
+            princservice.setVisible(false);
         }
 
     }

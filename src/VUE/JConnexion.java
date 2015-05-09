@@ -100,7 +100,7 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
 
              if (maconnexion.getconnexionok() == 1 ) {
              jControleur = new JControleur(maconnexion);
-             jControleur.setSize(800, 800);
+             jControleur.setSize(1200, 800);
              jControleur.setVisible(true);
              this.setVisible(false);
 
