@@ -125,6 +125,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         }
 
         if (e.getActionCommand().equals("Supprimer")) {
+            
             if (Cursor == "Service") {
                 ServiceDAO servicedao = new ServiceDAO();
                 servicedao.set_connexion(maconnexion);
@@ -135,6 +136,8 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 // princ.validate();
                 princservice.setVisible(false);
             }
+            
+            
         }
 
         if (e.getActionCommand().equals("Insérer")) {
