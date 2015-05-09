@@ -7,6 +7,7 @@ package VUE;
 import CONTROLEUR.Connexion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -37,30 +38,29 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
         
         this.maconnexion = maconnexion;
         
+        
         tabbedpane = new JTabbedPane();
         menu = new JMenu();
         recherche = new JRecherche();
         update = new JUpdate();
         reporting = new JReporting();
-        app1 = new JPanel (new FlowLayout());
-        app2 = new JPanel (new FlowLayout());
-        app3 = new JPanel (new FlowLayout());
-        app4 = new JPanel (new FlowLayout());
+        app1 = new JPanel (new BorderLayout());
+        app2 = new JPanel (new BorderLayout());
+        app3 = new JPanel (new BorderLayout());
+        app4 = new JPanel (new BorderLayout());
         
         
         this.getContentPane().add(tabbedpane);
         
         this.tabbedpane.addTab ("Menu", app1);
-        app1.add(menu.getContentPane());
+        app1.add("Center",menu.getContentPane());
         this.tabbedpane.addTab ("Recherche",app2);
-        app2.add(recherche.getContentPane());
+        app2.add("Center",recherche.getContentPane());
         this.tabbedpane.addTab ("Mise à jour",app3);
-        app3.add(update.getContentPane());
+        app3.add("Center",update.getContentPane());
         this.tabbedpane.addTab ("Reporting",app4);
-        app4.add(reporting.getContentPane());
+        app4.add("Center",reporting.getContentPane());
         
-        //this.setContentPane(app);
-       // this.setSize(800, 800);
         this.pack();
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //allows to close the window directly when we click on the red cross

@@ -22,7 +22,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
     private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10, jb11;
     private JTextArea ja1, ja2;
-    private JPanel p1, p2, p3, princ, selection ,affichagecentrale;
+    private JPanel p1, p2, p3, princ, selection, affichagecentrale;
     //// SERVICE
     private JPanel p1service, p2service, p3service, princservice, insererservice;
     private JComboBox jcservice;
@@ -68,9 +68,9 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         p1.add(this.jb8);
         this.jb8.addActionListener(this);
         selection.add("North", p1);
+        princ.add("North", selection);
 
-        affichagecentrale.setSize(10,41);
-        selection.add("South",affichagecentrale);
+        princ.add("Center", affichagecentrale);
 
         this.jb9 = new JButton("Mettre à jour");
         this.jb9.setBackground(Color.red);
@@ -87,37 +87,39 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         this.jb11.setForeground(Color.white);
         p3.add(this.jb11);
         this.jb11.addActionListener(this);
-        selection.add("Center", p3);
+        princ.add("South", p3);
 
-        princ.add("North", selection);
         this.setContentPane(princ);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Service")) {
-            ///SERVICE
-            Cursor = "Service";
-            DAO<Service> ServiceDAO = new ServiceDAO();
-            ServiceDAO.set_connexion(maconnexion);
-            int elem[] = ServiceDAO.nbrelem();
-            jcservice = new JComboBox();
-            selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
-            //jcservice.removeAllItems();
-            for (int i = 0; i < elem.length; i++) {
-                Service service = ServiceDAO.find(elem[i]);
-                jcservice.addItem(service.getstringService());
-                selection_de_la_jcombox_mais_ceci_est_lid[i] = service.getId_service();
+            if (Cursor != "Service") {
+                ///SERVICE
+                Cursor = "Service";
+                DAO<Service> ServiceDAO = new ServiceDAO();
+                ServiceDAO.set_connexion(maconnexion);
+                int elem[] = ServiceDAO.nbrelem();
+                jcservice = new JComboBox();
+                selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
+                //jcservice.removeAllItems();
+                for (int i = 0; i < elem.length; i++) {
+                    Service service = ServiceDAO.find(elem[i]);
+                    jcservice.addItem(service.getstringService());
+                    selection_de_la_jcombox_mais_ceci_est_lid[i] = service.getId_service();
+
+                }
+                jcservice.setActionCommand("jcservice");
+                jcservice.addActionListener(this);
+                princservice = new JPanel(new BorderLayout());
+                princservice.add("North", jcservice);
+                affichagecentrale.setVisible(true);
+                affichagecentrale.add("North", princservice);
+                jcservice.revalidate();
+                princ.revalidate();
 
             }
-            jcservice.setActionCommand("jcservice");
-            jcservice.addActionListener(this);
-            princservice = new JPanel(new BorderLayout());
-            princservice.add("North", jcservice);
-            princservice.setVisible(true);
-            affichagecentrale.add("South", princservice);
-            princ.revalidate();
-
         }
 
         if (e.getActionCommand().equals("jcservice")) {
@@ -125,7 +127,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         }
 
         if (e.getActionCommand().equals("Supprimer")) {
-            
+
             if (Cursor == "Service") {
                 ServiceDAO servicedao = new ServiceDAO();
                 servicedao.set_connexion(maconnexion);
@@ -133,11 +135,13 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                     servicedao.deleteint(selection_de_la_jcombox_mais_ceci_est_lid[selection_de_la_jcombox]);
                 }
                 selection_de_la_jcombox = 0;
-                // princ.validate();
                 princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+                Cursor = "";
+
             }
-            
-            
+
         }
 
         if (e.getActionCommand().equals("Insérer")) {
@@ -178,20 +182,26 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 p2service.add("South", this.jbvalide1);
 
                 affichagecentrale.add("Center", p2service);
-                p2service.setVisible(true);
+                affichagecentrale.setVisible(true);
                 princ.revalidate();
                 /// princ.validate();
             }
         }
 
         if (e.getActionCommand().equals("Valider Insertion")) {
-            DAO<Service> ServiceDAO = new ServiceDAO();
-            ServiceDAO.set_connexion(maconnexion);
-            ServiceDAO.create(new Service(
-                    jtf1.getText(), jtf2.getText(), Integer.parseInt(jtf3.getText()), Integer.parseInt(jtf4.getText()))
-            );
-            p2service.setVisible(false);
-            princservice.setVisible(false);
+
+            if (Cursor == "Service") {
+                DAO<Service> ServiceDAO = new ServiceDAO();
+                ServiceDAO.set_connexion(maconnexion);
+                ServiceDAO.create(new Service(
+                        jtf1.getText(), jtf2.getText(), Integer.parseInt(jtf3.getText()), Integer.parseInt(jtf4.getText()))
+                );
+                Cursor = "";
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+
+            }
         }
 
     }

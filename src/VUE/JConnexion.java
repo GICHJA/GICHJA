@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-
+import java.awt.Image;
 /**
  *
  * @author lucaromano
@@ -25,11 +25,16 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
     private JPanel princ, p1, p2, p3;
     private Connexion maconnexion;
     private static JControleur jControleur;
+    private Image panel;
+    
 
     public JConnexion() {
         super("Interface ");
         maconnexion = new Connexion();
         princ = new JPanel(new BorderLayout());
+         princ.setLayout(new BorderLayout());
+
+         
         p1 = new JPanel(new FlowLayout());
         p2 = new JPanel(new GridLayout(4, 4));
         p3 = new JPanel(new FlowLayout());
@@ -80,6 +85,7 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
         return maconnexion;
 
     }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -100,7 +106,8 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
 
              if (maconnexion.getconnexionok() == 1 ) {
              jControleur = new JControleur(maconnexion);
-             jControleur.setSize(1200, 800);
+             jControleur.setSize(500, 350);
+             jControleur.setLocation(1024/ 4, 1000 / 4);
              jControleur.setVisible(true);
              this.setVisible(false);
 
