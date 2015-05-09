@@ -38,16 +38,14 @@ public class Service {
         this.listinfirmier = listinfirmier;
         this.listchambre = listchambre;
     }
-    /*
-     public Service(int id_service, String nom, Docteur directeur, int no_directeur, String code, int id_batiment) {
-     this.id_service = id_service;
+    
+     public Service(String code,String nom,  int id_batiment ,int no_directeur) {
      this.nom = nom;
-     this.directeur = directeur;
      this.no_directeur = no_directeur;
      this.code = code;
      this.id_batiment = id_batiment;
      }
-     */
+     
 
     public int getId_service() {
         return id_service;

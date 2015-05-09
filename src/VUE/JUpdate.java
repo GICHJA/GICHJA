@@ -7,6 +7,7 @@ package VUE;
 import CONTROLEUR.BatimentDAO;
 import CONTROLEUR.DAO;
 import CONTROLEUR.ServiceDAO;
+import MODELE.Docteur;
 import MODELE.Service;
 import static VUE.JControleur.maconnexion;
 import java.awt.*;
@@ -23,16 +24,15 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     private JTextArea ja1, ja2;
     private JPanel p1, p2, p3, princ, selection;
     //// SERVICE
-    private JPanel p1service, p2service, p3service, princservice;
+    private JPanel p1service, p2service, p3service, princservice, insererservice;
     private JComboBox jcservice;
     private String Cursor;
     ////    CE QU il faut pour creer
-     private JTextField jtf1,jtf2,jtf3,jtf4,jtf5,jtf6,jtf7,jtf8,jtf9,jtf10,jtf11,jtf12,jtf13,jtf14,jtf15;
-     private JLabel jl;       
-    
+    private JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15;
+    private JLabel jl1, jl2, jl3, jl4, jl5;
+    private JButton jbvalide1;
+
     public JUpdate() {
-        
-       
 
         princ = new JPanel(new BorderLayout());
         selection = new JPanel(new BorderLayout());
@@ -72,7 +72,6 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         p2.add(this.ja2);
         selection.add("Center", p2);
 
-        
         this.jb9 = new JButton("Mettre à jour");
         p3.add(this.jb9);
         this.jb9.addActionListener(this);
@@ -98,38 +97,74 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             ServiceDAO.set_connexion(maconnexion);
             int elem[] = ServiceDAO.nbrelem();
             String[] listservice = new String[elem.length];
-            
+
             for (int i = 0; i < elem.length; i++) {
                 listservice[i] = ServiceDAO.find(i).getstringService();
             }
             jcservice = new JComboBox(listservice);
             jcservice.setActionCommand("jcservice");
             jcservice.addActionListener(this);
-            princservice= new JPanel(new BorderLayout());
+            princservice = new JPanel(new BorderLayout());
             princservice.add("North", jcservice);
-             princ.add("South", princservice);
-             
+            princ.add("South", princservice);
 
         }
-        
-         if (e.getActionCommand().equals("jcservice")) {
-             jcservice.getSelectedItem();
-         }
-         
-         if (e.getActionCommand().equals("Insérer")) {
-             if(Cursor == "Service")
-             {
-                 JTextField jtf1
-                 
-             }
-         }
-         
-         
-         
-         
-         
-        
-        
+
+        if (e.getActionCommand().equals("jcservice")) {
+            jcservice.getSelectedItem();
+        }
+
+        if (e.getActionCommand().equals("Insérer")) {
+            if (Cursor == "Service") {
+                this.p1service = new JPanel(new GridLayout(4, 1));
+                this.p2service= new JPanel(new BorderLayout());
+
+                this.jl1 = new JLabel("Code : ");
+                p1service.add(this.jl1);
+                this.jtf1 = new JTextField(20);
+                this.jtf1.addActionListener(this);
+                p1service.add(this.jtf1);
+
+                this.jl2 = new JLabel("Nom : ");
+                p1service.add(this.jl2);
+                this.jtf2 = new JTextField(20);
+                this.jtf2.addActionListener(this);
+                p1service.add(this.jtf2);
+
+                this.jl3 = new JLabel("Id_batiment : ");
+                p1service.add(this.jl3);
+                this.jtf3 = new JTextField(20);
+                this.jtf3.addActionListener(this);
+                p1service.add(this.jtf3);
+
+                this.jl4 = new JLabel("Directeur : ");
+                p1service.add(this.jl4);
+                this.jtf4 = new JTextField(20);
+                p1service.add(this.jtf4);
+                this.jtf4.addActionListener(this);
+
+                jbvalide1 = new JButton("Valider Insertion");
+                this.jbvalide1.addActionListener(this);
+                
+                p2service.add("Center",this.p1service);
+                
+                p2service.add("South",this.jbvalide1);
+
+                princ.add("Center", p2service);
+
+            }
+        }
+
+        if (e.getActionCommand().equals("Valider Insertion")) {
+            DAO<Service> ServiceDAO = new ServiceDAO();
+            ServiceDAO.set_connexion(maconnexion);
+            ServiceDAO.create(new Service(
+                    jtf1.getText(), jtf2.getText(), Integer.parseInt(jtf3.getText()), Integer.parseInt(jtf4.getText()))
+            );
+            
+
+        }
+
     }
 
     @Override

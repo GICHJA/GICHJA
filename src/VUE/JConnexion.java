@@ -94,9 +94,11 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
             }*/
              try {
 
-             maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
+            // maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
+             
+             maconnexion = new Connexion("prieux", jp1.getText(), "prieux-rw", "hEpFkmQh");
 
-             if (maconnexion.getconnexionok() == 1) {
+             if (maconnexion.getconnexionok() == 1 ) {
              jControleur = new JControleur(maconnexion);
              jControleur.setSize(800, 800);
              jControleur.setVisible(true);
