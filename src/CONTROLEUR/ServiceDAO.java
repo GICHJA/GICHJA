@@ -41,35 +41,34 @@ public class ServiceDAO extends DAO<Service> {
                     listobj.add(objDAO.find(result.getInt("numero")));
 
                 }
-            
 
-            Search = "SELECT * FROM service, chambre WHERE id_service = " + id + " AND chambre.code_service = service.code";
-            result = this.get_connexion().result(Search);
+                Search = "SELECT * FROM service, chambre WHERE id_service = " + id + " AND chambre.code_service = service.code";
+                result = this.get_connexion().result(Search);
 
-            if (result.first()) {
-                result.beforeFirst();
-                while (result.next() && result.getInt("no_chambre") != 0) {
-                    ChambreDAO objDAO2 = new ChambreDAO();
-                    objDAO2.set_connexion(this.get_connexion());
-                    listobj2.add(objDAO2.find(result.getInt("no_chambre")));
+                if (result.first()) {
+                    result.beforeFirst();
+                    while (result.next() && result.getInt("no_chambre") != 0) {
+                        ChambreDAO objDAO2 = new ChambreDAO();
+                        objDAO2.set_connexion(this.get_connexion());
+                        listobj2.add(objDAO2.find(result.getInt("no_chambre")));
 
+                    }
+
+                    result.first();
+                    DocteurDAO objDAO3 = new DocteurDAO();
+                    objDAO3.set_connexion(this.get_connexion());
+                    directeur = objDAO3.find(result.getInt("directeur"));
+                    obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
                 }
+                //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre
+            } else {
+
+                Search = "SELECT * FROM service WHERE id_service = " + id + " ";
+                result = this.get_connexion().result(Search);
 
                 result.first();
-                DocteurDAO objDAO3 = new DocteurDAO();
-                objDAO3.set_connexion(this.get_connexion());
-                directeur = objDAO3.find(result.getInt("directeur"));
-                obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
-            }
-                //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre
-            }else{
-                
-                Search = "SELECT * FROM service WHERE id_service = " + id + " ";
-            result = this.get_connexion().result(Search);
-            
-            result.first();
                 obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, null, null);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,8 +117,8 @@ public class ServiceDAO extends DAO<Service> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        public void deleteint(int id) {
+
+    public void deleteint(int id) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
