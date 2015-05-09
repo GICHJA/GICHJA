@@ -85,22 +85,30 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Connexion")) {
-            try {
 
-                maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
+        /*    if (maconnexion.getconnexionok() == 0) {
+                jControleur = new JControleur(maconnexion);
+                jControleur.setSize(800, 800);
+                jControleur.setVisible(true);
+                this.setVisible(false);
+            }*/
+             try {
 
-                if (maconnexion.getconnexionok() == 1) {
-                    jControleur = new JControleur(maconnexion);
-                    jControleur.setVisible(true);
-                    this.setVisible(false);
+             maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
 
-                }
+             if (maconnexion.getconnexionok() == 1) {
+             jControleur = new JControleur(maconnexion);
+             jControleur.setSize(800, 800);
+             jControleur.setVisible(true);
+             this.setVisible(false);
 
-            } catch (SQLException ex) {
-                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             }
+
+             } catch (SQLException ex) {
+             Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (ClassNotFoundException ex) {
+             Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+             }
         }
     }
 

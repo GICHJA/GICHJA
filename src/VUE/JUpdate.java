@@ -4,6 +4,11 @@
  */
 package VUE;
 
+import CONTROLEUR.BatimentDAO;
+import CONTROLEUR.DAO;
+import CONTROLEUR.ServiceDAO;
+import MODELE.Service;
+import static VUE.JControleur.maconnexion;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,50 +17,61 @@ import javax.swing.*;
  *
  * @author lucaromano
  */
-public class JUpdate extends JFrame implements ActionListener, WindowListener{
-    
+public class JUpdate extends JFrame implements ActionListener, WindowListener {
+
     private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10, jb11;
     private JTextArea ja1, ja2;
-    private JPanel p1, p2, p3, princ;
+    private JPanel p1, p2, p3, princ, selection;
+    //// SERVICE
+    private JPanel p1service, p2service, p3service, princservice;
+    private JComboBox jcservice;
+    private String Cursor;
+    ////    CE QU il faut pour creer
+     private JTextField jtf1,jtf2,jtf3,jtf4,jtf5,jtf6,jtf7,jtf8,jtf9,jtf10,jtf11,jtf12,jtf13,jtf14,jtf15;
+     private JLabel jl;       
     
-    public JUpdate(){
+    public JUpdate() {
         
-        princ = new JPanel (new BorderLayout());
-        p1 = new JPanel (new GridLayout (2,4));
-        p2 = new JPanel (new GridLayout (1,2));
-        p3 = new JPanel (new GridLayout (1,3));
-        
-        this.jb1 = new JButton ("Service");
+       
+
+        princ = new JPanel(new BorderLayout());
+        selection = new JPanel(new BorderLayout());
+        p1 = new JPanel(new GridLayout(2, 4));
+        p2 = new JPanel(new GridLayout(1, 2));
+        p3 = new JPanel(new GridLayout(1, 3));
+
+        this.jb1 = new JButton("Service");
         p1.add(this.jb1);
         this.jb1.addActionListener(this);
-        this.jb2 = new JButton ("Infirmier");
+        this.jb2 = new JButton("Infirmier");
         p1.add(this.jb2);
         this.jb2.addActionListener(this);
-        this.jb3 = new JButton ("Chambre");
+        this.jb3 = new JButton("Chambre");
         p1.add(this.jb3);
         this.jb3.addActionListener(this);
-        this.jb4 = new JButton ("Malade");
+        this.jb4 = new JButton("Malade");
         p1.add(this.jb4);
         this.jb4.addActionListener(this);
-        this.jb5 = new JButton ("Employé");
+        this.jb5 = new JButton("Employé");
         p1.add(this.jb5);
         this.jb5.addActionListener(this);
-        this.jb6 = new JButton ("Hospitalisation");
+        this.jb6 = new JButton("Hospitalisation");
         p1.add(this.jb6);
         this.jb6.addActionListener(this);
-        this.jb7 = new JButton ("Malade");
+        this.jb7 = new JButton("Malade");
         p1.add(this.jb7);
         this.jb7.addActionListener(this);
-        this.jb8 = new JButton ("Soigné");
+        this.jb8 = new JButton("Soigné");
         p1.add(this.jb8);
         this.jb8.addActionListener(this);
-        princ.add("North", p1);
-        
+        selection.add("North", p1);
+
         this.ja1 = new JTextArea("Tous les attributs\n\n\n\n\n");
         p2.add(this.ja1);
         this.ja2 = new JTextArea("Attributs entité choisie ou nouvelle entité");
         p2.add(this.ja2);
-        princ.add("Center", p2);
+        selection.add("Center", p2);
+
         
         this.jb9 = new JButton("Mettre à jour");
         p3.add(this.jb9);
@@ -66,17 +82,54 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener{
         this.jb11 = new JButton("Supprimer");
         p3.add(this.jb11);
         this.jb11.addActionListener(this);
-        princ.add("South", p3);
-        
-        this.setContentPane(princ);     
+        selection.add("South", p3);
+
+        princ.add("North", selection);
+
+        this.setContentPane(princ);
     }
-    
-    
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.getActionCommand().equals("Service")) {
+            ///SERVICE
+            Cursor = "Service";
+            DAO<Service> ServiceDAO = new ServiceDAO();
+            ServiceDAO.set_connexion(maconnexion);
+            int elem[] = ServiceDAO.nbrelem();
+            String[] listservice = new String[elem.length];
+            
+            for (int i = 0; i < elem.length; i++) {
+                listservice[i] = ServiceDAO.find(i).getstringService();
+            }
+            jcservice = new JComboBox(listservice);
+            jcservice.setActionCommand("jcservice");
+            jcservice.addActionListener(this);
+            princservice= new JPanel(new BorderLayout());
+            princservice.add("North", jcservice);
+             princ.add("South", princservice);
+             
+
+        }
+        
+         if (e.getActionCommand().equals("jcservice")) {
+             jcservice.getSelectedItem();
+         }
+         
+         if (e.getActionCommand().equals("Insérer")) {
+             if(Cursor == "Service")
+             {
+                 JTextField jtf1
+                 
+             }
+         }
+         
+         
+         
+         
+         
+        
+        
     }
 
     @Override
@@ -113,6 +166,5 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener{
     public void windowDeactivated(WindowEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-}
 
+}

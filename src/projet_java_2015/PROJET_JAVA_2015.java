@@ -54,7 +54,7 @@ public class PROJET_JAVA_2015 {
         //nameECE = "romano";
         // passwECE = clavier.nextLine();
         //loginBDD = "romano-rw";
-        //passwdBDD = clavier.nextLine(); //UZzWhDla
+        //passwdBDD = clavier.nextLine(); //UZzWhDla //hEpFkmQh
 
       
             //maconnexion = new Connexion(nameECE, passwECE, loginBDD, passwdBDD);
@@ -83,15 +83,9 @@ public class PROJET_JAVA_2015 {
            
             jconnexion = new JConnexion();
             
-            System.out.println("coucou");
-            
-            do{
-                
-              }while(jconnexion.getConnexionValide() == 0);
-            
-            System.out.println ("ok");
-            jControleur = new JControleur();
-             System.out.println ("ok1");
+    
+      
+     /*
             DAO<Batiment> BatimentDAO = new BatimentDAO();
             BatimentDAO.set_connexion(jconnexion.getConnexion());
             Batiment test = new Batiment();
@@ -100,7 +94,7 @@ public class PROJET_JAVA_2015 {
             testend.affiche();
             BatimentDAO.delete(testend);
             
-
+*/
 
         return;
     

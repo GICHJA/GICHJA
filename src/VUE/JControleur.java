@@ -48,7 +48,7 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
         app4 = new JPanel (new FlowLayout());
         
         
-        this.getContentPane().add("North", tabbedpane);
+        this.getContentPane().add(tabbedpane);
         
         this.tabbedpane.addTab ("Menu", app1);
         app1.add(menu.getContentPane());
@@ -60,6 +60,7 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
         app4.add(reporting.getContentPane());
         
         //this.setContentPane(app);
+       // this.setSize(800, 800);
         this.pack();
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //allows to close the window directly when we click on the red cross
