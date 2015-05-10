@@ -25,9 +25,11 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
     private JPanel p1, p2, princ;
     private JTextArea jtf1, jtf2, jtf3, jtf4, jtf5;
     private JTable jt1;
+    private Object[][] donnees ;
+    private  String[] entetes ;
 
     public JReporting() {
-
+        
         princ = new JPanel(new BorderLayout());
 
         p1 = new JPanel(new GridLayout(5, 1));
@@ -46,45 +48,43 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
         princ.add("North", this.p1);
         jt1 = new JTable();
 
-       /* this.ja = new JTextArea("Quand on clique sur une des statistiques au dessus, le graphique \ns’affichera directement dans cette fenêtre. Il y aura beaucoup plus\nde statistiques. "
-                + "Nous en avons mis que deux pour expliquer comment\ncela fonctionnera. ");
-        p2.add(this.ja);
-        princ.add("South", this.p2);*/
-
+        /* this.ja = new JTextArea("Quand on clique sur une des statistiques au dessus, le graphique \ns’affichera directement dans cette fenêtre. Il y aura beaucoup plus\nde statistiques. "
+         + "Nous en avons mis que deux pour expliquer comment\ncela fonctionnera. ");
+         p2.add(this.ja);
+         princ.add("South", this.p2);*/
         this.setContentPane(princ);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Moyenne des salaires des infirmiers par service")) {
-            
-            String sql = "SELECT COUNT(service.code) FROM service ;";
+
+            String sql = "SELECT COUNT(service.code) FROM service WHERE service.code in ( SELECT  infirmier.code_service FROM  infirmier );";
             String sql2 = "SELECT service.code ,AVG(infirmier.salaire)  FROM infirmier ,service Where service.code = infirmier.code_service GROUP BY service.code";
             try {
                 ResultSet res = maconnexion.result(sql);
                 p2.removeAll();
-                res.first();
-                Object[][] donnees = new Object[1][res.getInt(1)];
-                String[] entetes = new String[res.getInt(1)];
-                
-                
-                res = maconnexion.result(sql2);
-                int i =0;
                 if (res.first()) {
-                    res.beforeFirst();
-                    while (res.next()) {
-                        entetes[i] = res.getString("code");
-                        donnees[0][i] = res.getString("AVG(infirmier.salaire)");
-                        i++;
+                    donnees = new Object[1][res.getInt(1)];
+                    entetes = new String[res.getInt(1)];
+                    res = maconnexion.result(sql2);
+                    int i = 0;
+                    if (res.first()) {
+                        res.beforeFirst();
+                        while (res.next()) {
+                            entetes[i] = res.getString("code");
+                            donnees[0][i] = res.getString("AVG(infirmier.salaire)");
+                        //    System.out.println(donnees[0][i]);
+                            i++;
+
+                        }
+                        jt1 = new JTable(donnees, entetes);
+                        p2.add("Center", new JScrollPane(jt1));
+                        princ.add("Center", this.p2);
+                        p2.setVisible(true);
+                        princ.revalidate();
 
                     }
-                    
-                     jt1 = new JTable(donnees, entetes);
-                      p2.add("Center",new JScrollPane(jt1));
-                      princ.add("Center", this.p2);
-                      p2.setVisible(true);
-                      princ.revalidate();
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(JReporting.class.getName()).log(Level.SEVERE, null, ex);

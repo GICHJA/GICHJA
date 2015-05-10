@@ -67,7 +67,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         this.jb7 = new JButton("Docteur");
         p1.add(this.jb7);
         this.jb7.addActionListener(this);
-        this.jb8 = new JButton("Soigné");
+        this.jb8 = new JButton("Rendez-Vous");
         p1.add(this.jb8);
         this.jb8.addActionListener(this);
         selection.add("North", p1);
