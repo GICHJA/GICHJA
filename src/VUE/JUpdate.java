@@ -43,7 +43,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     private String Cursor;
     ////    CE QU il faut pour creer
     private JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15;
-    private JLabel jl1, jl2, jl3, jl4, jl5;
+    private JLabel jl1, jl2, jl3, jl4, jl5,jl6,jl7,jl8;
     private JButton jbvalide1;
 
     public JUpdate() {
@@ -411,8 +411,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (e.getActionCommand()
-                .equals("Mettre à jour")) {
+        if (e.getActionCommand().equals("Mettre à jour")) {
             if (Cursor == "Service") {
                 Cursor = "ServiceMAJ";
                 p2service.setVisible(false);
@@ -465,12 +464,77 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
                 princ.revalidate();
             }
+            
+              if (Cursor == "Infirmier") {
+                Cursor = "InfirmierMAJ";
+                p2service.setVisible(false);
+                p1service.setVisible(false);
+                this.p1service = new JPanel(new GridLayout(6, 2));
+                this.p2service = new JPanel(new BorderLayout());
+                p2service.setVisible(true);
+                p1service.setVisible(true);
+                Infirmier obj = (Infirmier) tabobjet[selection_de_la_jcombox];
+
+                   this.jl1 = new JLabel("Nom : ");
+                p1service.add(this.jl1);
+                this.jtf1 = new JTextField(20);
+                this.jtf1.setText(obj.getNom());
+                this.jtf1.addActionListener(this);
+                p1service.add(this.jtf1);
+
+                this.jl2 = new JLabel("Prenom : ");
+                p1service.add(this.jl2);
+                this.jtf2 = new JTextField(20);
+                this.jtf2.setText(obj.getPrenom());
+                this.jtf2.addActionListener(this);
+                p1service.add(this.jtf2);
+
+                this.jl3 = new JLabel("Adresse : ");
+                p1service.add(this.jl3);
+                this.jtf3 = new JTextField(20);
+                this.jtf3.setText(obj.getAdresse());
+                this.jtf3.addActionListener(this);
+                p1service.add(this.jtf3);
+
+                this.jl4 = new JLabel("Tel : ");
+                p1service.add(this.jl4);
+                this.jtf4 = new JTextField(20);
+                this.jtf4.setText(obj.getTel());
+                p1service.add(this.jtf4);
+                this.jtf4.addActionListener(this);
+
+                this.jl5 = new JLabel("Rotation : ");
+                p1service.add(this.jl5);
+                this.jtf5 = new JTextField(20);
+                this.jtf5.setText(obj.getRotation());
+                p1service.add(this.jtf5);
+                this.jtf5.addActionListener(this);
+                
+                this.jl6 = new JLabel("Salaire : ");
+                p1service.add(this.jl6);
+                this.jtf6 = new JTextField(20);
+                this.jtf6.setText( Double.toString(obj.getSalaire()) );
+                p1service.add(this.jtf6);
+                this.jtf6.addActionListener(this);
+
+                jbvalide1 = new JButton("Valider Insertion");
+                this.jbvalide1.addActionListener(this);
+
+                p2service.add("Center", this.p1service);
+
+                p2service.add("South", this.jbvalide1);
+
+                affichagecentrale.add("Center", p2service);
+                p2service.setVisible(true);
+                affichagecentrale.setVisible(true);
+
+                princ.revalidate();
+            }
 
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (e.getActionCommand()
-                .equals("Insérer")) {
+        if (e.getActionCommand().equals("Insérer")) {
             if (Cursor == "Service") {
                 p2service.setVisible(false);
                 p1service.setVisible(false);
@@ -516,6 +580,65 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
                 princ.revalidate();
             }
+
+            if (Cursor == "Infirmier") {
+                p2service.setVisible(false);
+                p1service.setVisible(false);
+                this.p1service = new JPanel(new GridLayout(6, 2));
+                this.p2service = new JPanel(new BorderLayout());
+                p2service.setVisible(true);
+                p1service.setVisible(true);
+
+                this.jl1 = new JLabel("Nom : ");
+                p1service.add(this.jl1);
+                this.jtf1 = new JTextField(3);
+                this.jtf1.addActionListener(this);
+                p1service.add(this.jtf1);
+
+                this.jl2 = new JLabel("Prenom : ");
+                p1service.add(this.jl2);
+                this.jtf2 = new JTextField(20);
+                this.jtf2.addActionListener(this);
+                p1service.add(this.jtf2);
+
+                this.jl3 = new JLabel("Adresse : ");
+                p1service.add(this.jl3);
+                this.jtf3 = new JTextField(20);
+                this.jtf3.addActionListener(this);
+                p1service.add(this.jtf3);
+
+                this.jl4 = new JLabel("Tel : ");
+                p1service.add(this.jl4);
+                this.jtf4 = new JTextField(20);
+                p1service.add(this.jtf4);
+                this.jtf4.addActionListener(this);
+
+                this.jl5 = new JLabel("Rotation : ");
+                p1service.add(this.jl5);
+                this.jtf5 = new JTextField(20);
+                p1service.add(this.jtf5);
+                this.jtf5.addActionListener(this);
+                
+                this.jl6 = new JLabel("Salaire : ");
+                p1service.add(this.jl6);
+                this.jtf6 = new JTextField(20);
+                p1service.add(this.jtf6);
+                this.jtf6.addActionListener(this);
+
+                jbvalide1 = new JButton("Valider Insertion");
+                this.jbvalide1.addActionListener(this);
+
+                p2service.add("Center", this.p1service);
+
+                p2service.add("South", this.jbvalide1);
+
+                affichagecentrale.add("Center", p2service);
+                p2service.setVisible(true);
+                affichagecentrale.setVisible(true);
+
+                princ.revalidate();
+            }
+
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
