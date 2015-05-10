@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -27,6 +31,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
     private JTable jt1;
     private Object[][] donnees ;
     private  String[] entetes ;
+    private JFreeChart chart ;
 
     public JReporting() {
         
@@ -67,6 +72,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
                 if (res.first()) {
                     donnees = new Object[1][res.getInt(1)];
                     entetes = new String[res.getInt(1)];
+                    
                     res = maconnexion.result(sql2);
                     int i = 0;
                     if (res.first()) {
@@ -79,7 +85,10 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
 
                         }
                         jt1 = new JTable(donnees, entetes);
+                         chart = ChartFactory.createBarChart("test", "test2", "test3", null);
+                         ChartPanel  chartpanel = new ChartPanel(chart);
                         p2.add("Center", new JScrollPane(jt1));
+                        p2.add("Center", new JScrollPane(chartpanel));
                         princ.add("Center", this.p2);
                         p2.setVisible(true);
                         princ.revalidate();
