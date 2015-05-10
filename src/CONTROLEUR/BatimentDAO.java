@@ -75,7 +75,19 @@ public class BatimentDAO extends DAO<Batiment> {
 
     @Override
     public Batiment update(Batiment obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                ResultSet result = null;
+
+        try {
+            String Search = "UPDATE batiment SET nom_batiment = '" + obj.getNom_batiment() + "' WHERE id_batiment =  '"
+                    + obj.getId_batiment() + "'  ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return obj;
     }
 
     @Override

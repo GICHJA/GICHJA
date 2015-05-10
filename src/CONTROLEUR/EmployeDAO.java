@@ -83,6 +83,26 @@ public class EmployeDAO extends DAO<Employe> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+        public void delete(int id) {
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from employe WHERE employe.numero = " + id + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM employe WHERE employe.numero = " + id+ " ;";
+                this.get_connexion().executeUpdate(Search);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void init() {

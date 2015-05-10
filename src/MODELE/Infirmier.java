@@ -105,4 +105,9 @@ public class Infirmier extends Employe {
         }
         
     }
+
+    public String getstringService() {
+        
+        return super.getstringService();
+    }
 }

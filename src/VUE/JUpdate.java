@@ -6,8 +6,10 @@ package VUE;
 
 import CONTROLEUR.BatimentDAO;
 import CONTROLEUR.DAO;
+import CONTROLEUR.InfirmierDAO;
 import CONTROLEUR.ServiceDAO;
 import MODELE.Docteur;
+import MODELE.Infirmier;
 import MODELE.Service;
 import static VUE.JControleur.maconnexion;
 import java.awt.*;
@@ -89,21 +91,32 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         this.jb11.addActionListener(this);
         princ.add("South", p3);
 
+        jcservice = new JComboBox();
+        princservice = new JPanel(new BorderLayout());
+        this.p1service = new JPanel(new GridLayout(4, 2));
+        this.p2service = new JPanel(new BorderLayout());
+
         this.setContentPane(princ);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getActionCommand().equals("Service")) {
             if (Cursor != "Service") {
                 ///SERVICE
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                jcservice.setVisible(false);
+                jcservice.removeAllItems();
+                princ.revalidate();
                 Cursor = "Service";
                 DAO<Service> ServiceDAO = new ServiceDAO();
                 ServiceDAO.set_connexion(maconnexion);
                 int elem[] = ServiceDAO.nbrelem();
-                jcservice = new JComboBox();
                 selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
                 //jcservice.removeAllItems();
+                jcservice = new JComboBox();
                 for (int i = 0; i < elem.length; i++) {
                     Service service = ServiceDAO.find(elem[i]);
                     jcservice.addItem(service.getstringService());
@@ -112,9 +125,42 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 }
                 jcservice.setActionCommand("jcservice");
                 jcservice.addActionListener(this);
-                princservice = new JPanel(new BorderLayout());
                 princservice.add("North", jcservice);
                 affichagecentrale.setVisible(true);
+                princservice.setVisible(true);
+                affichagecentrale.add("North", princservice);
+                jcservice.revalidate();
+                princ.revalidate();
+
+            }
+        }
+
+        if (e.getActionCommand().equals("Infirmier")) {
+            if (Cursor != "Infirmier") {
+                ///Infirmier
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                jcservice.setVisible(false);
+                jcservice.removeAllItems();
+                princ.revalidate();
+                Cursor = "Infirmier";
+                InfirmierDAO infirmierDAO = new InfirmierDAO();
+                infirmierDAO.set_connexion(maconnexion);
+                int elem[] = infirmierDAO.nbrelem();
+                selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
+                //jcservice.removeAllItems();
+                jcservice = new JComboBox();
+                for (int i = 0; i < elem.length; i++) {
+                    Infirmier infirmier = infirmierDAO.find(elem[i]);
+                    jcservice.addItem(infirmier.getstringService());
+                    selection_de_la_jcombox_mais_ceci_est_lid[i] = infirmier.getId_employe();
+
+                }
+                jcservice.setActionCommand("jcservice");
+                jcservice.addActionListener(this);
+                princservice.add("North", jcservice);
+                affichagecentrale.setVisible(true);
+                princservice.setVisible(true);
                 affichagecentrale.add("North", princservice);
                 jcservice.revalidate();
                 princ.revalidate();
@@ -142,17 +188,35 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
             }
 
+            if (Cursor == "Infirmier") {
+                InfirmierDAO infirmierDAO = new InfirmierDAO();
+                infirmierDAO.set_connexion(maconnexion);
+                if (selection_de_la_jcombox != 0) {
+                    infirmierDAO.deleteint(selection_de_la_jcombox_mais_ceci_est_lid[selection_de_la_jcombox]);
+                }
+                selection_de_la_jcombox = 0;
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+                Cursor = "";
+
+            }
+
         }
 
         if (e.getActionCommand().equals("Insérer")) {
             if (Cursor == "Service") {
                 System.out.println("1");
+                p2service.setVisible(false);
+                p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(4, 2));
                 this.p2service = new JPanel(new BorderLayout());
+                p2service.setVisible(true);
+                p1service.setVisible(true);
 
                 this.jl1 = new JLabel("Code : ");
                 p1service.add(this.jl1);
-                this.jtf1 = new JTextField(20);
+                this.jtf1 = new JTextField(3);
                 this.jtf1.addActionListener(this);
                 p1service.add(this.jtf1);
 
@@ -182,9 +246,10 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 p2service.add("South", this.jbvalide1);
 
                 affichagecentrale.add("Center", p2service);
+                p2service.setVisible(true);
                 affichagecentrale.setVisible(true);
+
                 princ.revalidate();
-                /// princ.validate();
             }
         }
 

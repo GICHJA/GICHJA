@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class Connexion {
 
     /**
-     * Attributs prives : connexion JDBC, statement, ordre requete et resultat requete
+     * Attributs prives : connexion JDBC, statement, ordre requete et resultat
+     * requete
      */
     private Connection conn;
     private Statement stmt;
@@ -39,17 +40,17 @@ public class Connexion {
     /**
      * Constructeur de sauvegarde pour connection ultérieur
      */
-    public Connexion()
-    {
-        
+    public Connexion() {
+
     }
-    
-     public int getconnexionok() {
+
+    public int getconnexionok() {
         return connexionok;
     }
-    
+
     /**
-     * Constructeur avec 4 paramètres : username et password ECE, login et password de la BDD
+     * Constructeur avec 4 paramètres : username et password ECE, login et
+     * password de la BDD
      */
     public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
@@ -60,7 +61,7 @@ public class Connexion {
 
         if (ssh.connect()) {
             System.out.println("Connexion reussie");
-            connexionok = 1;    
+            connexionok = 1;
             // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
             String urlDatabase = "jdbc:mysql://localhost:3305/" + usernameECE;
 
@@ -70,51 +71,27 @@ public class Connexion {
             // création d'un ordre SQL (statement)
             stmt = conn.createStatement();
 
-            // initialisation de la liste des requetes de selection et de MAJ
-            remplirRequetes();
-            remplirRequetesMaj();
         }
     }
 
     /**
-     * Méthode privée qui ajoute la requete de selection en parametre dans son ArrayList
+     * Constructeur avec 2 paramètres : username et password ECE, login et
+     * password de la BDD
      */
-    private void ajouterRequete(String requete) {
-        requetes.add(requete);
-    }
+    public Connexion(String usernamebase) throws SQLException, ClassNotFoundException {
+        // chargement driver "com.mysql.jdbc.Driver"
+        Class.forName("com.mysql.jdbc.Driver");
 
-    /**
-     * Méthode privée qui initialise la liste des requetes de selection
-     */
-    private void remplirRequetes() {
-        ajouterRequete("SELECT ename, sal FROM Emp ORDER BY sal;");
-        ajouterRequete("SELECT Dept.*, Emp.*, Mission.* FROM Dept, Emp, Mission WHERE Dept.deptno=Emp.deptno AND Emp.empno=Mission.empno;");
-        ajouterRequete("SELECT AVG (Emp.sal) FROM Emp, Mission WHERE Emp.empno = Mission.empno;");
-        ajouterRequete("SELECT Dept.*, Emp.* FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND comm>0;");
-        ajouterRequete("SELECT hiredate, empno, ename FROM Emp WHERE (((hiredate)>='1981-05-01' And (hiredate)<'1981-05-31'))ORDER BY hiredate;");
-        ajouterRequete("SELECT ename, job FROM Emp ORDER BY job;");
-        ajouterRequete("SELECT DISTINCT dname, job FROM Dept, Emp WHERE Dept.deptno=Emp.deptno AND job='Clerk';");
-    }
+        System.out.println("Connexion reussie");
+        connexionok = 1;
+        // url de connexion"
+        String urlDatabase = "jdbc:mysql://localhost/" + usernamebase;
 
-    /**
-     * Méthode privée qui ajoute la requete de MAJ en parametre dans son ArrayList
-     */
-    private void ajouterRequeteMaj(String requete) {
-        requetesMaj.add(requete);
-    }
+        //création d'une connexion JDBC à la base
+        conn = DriverManager.getConnection(urlDatabase, "root", "root");
 
-    /**
-     * Méthode privée qui initialise la liste des requetes de MAJ
-     */
-    private void remplirRequetesMaj() {
-        // Requêtes d'insertion
-        ajouterRequeteMaj("INSERT INTO Dept (deptno,dname,loc) VALUES (50,'ECE','Paris');");
-
-        // Requêtes de modification
-        ajouterRequeteMaj("UPDATE Dept SET loc='Eiffel' WHERE loc='Paris';");
-
-        // Requêtes de suppression
-        ajouterRequeteMaj("DELETE FROM Dept WHERE loc='Eiffel';");
+        // création d'un ordre SQL (statement)
+        stmt = conn.createStatement();
 
     }
 
@@ -148,13 +125,13 @@ public class Connexion {
     /**
      * Methode qui retourne la resultat de la requete en parametre
      */
-     public ResultSet result(String requete) throws SQLException {
+    public ResultSet result(String requete) throws SQLException {
         // récupération de l'ordre de la requete
-            Statement stmt2;
-         stmt2 = conn.createStatement();
+        Statement stmt2;
+        stmt2 = conn.createStatement();
         return stmt2.executeQuery(requete);
-     }
-    
+    }
+
     /**
      * Methode qui retourne l'ArrayList des champs de la requete en parametre
      */
@@ -179,7 +156,7 @@ public class Connexion {
 
             // Concatener les champs de la ligne separes par ,
             for (int i = 1; i < nbColonne; i++) {
-                champs = champs + "," + rset.getString(i+1);
+                champs = champs + "," + rset.getString(i + 1);
             }
 
             // ajouter un "\n" à la ligne des champs
@@ -192,8 +169,6 @@ public class Connexion {
         // Retourner l'ArrayList
         return liste;
     }
-    
-    
 
     /**
      * Méthode qui execute une requete de MAJ en parametre

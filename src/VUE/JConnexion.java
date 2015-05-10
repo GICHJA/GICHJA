@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import java.awt.Image;
+
 /**
  *
  * @author lucaromano
@@ -19,22 +20,20 @@ import java.awt.Image;
 public class JConnexion extends JFrame implements ActionListener, WindowListener {
 
     private JLabel jl1, jl2, jl3, jl4, jl5;
-    private JButton jb;
+    private JButton jb, jb2;
     private JTextField jt1, jt2;
     private JPasswordField jp1, jp2;
     private JPanel princ, p1, p2, p3;
     private Connexion maconnexion;
     private static JControleur jControleur;
     private Image panel;
-    
 
     public JConnexion() {
         super("Interface ");
         maconnexion = new Connexion();
         princ = new JPanel(new BorderLayout());
-         princ.setLayout(new BorderLayout());
+        princ.setLayout(new BorderLayout());
 
-         
         p1 = new JPanel(new FlowLayout());
         p2 = new JPanel(new GridLayout(4, 4));
         p3 = new JPanel(new FlowLayout());
@@ -63,8 +62,13 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
         princ.add("Center", p2);
 
         this.jb = new JButton("Connexion");
-        p3.add(this.jb);
+        p3.add("East", this.jb);
         this.jb.addActionListener(this);
+        this.jb2 = new JButton("Hors-ligne");
+        p3.add(this.jb2);
+        this.jb2.addActionListener(this);
+        p3.add("West", this.jb2);
+
         princ.add("South", p3);
 
         this.setContentPane(princ);
@@ -85,39 +89,60 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
         return maconnexion;
 
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Connexion")) {
 
-        /*    if (maconnexion.getconnexionok() == 0) {
-                jControleur = new JControleur(maconnexion);
-                jControleur.setSize(800, 800);
-                jControleur.setVisible(true);
-                this.setVisible(false);
-            }*/
-             try {
-
-            // maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
-             
-             maconnexion = new Connexion("prieux", jp1.getText(), "prieux-rw", "hEpFkmQh");
-
-             if (maconnexion.getconnexionok() == 1 ) {
+            /*    if (maconnexion.getconnexionok() == 0) {
              jControleur = new JControleur(maconnexion);
-             jControleur.setSize(500, 350);
-             jControleur.setLocation(1024/ 4, 1000 / 4);
+             jControleur.setSize(800, 800);
              jControleur.setVisible(true);
              this.setVisible(false);
+             }*/
+            try {
 
-             }
+                // maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
+                maconnexion = new Connexion("prieux", jp1.getText(), "prieux-rw", "hEpFkmQh");
 
-             } catch (SQLException ex) {
-             Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (ClassNotFoundException ex) {
-             Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
-             }
+                if (maconnexion.getconnexionok() == 1) {
+                    jControleur = new JControleur(maconnexion);
+                    jControleur.setSize(500, 350);
+                    jControleur.setLocation(1024 / 4, 1000 / 4);
+                    jControleur.setVisible(true);
+                    this.setVisible(false);
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (e.getActionCommand().equals("Hors-ligne")) {
+            try {
+
+                // maconnexion = new Connexion(jt1.getText(), jp1.getText(), jt2.getText(), jp2.getText());
+                maconnexion = new Connexion("prieux");
+
+                if (maconnexion.getconnexionok() == 1) {
+                    jControleur = new JControleur(maconnexion);
+                    jControleur.setSize(500, 350);
+                    jControleur.setLocation(1024 / 4, 1000 / 4);
+                    jControleur.setVisible(true);
+                    this.setVisible(false);
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(JConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 

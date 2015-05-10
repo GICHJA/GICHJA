@@ -6,6 +6,7 @@
 package CONTROLEUR;
 
 import MODELE.Chambre;
+import MODELE.Employe;
 import MODELE.Infirmier;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,6 +125,29 @@ public class InfirmierDAO extends DAO<Infirmier> {
                 Search = "DELETE FROM infirmier WHERE infirmier.numero = " + obj.getNumero() + " ;";
                 this.get_connexion().executeUpdate(Search);
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteint(int id) {
+                ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from infirmier WHERE infirmier.numero = " + id + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM infirmier WHERE infirmier.numero = " + id + " ;";
+                this.get_connexion().executeUpdate(Search);
+                
+                EmployeDAO employeDAO = new EmployeDAO();
+                employeDAO.delete(id);
+            }
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class

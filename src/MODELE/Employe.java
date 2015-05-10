@@ -80,4 +80,8 @@ public class Employe {
 
     }
 
+    String getstringService() {
+        return "Id_employe = " + id_employe + " Nom = " + nom + " prenom = " + prenom +" tel = " + tel +" adresse = " + adresse + "\n";
+    }
+
 }

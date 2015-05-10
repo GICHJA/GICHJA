@@ -63,7 +63,18 @@ public class ChambreDAO extends DAO<Chambre> {
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
         try {
-            String Search = "INSERT INTO chambre VALUES ( '" + nextid + "','" + obj.getCode_service() + "','" + obj.getSurveillant() + "','" + obj.getNo_chambre() + "' ) ";
+            String Search = "INSERT INTO chambre VALUES ( "
+                    + "'" 
+                    + nextid 
+                    + "','"
+                    + obj.getCode_service()
+                    + "','"
+                    + obj.getNo_chambre()
+                    + "','"
+                    + obj.getSurveillant()
+                    + "','"
+                    + obj.getNb_lit()
+                    + "' ) ";
             this.get_connexion().executeUpdate(Search);
 
         } catch (SQLException ex) {
@@ -76,7 +87,26 @@ public class ChambreDAO extends DAO<Chambre> {
 
     @Override
     public Chambre update(Chambre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet result = null;
+/*
+        try {
+            String Search = "UPDATE chambre SET "
+                    + "code_service = '" 
+                    + obj.getCode_service() 
+                    + "', '" 
+                    + obj.getSurveillant() 
+                    + "','" 
+                    + obj.getNo_chambre() 
+                    + "' ) ";"' WHERE id_batiment =  '"
+                    + obj.getId_batiment() + "'  ";
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+*/
+        return obj;
     }
 
     @Override
