@@ -43,7 +43,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     private String Cursor;
     ////    CE QU il faut pour creer
     private JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15;
-    private JLabel jl1, jl2, jl3, jl4, jl5,jl6,jl7,jl8;
+    private JLabel jl1, jl2, jl3, jl4, jl5, jl6, jl7, jl8;
     private JButton jbvalide1;
 
     public JUpdate() {
@@ -464,9 +464,9 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
                 princ.revalidate();
             }
-            
-              if (Cursor == "Infirmier") {
-                Cursor = "InfirmierMAJ";
+
+            if (Cursor == "Infirmier") {
+                Cursor = "InfimiereMAJ";
                 p2service.setVisible(false);
                 p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(6, 2));
@@ -475,7 +475,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 p1service.setVisible(true);
                 Infirmier obj = (Infirmier) tabobjet[selection_de_la_jcombox];
 
-                   this.jl1 = new JLabel("Nom : ");
+                this.jl1 = new JLabel("Nom : ");
                 p1service.add(this.jl1);
                 this.jtf1 = new JTextField(20);
                 this.jtf1.setText(obj.getNom());
@@ -509,11 +509,11 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 this.jtf5.setText(obj.getRotation());
                 p1service.add(this.jtf5);
                 this.jtf5.addActionListener(this);
-                
+
                 this.jl6 = new JLabel("Salaire : ");
                 p1service.add(this.jl6);
                 this.jtf6 = new JTextField(20);
-                this.jtf6.setText( Double.toString(obj.getSalaire()) );
+                this.jtf6.setText(Double.toString(obj.getSalaire()));
                 p1service.add(this.jtf6);
                 this.jtf6.addActionListener(this);
 
@@ -584,7 +584,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             if (Cursor == "Infirmier") {
                 p2service.setVisible(false);
                 p1service.setVisible(false);
-                this.p1service = new JPanel(new GridLayout(6, 2));
+                this.p1service = new JPanel(new GridLayout(7, 2));
                 this.p2service = new JPanel(new BorderLayout());
                 p2service.setVisible(true);
                 p1service.setVisible(true);
@@ -618,12 +618,18 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 this.jtf5 = new JTextField(20);
                 p1service.add(this.jtf5);
                 this.jtf5.addActionListener(this);
-                
+
                 this.jl6 = new JLabel("Salaire : ");
                 p1service.add(this.jl6);
                 this.jtf6 = new JTextField(20);
                 p1service.add(this.jtf6);
                 this.jtf6.addActionListener(this);
+
+                this.jl7 = new JLabel("Service : ");
+                p1service.add(this.jl7);
+                this.jtf7 = new JTextField(20);
+                p1service.add(this.jtf7);
+                this.jtf7.addActionListener(this);
 
                 jbvalide1 = new JButton("Valider Insertion");
                 this.jbvalide1.addActionListener(this);
@@ -668,6 +674,55 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 DAO<Service> ServiceDAO = new ServiceDAO();
                 ServiceDAO.set_connexion(maconnexion);
                 ServiceDAO.update(service);
+                Cursor = "";
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+
+            }
+
+            if (Cursor == "Infirmier") {
+                System.out.println("ici");
+                DAO<Infirmier> obj = new InfirmierDAO();
+                obj.set_connexion(maconnexion);
+                Infirmier obj2 = new Infirmier();
+                
+                obj2.setAdresse(jtf3.getText());
+                obj2.setNom(jtf1.getText());
+                obj2.setPrenom(jtf2.getText());
+                obj2.setRotation(jtf5.getText());
+
+                obj2.setTel(jtf4.getText());
+
+                obj2.setSalaire(Double.parseDouble(jtf6.getText()));
+
+                obj2.setCode_service(jtf7.getText());
+
+                //obj2.affiche();
+                obj.create(obj2);
+
+                Cursor = "";
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+                System.out.println("ici");
+            }
+            if (Cursor == "InfimiereMAJ") {
+                Infirmier obj = (Infirmier) tabobjet[selection_de_la_jcombox];
+
+                obj.setAdresse(jtf3.getText());
+                obj.setNom(jtf1.getText());
+                obj.setPrenom(jtf2.getText());
+                obj.setRotation(jtf5.getText());
+
+                obj.setTel(jtf4.getText());
+
+                obj.setSalaire(Double.parseDouble(jtf6.getText()));
+
+
+                DAO<Infirmier> DAOOBJ = new InfirmierDAO();
+                DAOOBJ.set_connexion(maconnexion);
+                DAOOBJ.update(obj);
                 Cursor = "";
                 princservice.setVisible(false);
                 p2service.setVisible(false);

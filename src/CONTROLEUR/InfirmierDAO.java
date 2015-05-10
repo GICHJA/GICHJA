@@ -75,48 +75,21 @@ public class InfirmierDAO extends DAO<Infirmier> {
                 result.first();
                 obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
                         listobj, id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+                obj.setCode_service(result.getString("code_service"));
+                obj.setNumero(result.getInt("numero"));
+                
+                
 
                 //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
             } else {
                 Search = "SELECT * FROM employe , infirmier  WHERE infirmier.numero = " + id + " AND  employe.numero = infirmier.numero ";
                 result = this.get_connexion().result(Search);
-                result.first();
-                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
-                        null, id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return obj;
-    }
-    
-    public Infirmier find(String requete) {
-        ResultSet result = null;
-        Infirmier obj = new Infirmier();
-        List<Chambre> listobj = new LinkedList();;
-        try {
-            String Search = "SELECT * FROM employe , infirmier , chambre WHERE" + requete + " AND  employe.numero = infirmier.numero AND chambre.surveillant =  infirmier.numero ";
-            result = this.get_connexion().result(Search);
-
-            if (result.first()) {
-                result.beforeFirst();
-                while (result.next() && result.getInt("id_chambre") != 0) {
-                    ChambreDAO objDAO = new ChambreDAO();
-                    objDAO.set_connexion(this.get_connexion());
-                    listobj.add(objDAO.find(result.getInt("id_chambre")));
-
+                if (result.first()) {
+                    obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                            null, id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+                                    obj.setCode_service(result.getString("code_service"));
+                obj.setNumero(result.getInt("numero"));
                 }
-                result.first();
-                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
-                        listobj, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
-
-                //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
-            } else {
-                Search = "SELECT * FROM employe , infirmier  WHERE" + requete + " AND  employe.numero = infirmier.numero ";
-                result = this.get_connexion().result(Search);
-                result.first();
-                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
-                        null, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,10 +101,14 @@ public class InfirmierDAO extends DAO<Infirmier> {
     public Infirmier create(Infirmier obj) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();
-        int nextid = listelem[listelem.length - 1] + 1;
+        int nextid = listelem[listelem.length - 1] + 40;
         try {
-            String Search = "INSERT INTO infirmier VALUES ( '" + nextid + "','" + obj.getCode_service() + "','" + obj.getRotation() + "','" + obj.getRotation() + "' ) ";
+            String Search = "INSERT INTO infirmier VALUES ( '" + nextid + "','" + obj.getCode_service() + "','" + obj.getRotation() + "','" + obj.getSalaire() + "' ) ";
             this.get_connexion().executeUpdate(Search);
+            obj.setId_employe(nextid);
+            EmployeDAO employeDAO = new EmployeDAO();
+            employeDAO.set_connexion(this.get_connexion());
+            employeDAO.create(obj);
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class
@@ -143,7 +120,28 @@ public class InfirmierDAO extends DAO<Infirmier> {
 
     @Override
     public Infirmier update(Infirmier obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                ResultSet result = null;
+
+        try {
+            String Search = "UPDATE infirmier SET "
+                    + "numero = '" + obj.getNumero() + "' ,"
+                    + "code_service = '" + obj.getCode_service() + "' ,"
+                    + "rotation = '" + obj.getRotation() + "' ,"
+                    + "salaire = '" + obj.getSalaire() + "' "
+                    + "WHERE numero =  '" + obj.getNumero() + "' ";
+            
+             EmployeDAO employeDAO = new EmployeDAO();
+            employeDAO.set_connexion(this.get_connexion());
+            employeDAO.update(obj);
+
+            System.out.println(Search);
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
     }
 
     @Override
@@ -167,7 +165,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
     }
 
     public void deleteint(int id) {
-                ResultSet result = null;
+        ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
         try {
@@ -177,16 +175,49 @@ public class InfirmierDAO extends DAO<Infirmier> {
 
                 Search = "DELETE FROM infirmier WHERE infirmier.numero = " + id + " ;";
                 this.get_connexion().executeUpdate(Search);
+
+                 EmployeDAO employeDAO = new EmployeDAO();
+                employeDAO.set_connexion(this.get_connexion());
                 
-                EmployeDAO employeDAO = new EmployeDAO();
-                employeDAO.delete(id);
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public Infirmier find(String requete) {
+        ResultSet result = null;
+        Infirmier obj = new Infirmier();
+        List<Chambre> listobj = new LinkedList();;
+        try {
+            String Search = "SELECT * FROM employe , infirmier , chambre WHERE" + requete + " AND  employe.numero = infirmier.numero AND chambre.surveillant =  infirmier.numero ";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+                result.beforeFirst();
+                while (result.next() && result.getInt("id_chambre") != 0) {
+                    ChambreDAO objDAO = new ChambreDAO();
+                   objDAO.set_connexion(this.get_connexion());
+                  listobj.add(objDAO.find(result.getInt("id_chambre")));
+
+                }
+                result.first();
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                        listobj, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+
+                //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
+            } else {
+                Search = "SELECT * FROM employe , infirmier  WHERE" + requete + " AND  employe.numero = infirmier.numero ";
+                result = this.get_connexion().result(Search);
+                result.first();
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                        null, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
     }
 
 }
