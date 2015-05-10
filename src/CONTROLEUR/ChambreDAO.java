@@ -24,12 +24,14 @@ public class ChambreDAO extends DAO<Chambre> {
     private ArrayList tablechambre = null;
     private Chambre listchambre = null;
 
-    @Override
-    public void init() {
 
-    }
-
-    @Override
+        /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     public Chambre find(int id_chambre) {
         ResultSet result = null, result2 = null;
         Chambre chambre = new Chambre();
@@ -56,7 +58,14 @@ public class ChambreDAO extends DAO<Chambre> {
         }
         return chambre;
     }
-
+    
+        /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Chambre create(Chambre obj) {
         ResultSet result = null;
@@ -84,7 +93,13 @@ public class ChambreDAO extends DAO<Chambre> {
 
         return this.find(nextid);
     }
-
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Chambre update(Chambre obj) {
         ResultSet result = null;
@@ -108,7 +123,13 @@ public class ChambreDAO extends DAO<Chambre> {
 */
         return obj;
     }
-
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Chambre obj) {
         ResultSet result = null;
@@ -128,7 +149,12 @@ public class ChambreDAO extends DAO<Chambre> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;

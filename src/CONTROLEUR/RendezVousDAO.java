@@ -24,6 +24,13 @@ import java.util.logging.Logger;
  */
 public class RendezVousDAO extends DAO<RendezVous> {
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id
+     * @return
+     */
     @Override
     public RendezVous find(int id) {
         ResultSet result = null;
@@ -36,7 +43,7 @@ public class RendezVousDAO extends DAO<RendezVous> {
                 obj = new RendezVous(id, result.getString("datearr"), result.getString("datedep"), result.getString("motif"));
 
             }
-                //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre*/
+            //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre*/
 
         } catch (SQLException ex) {
             Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,6 +51,13 @@ public class RendezVousDAO extends DAO<RendezVous> {
         return obj;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public RendezVous create(RendezVous obj) {
         ResultSet result = null;
@@ -61,14 +75,28 @@ public class RendezVousDAO extends DAO<RendezVous> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public RendezVous update(RendezVous obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(RendezVous obj) {
-ResultSet result = null;
+        ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
         try {
@@ -83,13 +111,15 @@ ResultSet result = null;
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        }    }
-
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;
@@ -119,19 +149,18 @@ ResultSet result = null;
     }
 
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
-                                ResultSet result = null;
+        ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
         try {
-            String Search =  "select * from rendezvous WHERE rendezvous.no_rdv = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+            String Search = "select * from rendezvous WHERE rendezvous.no_rdv = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
             result = this.get_connexion().result(Search);
             if (result.first()) {
 
-                 Search = "DELETE FROM batiment WHERE rendezvous.no_rdv = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+                Search = "DELETE FROM batiment WHERE rendezvous.no_rdv = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
                 this.get_connexion().executeUpdate(Search);
-                
+
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class

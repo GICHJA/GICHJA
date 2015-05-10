@@ -21,11 +21,12 @@ import java.util.logging.Logger;
  */
 public class DocteurDAO extends DAO<Docteur> {
 
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;
@@ -54,6 +55,13 @@ public class DocteurDAO extends DAO<Docteur> {
         return nbr;
     }
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     @Override
     public Docteur find(int id) {
         ResultSet result = null, result2 = null;
@@ -91,7 +99,14 @@ public class DocteurDAO extends DAO<Docteur> {
         }
         return obj;
     }
-    
+
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     public Docteur find(String requete) {
         ResultSet result = null, result2 = null;
         Docteur obj = new Docteur();
@@ -129,6 +144,13 @@ public class DocteurDAO extends DAO<Docteur> {
         return obj;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Docteur create(Docteur obj) {
         ResultSet result = null;
@@ -146,11 +168,25 @@ public class DocteurDAO extends DAO<Docteur> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Docteur update(Docteur obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Docteur obj) {
         ResultSet result = null;
@@ -171,8 +207,15 @@ public class DocteurDAO extends DAO<Docteur> {
         }
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
-                        ResultSet result = null;
+        ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
         try {
@@ -180,13 +223,12 @@ public class DocteurDAO extends DAO<Docteur> {
             result = this.get_connexion().result(Search);
             if (result.first()) {
 
-                 Search = "DELETE FROM batiment WHERE docteur.numero = " +selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+                Search = "DELETE FROM batiment WHERE docteur.numero = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
                 this.get_connexion().executeUpdate(Search);
-                
+
                 EmployeDAO employeDAO = new EmployeDAO();
                 employeDAO.delete(selection_de_la_jcombox_mais_ceci_est_lid);
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class

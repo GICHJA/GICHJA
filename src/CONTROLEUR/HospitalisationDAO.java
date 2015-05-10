@@ -23,6 +23,13 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
     private ArrayList tableHospitalisation = new ArrayList();
     private List<Hospitalisation> listHospitalisation = new LinkedList();
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Hospitalisation find(int id) {
         ResultSet result = null;
@@ -42,6 +49,13 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         return hospitalisation;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Hospitalisation create(Hospitalisation obj) {
         ResultSet result = null;
@@ -59,11 +73,25 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Hospitalisation update(Hospitalisation obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Hospitalisation obj) {
         ResultSet result = null;
@@ -84,34 +112,12 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         }
     }
 
-    @Override
-    public void init() {
-
-        ResultSet result = null;
-
-        try {
-            tableHospitalisation = this.get_connexion().remplirChampsRequete("select * from hospitalisation");
-            result = this.get_connexion().result("select * from hospitalisation");
-        } catch (SQLException ex) {
-            Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            while (result.next()) {
-                int lit;
-                int id;
-                lit = result.getInt("lit");
-                id = result.getInt("id_hospitalisation");
-                Hospitalisation obj;
-                obj = new Hospitalisation(id, lit);
-                listHospitalisation.add(obj);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;

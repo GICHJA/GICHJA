@@ -21,11 +21,12 @@ import java.util.logging.Logger;
  */
 public class InfirmierDAO extends DAO<Infirmier> {
 
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;
@@ -54,6 +55,13 @@ public class InfirmierDAO extends DAO<Infirmier> {
         return nbr;
     }
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     @Override
     @SuppressWarnings("empty-statement")
     public Infirmier find(int id) {
@@ -77,8 +85,6 @@ public class InfirmierDAO extends DAO<Infirmier> {
                         listobj, id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
                 obj.setCode_service(result.getString("code_service"));
                 obj.setNumero(result.getInt("numero"));
-                
-                
 
                 //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
             } else {
@@ -87,8 +93,8 @@ public class InfirmierDAO extends DAO<Infirmier> {
                 if (result.first()) {
                     obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
                             null, id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
-                                    obj.setCode_service(result.getString("code_service"));
-                obj.setNumero(result.getInt("numero"));
+                    obj.setCode_service(result.getString("code_service"));
+                    obj.setNumero(result.getInt("numero"));
                 }
             }
         } catch (SQLException ex) {
@@ -97,6 +103,13 @@ public class InfirmierDAO extends DAO<Infirmier> {
         return obj;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Infirmier create(Infirmier obj) {
         ResultSet result = null;
@@ -118,9 +131,16 @@ public class InfirmierDAO extends DAO<Infirmier> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Infirmier update(Infirmier obj) {
-                ResultSet result = null;
+        ResultSet result = null;
 
         try {
             String Search = "UPDATE infirmier SET "
@@ -129,8 +149,8 @@ public class InfirmierDAO extends DAO<Infirmier> {
                     + "rotation = '" + obj.getRotation() + "' ,"
                     + "salaire = '" + obj.getSalaire() + "' "
                     + "WHERE numero =  '" + obj.getNumero() + "' ";
-            
-             EmployeDAO employeDAO = new EmployeDAO();
+
+            EmployeDAO employeDAO = new EmployeDAO();
             employeDAO.set_connexion(this.get_connexion());
             employeDAO.update(obj);
 
@@ -144,6 +164,13 @@ public class InfirmierDAO extends DAO<Infirmier> {
         return obj;
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Infirmier obj) {
         ResultSet result = null;
@@ -164,6 +191,13 @@ public class InfirmierDAO extends DAO<Infirmier> {
         }
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     public void deleteint(int id) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();
@@ -176,7 +210,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
                 Search = "DELETE FROM infirmier WHERE infirmier.numero = " + id + " ;";
                 this.get_connexion().executeUpdate(Search);
 
-                 EmployeDAO employeDAO = new EmployeDAO();
+                EmployeDAO employeDAO = new EmployeDAO();
                 employeDAO.set_connexion(this.get_connexion());
                 employeDAO.delete(id);
             }
@@ -186,7 +220,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Infirmier find(String requete) {
         ResultSet result = null;
         Infirmier obj = new Infirmier();
@@ -198,8 +232,8 @@ public class InfirmierDAO extends DAO<Infirmier> {
                 result.beforeFirst();
                 while (result.next() && result.getInt("id_chambre") != 0) {
                     ChambreDAO objDAO = new ChambreDAO();
-                   objDAO.set_connexion(this.get_connexion());
-                  listobj.add(objDAO.find(result.getInt("id_chambre")));
+                    objDAO.set_connexion(this.get_connexion());
+                    listobj.add(objDAO.find(result.getInt("id_chambre")));
 
                 }
                 result.first();

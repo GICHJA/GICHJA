@@ -22,6 +22,13 @@ import java.util.logging.Logger;
  */
 public class ServiceDAO extends DAO<Service> {
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Service find(int id) {
         ResultSet result = null;
@@ -79,7 +86,15 @@ public class ServiceDAO extends DAO<Service> {
         }
         return obj;
     }
-        public Service find(String requete) {
+
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id
+     * @return
+     */
+    public Service find(String requete) {
         ResultSet result = null;
         Service obj = new Service();
         List<Infirmier> listobj = new LinkedList();
@@ -125,7 +140,13 @@ public class ServiceDAO extends DAO<Service> {
         }
         return obj;
     }
-        
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Service create(Service obj) {
         ResultSet result = null;
@@ -142,7 +163,13 @@ public class ServiceDAO extends DAO<Service> {
 
         return this.find(nextid);
     }
-
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Service update(Service obj) {
         ResultSet result = null;
@@ -165,7 +192,13 @@ public class ServiceDAO extends DAO<Service> {
 
         return obj;
     }
-
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Service obj) {
         ResultSet result = null;
@@ -185,7 +218,13 @@ public class ServiceDAO extends DAO<Service> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     public void deleteint(int id) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();
@@ -206,11 +245,12 @@ public class ServiceDAO extends DAO<Service> {
         }
     }
 
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;

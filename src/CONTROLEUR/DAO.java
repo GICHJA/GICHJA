@@ -12,66 +12,60 @@ import java.sql.SQLException;
  * @author Adrien
  * @param <T>
  */
-public abstract class DAO <T> {
-    
+public abstract class DAO<T> {
+
     private Connexion maconnexion;
-    
-    
-        public Connexion get_connexion()
-        {
-            return maconnexion;
-        }
-    
-        public void set_connexion(Connexion maconnexion)
-        {
-            this.maconnexion = maconnexion;
-        }
-        
-                        
-    	/**
-	 * Permet de Crée la list d'objet
-	 * @return
-	 */
-	public abstract void init();
-        
-            	/**
-	 * Retourne le nombre d'élement present sur la base de donnée
-	 * @return
-	 */
-	public abstract int[] nbrelem();
-	
-        
-                
-    	/**
-	 * Permet de récupérer un objet via son ID
-	 * @param id
-	 * @return
-	 */
-	public abstract T find(int id);
-	
-	/**
-	 * Permet de créer une entrée dans la base de données
-	 * par rapport à un objet
-	 * @param obj
-	 */
-	public abstract T create(T obj);
-	
-	/**
-	 * Permet de mettre à jour les données d'une entrée dans la base 
-	 * @param obj
-	 */
-	public abstract T update(T obj);
-	
-	/**
-	 * Permet la suppression d'une entrée de la base
-	 * @param obj
-	 */
-	public abstract void delete(T obj);
 
+    public Connexion get_connexion() {
+        return maconnexion;
+    }
 
-           
-    
- 
-    
+    public void set_connexion(Connexion maconnexion) {
+        this.maconnexion = maconnexion;
+    }
+
+      /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
+    public abstract int[] nbrelem();
+
+     /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
+    public abstract T find(int id);
+
+       /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
+    public abstract T create(T obj);
+
+      /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
+    public abstract T update(T obj);
+
+      /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
+    public abstract void delete(T obj);
+
 }
-

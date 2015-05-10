@@ -20,6 +20,13 @@ import java.util.logging.Logger;
  */
 public class MaladeDAO extends DAO<Malade> {
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Malade find(int id) {
         ResultSet result = null, result2 = null;
@@ -51,7 +58,14 @@ public class MaladeDAO extends DAO<Malade> {
         }
         return malade;
     }
-    
+
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param requete
+     * @return
+     */
     public Malade find(String requete) {
         ResultSet result = null, result2 = null;
         Malade malade = new Malade();
@@ -83,6 +97,13 @@ public class MaladeDAO extends DAO<Malade> {
         return malade;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Malade create(Malade obj) {
         ResultSet result = null;
@@ -100,11 +121,25 @@ public class MaladeDAO extends DAO<Malade> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Malade update(Malade obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Malade obj) {
         ResultSet result = null;
@@ -125,12 +160,14 @@ public class MaladeDAO extends DAO<Malade> {
         }
     }
 
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
     public int[] nbrelem() {
         int nbr[] = null;
         ResultSet result = null;
@@ -158,7 +195,7 @@ public class MaladeDAO extends DAO<Malade> {
         return nbr;
     }
 
-    public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {           
+    public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();
         int nextid = listelem[listelem.length - 1] + 1;
@@ -169,14 +206,14 @@ public class MaladeDAO extends DAO<Malade> {
 
                 Search = "DELETE FROM malade WHERE malade.numero = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
                 this.get_connexion().executeUpdate(Search);
-                
+
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
-        }throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

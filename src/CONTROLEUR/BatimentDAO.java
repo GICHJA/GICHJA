@@ -20,6 +20,13 @@ import java.util.logging.Logger;
  */
 public class BatimentDAO extends DAO<Batiment> {
 
+    /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     @Override
     public Batiment find(int id_batiment) {
         ResultSet result = null, result2 = null;
@@ -56,6 +63,13 @@ public class BatimentDAO extends DAO<Batiment> {
         return batiment;
     }
 
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Batiment create(Batiment obj) {
         ResultSet result = null;
@@ -73,9 +87,16 @@ public class BatimentDAO extends DAO<Batiment> {
         return this.find(nextid);
     }
 
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Batiment update(Batiment obj) {
-                ResultSet result = null;
+        ResultSet result = null;
 
         try {
             String Search = "UPDATE batiment SET nom_batiment = '" + obj.getNom_batiment() + "' WHERE id_batiment =  '"
@@ -90,6 +111,13 @@ public class BatimentDAO extends DAO<Batiment> {
         return obj;
     }
 
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Batiment obj) {
         ResultSet result = null;
@@ -111,11 +139,12 @@ public class BatimentDAO extends DAO<Batiment> {
 
     }
 
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;

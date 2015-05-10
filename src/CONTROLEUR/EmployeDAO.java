@@ -19,7 +19,14 @@ import java.util.logging.Logger;
 public class EmployeDAO extends DAO<Employe> {
 
     int newattr;
-
+    
+      /**
+     * Méthode find : Permet de retourner la classe entiérement remplie en
+     * fournissant un id requete
+     *
+     * @param id_batiment
+     * @return
+     */
     @Override
     public Employe find(int id) {
         ResultSet result = null;
@@ -35,7 +42,7 @@ public class EmployeDAO extends DAO<Employe> {
                         result.getString("adresse"),
                         result.getString("tel"));
                 employe.setId_employe(id);
-                
+
             }
 
         } catch (SQLException ex) {
@@ -43,7 +50,13 @@ public class EmployeDAO extends DAO<Employe> {
         }
         return employe;
     }
-
+    /**
+     * Méthode create : Permet de creer la classe entiérement remplie en
+     * fournissant un obg requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Employe create(Employe obj) {
         ResultSet result = null;
@@ -58,10 +71,16 @@ public class EmployeDAO extends DAO<Employe> {
 
         return this.find(obj.getId_employe());
     }
-
+    /**
+     * Méthode update : Permet de mettre a jour la base de donnée en fournissent
+     * un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public Employe update(Employe obj) {
-                        ResultSet result = null;
+        ResultSet result = null;
 
         try {
             String Search = "UPDATE employe SET "
@@ -81,7 +100,13 @@ public class EmployeDAO extends DAO<Employe> {
         }
         return obj;
     }
-
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public void delete(Employe obj) {
         ResultSet result = null;
@@ -101,16 +126,21 @@ public class EmployeDAO extends DAO<Employe> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-        public void delete(int id) {
+    /**
+     * Méthode delete : Permet de supprimer un elemde la base de donnée en
+     * fournissent un obj requete
+     *
+     * @param obj
+     * @return
+     */
+    public void delete(int id) {
         ResultSet result = null;
         try {
             String Search = "select * from employe WHERE employe.numero = " + id + " ;";
             result = this.get_connexion().result(Search);
             if (result.first()) {
 
-                Search = "DELETE FROM employe WHERE employe.numero = " + id+ " ;";
+                Search = "DELETE FROM employe WHERE employe.numero = " + id + " ;";
                 this.get_connexion().executeUpdate(Search);
             }
 
@@ -119,12 +149,13 @@ public class EmployeDAO extends DAO<Employe> {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     *
+     * @param obj
+     * @return
+     */
+  
     @Override
     public int[] nbrelem() {
         int nbr[] = null;
