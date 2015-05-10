@@ -68,6 +68,11 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         p1.add(this.jb7);
         this.jb7.addActionListener(this);
         princ.add("North", p1);
+        
+                this.p1service = new JPanel();
+                this.p2service = new JPanel();
+                
+
                 
         selection.add("North", princ);
         this.setContentPane(selection);
@@ -77,10 +82,12 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
     @Override
     public void actionPerformed(ActionEvent e) {   
         if (e.getActionCommand().equals("Service")){
-            Cursor = "Service";
+            Cursor = "Service";        
+            this.p2service.setVisible(false);
+                this.p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(5, 2));
                 this.p2service = new JPanel(new FlowLayout());
-
+        
                 this.jl1 = new JLabel("Code : ");
                 p1service.add(this.jl1);
                 this.jtf1 = new JTextField(20);
@@ -108,7 +115,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 jbvalide1 = new JButton("Rechercher");
                 this.jbvalide1.addActionListener(this);
                 p2service.add(this.jbvalide1);
-                
+                                this.p2service.setVisible(true);
+                this.p1service.setVisible(true);
                 selection.add("Center", p1service);
                 selection.add("South", p2service);
                 selection.revalidate();
@@ -116,6 +124,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         
         if (e.getActionCommand().equals("Infirmier")){
             Cursor = "Infirmier";
+                           this.p2service.setVisible(false);
+                this.p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(5, 2));
                 this.p2service = new JPanel(new FlowLayout());
 
@@ -146,7 +156,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 jbvalide1 = new JButton("Rechercher");
                 this.jbvalide1.addActionListener(this);
                 p2service.add(this.jbvalide1);
-                
+                                                this.p2service.setVisible(true);
+                this.p1service.setVisible(true);
                 selection.add("Center", p1service);
                 selection.add("South", p2service);
                 selection.revalidate();
@@ -154,6 +165,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         
         if (e.getActionCommand().equals("Malade")){
             Cursor = "Malade";
+                           this.p2service.setVisible(false);
+                this.p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(5, 2));
                 this.p2service = new JPanel(new FlowLayout());
 
@@ -190,7 +203,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 jbvalide1 = new JButton("Rechercher");
                 this.jbvalide1.addActionListener(this);
                 p2service.add(this.jbvalide1);
-                
+                                                this.p2service.setVisible(true);
+                this.p1service.setVisible(true);
                 selection.add("Center", p1service);
                 selection.add("South", p2service);
                 selection.revalidate();
@@ -198,7 +212,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 
         if (e.getActionCommand().equals("Docteur")){
             Cursor = "Docteur";
-            
+                           this.p2service.setVisible(false);
+                this.p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(5, 2));
                 this.p2service = new JPanel(new FlowLayout());
 
@@ -217,7 +232,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 jbvalide1 = new JButton("Rechercher");
                 this.jbvalide1.addActionListener(this);
                 p2service.add(this.jbvalide1);
-                
+                                                this.p2service.setVisible(true);
+                this.p1service.setVisible(true);
                 selection.add("Center", p1service);
                 selection.add("South", p2service);
                 selection.revalidate();
