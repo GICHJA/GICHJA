@@ -77,32 +77,9 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         p1.add(this.jb9);
         this.jb9.addActionListener(this);
         princ.add("North", p1);
-        
-        /*this.jl = new JLabel("Tapez votre recherche :");
-        p2.add(this.jl);
-        this.jt = new JTextField (10);
-        p2.add(this.jt);
-        princ.add("West", p2);*/
-        
-        /*this.jb9 = new JButton("Rechercher");
-        p3.add(this.jb9);
-        this.jb9.addActionListener(this);
-        princ.add("South", p3);*/
-        
-        /*this.ja = new JTextArea("Affichage", 10, 45);//de notre recherche. Si par exemple, on clique sur le bouton employé,\ntous les employés seront affichés. "
-                //"On peut également pour être plus précis mettre \ndans la recherche le nom de l’employé recherché, "
-                //"le résultat affichera cette employé \navec tous les attributs qui lui correspond."
-        p4.add(this.ja);
-        princ.add("Center", p4);*/
-        
+                
         selection.add("North", princ);
         this.setContentPane(selection);
-        
-        
-        /*this.pack();
-	this.setVisible(true);
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
-        
     }
     
 
@@ -120,8 +97,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         }
         
         if (e.getActionCommand().equals("Service")){
-            
             Cursor = "Service";
+            
             this.p1service = new JPanel(new GridLayout(4, 2));
             this.p2service = new JPanel(new FlowLayout());
 
@@ -160,7 +137,34 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         if (e.getActionCommand().equals("Rechercher")){   
             if (Cursor == "Service"){
                 String requete = " ";
-                if (jtf1.getText().length()!=0){
+                if ((jtf1.getText().length() == 0) & (jtf2.getText().length()== 0) & (jtf3.getText().length()== 0) & (jtf4.getText().length()== 0)){
+                    DAO<Service> ServiceDAO = new ServiceDAO();
+                    ServiceDAO.set_connexion(maconnexion);
+                    int elem[] = ServiceDAO.nbrelem();
+                    //String[] listemploye = new String[elem.length];
+                    columnNames = new String[4];
+                    columnNames[0] = "Code";
+                    columnNames[1] = "Nom";
+                    columnNames[2] = "id_batiment";
+                    columnNames[3] = "directeur";
+            
+                    data = new Object[elem.length][4];
+                    int j = 0;
+            
+                    for (int i = 0; i < elem.length; i++) {
+                        Service service = ServiceDAO.find(elem[i]);
+               
+                        data[j][0] = service.getCode();
+                        data[j][1] = service.getNom();
+                        data[j][2] = service.getId_batiment();
+                        data[j][3] = service.getDirecteur();
+                        j++;
+               
+                    }
+                    table = new JTable(data, columnNames);
+                    JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
+                }
+                  if (jtf1.getText().length()!=0){
                     requete+= "code = \"" + jtf1.getText() + "\" " ;
                 }
                 if (jtf2.getText().length()!=0){
@@ -184,6 +188,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                     data[0][0] = listservicerecherche.getNom();
                     data[0][1] = listservicerecherche.getCode();
                 }
+                
             }
             table = new JTable(data, columnNames);
             JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
@@ -194,7 +199,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             DAO<Employe> EmployeDAO = new EmployeDAO();
             EmployeDAO.set_connexion(maconnexion);
             int elem[] = EmployeDAO.nbrelem();
-            String[] listservice = new String[elem.length];
+            //String[] listemploye = new String[elem.length];
             columnNames = new String[4];
             columnNames[0] = "Nom";
             columnNames[1] = "Prénom";
@@ -222,7 +227,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             DAO<Malade> MaladeDAO = new MaladeDAO();
             MaladeDAO.set_connexion(maconnexion);
             int elem[] = MaladeDAO.nbrelem();
-            String[] listservice = new String[elem.length];
+            String[] listmalade = new String[elem.length];
             columnNames = new String[5];
             columnNames[0] = "Numéro";
             columnNames[1] = "Nom";
@@ -252,7 +257,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             DAO<Docteur> DocteurDAO = new DocteurDAO();
             DocteurDAO.set_connexion(maconnexion);
             int elem[] = DocteurDAO.nbrelem();
-            String[] listservice = new String[elem.length];
+            String[] listdocteur = new String[elem.length];
             columnNames = new String[3];
             columnNames[0] = "Nom";
             columnNames[1] = "Prénom";
