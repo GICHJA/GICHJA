@@ -44,7 +44,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
         this.jb1 = new JButton("Moyenne des salaires des infirmiers par service");
         p1.add(this.jb1);
         this.jb1.addActionListener(this);
-        this.jb2 = new JButton("Nombre d'hospitalisés par type de service");
+        this.jb2 = new JButton("Nombre de docteur par spécialité");
         p1.add(this.jb2);
         this.jb2.addActionListener(this);
         this.jb3 = new JButton("Le nombre moyen de lits par chambre dans chaque Batiment");
@@ -89,7 +89,38 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
                         jt1 = new JTable(donnees, entetes);
                         chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
                         ChartPanel chartpanel = new ChartPanel(chart);
-                        p2.add("Center", new JScrollPane(jt1));
+                        chartpanel.setSize(500,350);
+                        //p2.add("Center", new JScrollPane(jt1));
+                        p2.add("Center", new JScrollPane(chartpanel));
+                        princ.add("Center", this.p2);
+                        p2.setVisible(true);
+                        princ.revalidate();
+
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JReporting.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        
+                if (e.getActionCommand().equals("Nombre de docteur par spécialité")) {
+
+            String sql2 = "SELECT docteur.specialite, COUNT(docteur.specialite) FROM docteur GROUP by specialite";
+            try {
+                ResultSet res = maconnexion.result(sql2);
+                p2.removeAll();
+                if (res.first()) {
+                    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                    if (res.first()) {
+                        res.beforeFirst();
+                        while (res.next()) {
+                            dataset.setValue(res.getInt("COUNT(docteur.specialite)"), "", res.getString("specialite"));
+                        }
+                        chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
+                        ChartPanel chartpanel = new ChartPanel(chart);
+                        chartpanel.setSize(500,350);
+                        //p2.add("Center", new JScrollPane(jt1));
                         p2.add("Center", new JScrollPane(chartpanel));
                         princ.add("Center", this.p2);
                         p2.setVisible(true);
