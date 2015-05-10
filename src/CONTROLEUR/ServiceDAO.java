@@ -59,6 +59,8 @@ public class ServiceDAO extends DAO<Service> {
                     objDAO3.set_connexion(this.get_connexion());
                     directeur = objDAO3.find(result.getInt("directeur"));
                     obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
+                    obj.setId_batiment( result.getInt("id_batiment"));
+                    obj.setNo_directeur(result.getInt("directeur"));
                 }
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre
             } else {
@@ -68,6 +70,9 @@ public class ServiceDAO extends DAO<Service> {
 
                 result.first();
                 obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, null, null);
+                obj.setId_batiment( result.getInt("id_batiment"));
+                obj.setNo_directeur(result.getInt("directeur"));
+                
 
             }
         } catch (SQLException ex) {
@@ -95,7 +100,25 @@ public class ServiceDAO extends DAO<Service> {
 
     @Override
     public Service update(Service obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                       ResultSet result = null;
+
+        try {
+            String Search = "UPDATE service SET "
+                    + "code = '" + obj.getCode() + "' ,"
+                    + "nom = '" + obj.getNom() + "' ,"
+                    + "id_batiment = '" + obj.getId_batiment() + "' ,"
+                    + "directeur = '" + obj.getNo_directeur() + "' "
+                    + "WHERE id_service =  '"+ obj.getId_service()+ "' ";
+            
+            System.out.println(Search);
+            this.get_connexion().executeUpdate(Search);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return obj;
     }
 
     @Override

@@ -30,6 +30,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     private JComboBox jcservice;
     private int selection_de_la_jcombox;
     private int[] selection_de_la_jcombox_mais_ceci_est_lid;
+    private Object tabobjet[];
     private String Cursor;
     ////    CE QU il faut pour creer
     private JTextField jtf1, jtf2, jtf3, jtf4, jtf5, jtf6, jtf7, jtf8, jtf9, jtf10, jtf11, jtf12, jtf13, jtf14, jtf15;
@@ -117,11 +118,12 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
                 //jcservice.removeAllItems();
                 jcservice = new JComboBox();
+                this.tabobjet = new Service[elem.length];
                 for (int i = 0; i < elem.length; i++) {
                     Service service = ServiceDAO.find(elem[i]);
                     jcservice.addItem(service.getstringService());
                     selection_de_la_jcombox_mais_ceci_est_lid[i] = service.getId_service();
-
+                    this.tabobjet[i] = service;
                 }
                 jcservice.setActionCommand("jcservice");
                 jcservice.addActionListener(this);
@@ -150,11 +152,12 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 selection_de_la_jcombox_mais_ceci_est_lid = new int[elem.length];
                 //jcservice.removeAllItems();
                 jcservice = new JComboBox();
+                this.tabobjet = new Infirmier[elem.length];
                 for (int i = 0; i < elem.length; i++) {
                     Infirmier infirmier = infirmierDAO.find(elem[i]);
                     jcservice.addItem(infirmier.getstringService());
                     selection_de_la_jcombox_mais_ceci_est_lid[i] = infirmier.getId_employe();
-
+                   this.tabobjet[i] = infirmier;
                 }
                 jcservice.setActionCommand("jcservice");
                 jcservice.addActionListener(this);
@@ -167,11 +170,11 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
 
             }
         }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (e.getActionCommand().equals("jcservice")) {
             selection_de_la_jcombox = jcservice.getSelectedIndex();
         }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (e.getActionCommand().equals("Supprimer")) {
 
             if (Cursor == "Service") {
@@ -203,10 +206,65 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
             }
 
         }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (e.getActionCommand().equals("Mettre à jour")) {
+            if (Cursor == "Service") {
+                Cursor= "ServiceMAJ";
+                p2service.setVisible(false);
+                p1service.setVisible(false);
+                this.p1service = new JPanel(new GridLayout(4, 2));
+                this.p2service = new JPanel(new BorderLayout());
+                p2service.setVisible(true);
+                p1service.setVisible(true);
+                Service service = (Service) tabobjet[selection_de_la_jcombox];
 
+                this.jl1 = new JLabel("Code : ");
+                p1service.add(this.jl1);
+                this.jtf1 = new JTextField(3);
+                this.jtf1.setText(service.getCode());
+                this.jtf1.addActionListener(this);
+                p1service.add(this.jtf1);
+
+                this.jl2 = new JLabel("Nom : ");
+                p1service.add(this.jl2);
+                this.jtf2 = new JTextField(20);
+                this.jtf2.setText(service.getNom());
+                this.jtf2.addActionListener(this);
+                p1service.add(this.jtf2);
+
+                this.jl3 = new JLabel("Id_batiment : ");
+                p1service.add(this.jl3);
+                this.jtf3 = new JTextField(20);
+                System.out.println(service.getId_batiment());
+                this.jtf3.setText(Integer.toString(service.getId_batiment()));
+                this.jtf3.addActionListener(this);
+                p1service.add(this.jtf3);
+
+                this.jl4 = new JLabel("Directeur : ");
+                p1service.add(this.jl4);
+                this.jtf4 = new JTextField(20);
+                this.jtf4.setText(Integer.toString(service.getNo_directeur()));
+                p1service.add(this.jtf4);
+                this.jtf4.addActionListener(this);
+
+                jbvalide1 = new JButton("Valider Insertion");
+                this.jbvalide1.addActionListener(this);
+
+                p2service.add("Center", this.p1service);
+
+                p2service.add("South", this.jbvalide1);
+
+                affichagecentrale.add("Center", p2service);
+                p2service.setVisible(true);
+                affichagecentrale.setVisible(true);
+
+                princ.revalidate();
+            }
+
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (e.getActionCommand().equals("Insérer")) {
             if (Cursor == "Service") {
-                System.out.println("1");
                 p2service.setVisible(false);
                 p1service.setVisible(false);
                 this.p1service = new JPanel(new GridLayout(4, 2));
@@ -252,7 +310,7 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 princ.revalidate();
             }
         }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (e.getActionCommand().equals("Valider Insertion")) {
 
             if (Cursor == "Service") {
@@ -267,8 +325,26 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
                 princ.revalidate();
 
             }
-        }
+            if (Cursor == "ServiceMAJ") {
+                Service service = (Service) tabobjet[selection_de_la_jcombox];
 
+                service.setCode(jtf1.getText());
+                service.setNom((jtf2.getText()));
+                service.setId_batiment(Integer.parseInt(jtf3.getText()));
+                service.setNo_directeur(Integer.parseInt(jtf4.getText()));
+
+                DAO<Service> ServiceDAO = new ServiceDAO();
+                ServiceDAO.set_connexion(maconnexion);
+                ServiceDAO.update(service);
+                Cursor = "";
+                princservice.setVisible(false);
+                p2service.setVisible(false);
+                princ.revalidate();
+
+            }
+
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
