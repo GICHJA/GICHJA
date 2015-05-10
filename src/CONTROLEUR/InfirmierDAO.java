@@ -178,7 +178,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
 
                  EmployeDAO employeDAO = new EmployeDAO();
                 employeDAO.set_connexion(this.get_connexion());
-                
+                employeDAO.delete(id);
             }
 
         } catch (SQLException ex) {
