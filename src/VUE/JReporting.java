@@ -87,7 +87,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
 
                         }
                         jt1 = new JTable(donnees, entetes);
-                        chart = ChartFactory.createAreaChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
+                        chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
                         ChartPanel chartpanel = new ChartPanel(chart);
                         p2.add("Center", new JScrollPane(jt1));
                         p2.add("Center", new JScrollPane(chartpanel));
