@@ -47,7 +47,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
         this.jb2 = new JButton("Nombre de docteur par spécialité");
         p1.add(this.jb2);
         this.jb2.addActionListener(this);
-        this.jb3 = new JButton("Le nombre moyen de lits par chambre dans chaque Batiment");
+        this.jb3 = new JButton("Le nombre de lits dans chaque Batiment");
         p1.add(this.jb3);
         this.jb3.addActionListener(this);
 
@@ -89,7 +89,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
                         jt1 = new JTable(donnees, entetes);
                         chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
                         ChartPanel chartpanel = new ChartPanel(chart);
-                        chartpanel.setSize(500,350);
+                        chartpanel.setSize(500, 350);
                         //p2.add("Center", new JScrollPane(jt1));
                         p2.add("Center", new JScrollPane(chartpanel));
                         princ.add("Center", this.p2);
@@ -103,8 +103,8 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
             }
 
         }
-        
-                if (e.getActionCommand().equals("Nombre de docteur par spécialité")) {
+
+        if (e.getActionCommand().equals("Nombre de docteur par spécialité")) {
 
             String sql2 = "SELECT docteur.specialite, COUNT(docteur.specialite) FROM docteur GROUP by specialite";
             try {
@@ -119,7 +119,37 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
                         }
                         chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
                         ChartPanel chartpanel = new ChartPanel(chart);
-                        chartpanel.setSize(500,350);
+                        chartpanel.setSize(500, 350);
+                        //p2.add("Center", new JScrollPane(jt1));
+                        p2.add("Center", new JScrollPane(chartpanel));
+                        princ.add("Center", this.p2);
+                        p2.setVisible(true);
+                        princ.revalidate();
+
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JReporting.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        if (e.getActionCommand().equals("Le nombre de lits dans chaque Batiment")) {
+
+            String sql2 = "SELECT batiment.nom_batiment , SUM(chambre.nb_lits) FROM batiment,service, chambre WHERE Batiment.id_batiment = Service.id_batiment and Service.code = chambre.code_service GROUP by Batiment.nom_batiment";
+            try {
+                ResultSet res = maconnexion.result(sql2);
+                p2.removeAll();
+                if (res.first()) {
+                    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                    if (res.first()) {
+                        res.beforeFirst();
+                        while (res.next()) {
+                            dataset.setValue(res.getInt("SUM(chambre.nb_lits)"), "", res.getString("batiment.nom_batiment"));
+                        }
+                        chart = ChartFactory.createBarChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
+                        ChartPanel chartpanel = new ChartPanel(chart);
+                        chartpanel.setSize(500, 350);
                         //p2.add("Center", new JScrollPane(jt1));
                         p2.add("Center", new JScrollPane(chartpanel));
                         princ.add("Center", this.p2);
