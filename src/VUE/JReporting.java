@@ -16,6 +16,7 @@ import javax.swing.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -29,12 +30,12 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
     private JPanel p1, p2, princ;
     private JTextArea jtf1, jtf2, jtf3, jtf4, jtf5;
     private JTable jt1;
-    private Object[][] donnees ;
-    private  String[] entetes ;
-    private JFreeChart chart ;
+    private Object[][] donnees;
+    private String[] entetes;
+    private JFreeChart chart;
 
     public JReporting() {
-        
+
         princ = new JPanel(new BorderLayout());
 
         p1 = new JPanel(new GridLayout(5, 1));
@@ -72,21 +73,22 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
                 if (res.first()) {
                     donnees = new Object[1][res.getInt(1)];
                     entetes = new String[res.getInt(1)];
-                    
+                    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                     res = maconnexion.result(sql2);
                     int i = 0;
                     if (res.first()) {
                         res.beforeFirst();
                         while (res.next()) {
+                            dataset.setValue(res.getInt("AVG(infirmier.salaire)"), "", res.getString("code"));
                             entetes[i] = res.getString("code");
                             donnees[0][i] = res.getString("AVG(infirmier.salaire)");
-                        //    System.out.println(donnees[0][i]);
+                            //    System.out.println(donnees[0][i]);
                             i++;
 
                         }
                         jt1 = new JTable(donnees, entetes);
-                         chart = ChartFactory.createBarChart("test", "test2", "test3", null);
-                         ChartPanel  chartpanel = new ChartPanel(chart);
+                        chart = ChartFactory.createAreaChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
+                        ChartPanel chartpanel = new ChartPanel(chart);
                         p2.add("Center", new JScrollPane(jt1));
                         p2.add("Center", new JScrollPane(chartpanel));
                         princ.add("Center", this.p2);
