@@ -136,7 +136,7 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
 
         if (e.getActionCommand().equals("Le nombre de lits dans chaque Batiment")) {
 
-            String sql2 = "SELECT batiment.nom_batiment , SUM(chambre.nb_lits) FROM batiment,service, chambre WHERE Batiment.id_batiment = Service.id_batiment and Service.code = chambre.code_service GROUP by Batiment.nom_batiment";
+            String sql2 = "SELECT batiment.nom_batiment , SUM(chambre.nb_lits) FROM batiment,service, chambre WHERE batiment.id_batiment = service.id_batiment and service.code = chambre.code_service GROUP by batiment.nom_batiment";
             try {
                 ResultSet res = maconnexion.result(sql2);
                 p2.removeAll();

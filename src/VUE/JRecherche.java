@@ -250,13 +250,13 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                     ServiceDAO.set_connexion(maconnexion);
                     int elem[] = ServiceDAO.nbrelem();
                     //String[] listemploye = new String[elem.length];
-                    columnNames = new String[4];
+                    columnNames = new String[5];
                     columnNames[0] = "Code";
                     columnNames[1] = "Nom";
                     columnNames[2] = "id_batiment";
                     columnNames[3] = "directeur";
-            
-                    data = new Object[elem.length][4];
+                    columnNames[4] = "List Chambre";
+                    data = new Object[elem.length][5];
                     int j = 0;
             
                     for (int i = 0; i < elem.length; i++) {
@@ -266,6 +266,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                         data[j][1] = service.getNom();
                         data[j][2] = service.getId_batiment();
                         data[j][3] = service.getDirecteur().getNom();
+                        data[j][3] = service.getListchambre();
                         j++;
                
                     }
@@ -290,11 +291,13 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                     columnNames[0] = "Nom";
                     columnNames[1] = "Code";
                     columnNames[2] = "Directeur";
+                    
                     data = new Object[2][3];
                     if(listservicerecherche!=null){
                         data[0][0] = listservicerecherche.getNom();
                         data[0][1] = listservicerecherche.getCode();
                         data[0][2] = listservicerecherche.getDirecteur().getNom();
+                        
                     }
                 
                 }
