@@ -8,6 +8,7 @@ import CONTROLEUR.BatimentDAO;
 import CONTROLEUR.DAO;
 import CONTROLEUR.DocteurDAO;
 import CONTROLEUR.EmployeDAO;
+import CONTROLEUR.HospitalisationDAO;
 import CONTROLEUR.MaladeDAO;
 import CONTROLEUR.ServiceDAO;
 import MODELE.Batiment;
@@ -15,6 +16,7 @@ import MODELE.Docteur;
 import MODELE.Employe;
 import MODELE.Malade;
 import MODELE.Service;
+import MODELE.Hospitalisation;
 import static VUE.JControleur.maconnexion;
 import java.awt.*;
 import java.awt.event.*;
@@ -133,10 +135,53 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             selection.add("Center", p1service);
             selection.add("South", p2service);
             selection.revalidate();
-        }   
+        }
+        if (e.getActionCommand().equals("Hospitalisation")){
+           Cursor = "Hospitalisation";
+            
+            this.p1service = new JPanel(new GridLayout(4, 2));
+            this.p2service = new JPanel(new FlowLayout());
+
+            this.jl1 = new JLabel("Numéro du malade : ");
+            p1service.add(this.jl1);
+            this.jtf1 = new JTextField(20);
+            this.jtf1.addActionListener(this);
+            p1service.add(this.jtf1);
+
+            this.jl2 = new JLabel("Code du service : ");
+            p1service.add(this.jl2);
+            this.jtf2 = new JTextField(20);
+            this.jtf2.addActionListener(this);
+            p1service.add(this.jtf2);
+
+            this.jl3 = new JLabel("Numero de chambre : ");
+            p1service.add(this.jl3);
+            this.jtf3 = new JTextField(20);
+            this.jtf3.addActionListener(this);
+            p1service.add(this.jtf3);
+
+            this.jl4 = new JLabel("Nombre de lit : ");
+            p1service.add(this.jl4);
+            this.jtf4 = new JTextField(20);
+            p1service.add(this.jtf4);
+            this.jtf4.addActionListener(this);
+                
+            jbvalide1 = new JButton("Rechercher");
+            this.jbvalide1.addActionListener(this);
+            p2service.add(this.jbvalide1);
+                
+            selection.add("Center", p1service);
+            selection.add("South", p2service);
+            selection.revalidate();
+        }
+        
+        
         if (e.getActionCommand().equals("Rechercher")){   
             if (Cursor == "Service"){
                 String requete = " ";
+                ServiceDAO servicedao= new ServiceDAO();
+                servicedao.set_connexion(maconnexion);
+                
                 if ((jtf1.getText().length() == 0) & (jtf2.getText().length()== 0) & (jtf3.getText().length()== 0) & (jtf4.getText().length()== 0)){
                     DAO<Service> ServiceDAO = new ServiceDAO();
                     ServiceDAO.set_connexion(maconnexion);
@@ -157,43 +202,109 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                         data[j][0] = service.getCode();
                         data[j][1] = service.getNom();
                         data[j][2] = service.getId_batiment();
-                        data[j][3] = service.getDirecteur();
+                        data[j][3] = service.getDirecteur().getNom();
                         j++;
                
                     }
                     table = new JTable(data, columnNames);
                     JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
                 }
-                  if (jtf1.getText().length()!=0){
-                    requete+= "code = \"" + jtf1.getText() + "\" " ;
-                }
-                if (jtf2.getText().length()!=0){
-                    requete+= "AND nom = \"" + jtf2.getText() + "\" ";
-                }
-                if (jtf3.getText().length()!=0){
-                    requete+= "AND id_batiment = " + jtf3.getText() + " ";
-                }
-                if (jtf4.getText().length()!=0){
-                    requete+= "AND directeur = " + jtf4.getText() + " ";
-                }
-                ServiceDAO servicedao= new ServiceDAO();
-                servicedao.set_connexion(maconnexion);
-                Service listservicerecherche = servicedao.find(requete);
-                columnNames = new String[2];
-                columnNames[0] = "Nom";
-                columnNames[1] = "Code";
-                data = new Object[2][2];
-                if(listservicerecherche!=null)
-                {
-                    data[0][0] = listservicerecherche.getNom();
-                    data[0][1] = listservicerecherche.getCode();
-                }
+                else{
+                    if (jtf1.getText().length()!=0){
+                        requete+= "code = \"" + jtf1.getText() + "\" " ;
+                    }
+                    if (jtf2.getText().length()!=0){
+                        requete+= "AND nom = \"" + jtf2.getText() + "\" ";
+                    }
+                    if (jtf3.getText().length()!=0){
+                        requete+= "AND id_batiment = " + jtf3.getText() + " ";
+                    }
+                    if (jtf4.getText().length()!=0){
+                        requete+= "AND directeur = " + jtf4.getText() + " ";
+                    }   
+                    Service listservicerecherche = servicedao.find(requete);
+                    columnNames = new String[3];
+                    columnNames[0] = "Nom";
+                    columnNames[1] = "Code";
+                    columnNames[2] = "Directeur";
+                    data = new Object[2][3];
+                    if(listservicerecherche!=null)
+                    {
+                        data[0][0] = listservicerecherche.getNom();
+                        data[0][1] = listservicerecherche.getCode();
+                        data[0][2] = listservicerecherche.getDirecteur().getNom();
+                    }
                 
+                }
+                table = new JTable(data, columnNames);
+                JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
             }
-            table = new JTable(data, columnNames);
-            JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
-        }
-        
+            if (Cursor == "Hospitalisation"){
+                String requete = " ";
+                HospitalisationDAO hospitalisationdao= new HospitalisationDAO();
+                hospitalisationdao.set_connexion(maconnexion);
+                
+                if ((jtf1.getText().length() == 0) & (jtf2.getText().length()== 0) & (jtf3.getText().length()== 0) & (jtf4.getText().length()== 0)){
+                    DAO<Service> ServiceDAO = new ServiceDAO();
+                    ServiceDAO.set_connexion(maconnexion);
+                    int elem[] = ServiceDAO.nbrelem();
+                    columnNames = new String[4];
+                    columnNames[0] = "Num_malade";
+                    columnNames[1] = "Code_service";
+                    columnNames[2] = "Num_chambre";
+                    columnNames[3] = "Nb_lit";
+            
+                    data = new Object[elem.length][4];
+                    int j = 0;
+            
+                    for (int i = 0; i < elem.length; i++) {
+                        Hospitalisation hospitalisation = HospitalisationDAO.find(elem[i]);
+               
+                        data[j][0] = hospitalisation.getNo_malade();
+                        data[j][1] = hospitalisation.getCode_service();
+                        data[j][2] = hospitalisation.getNo_chambre();
+                        data[j][3] = hospitalisation.getLit();
+                        j++;
+               
+                    }
+                    table = new JTable(data, columnNames);
+                    JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
+                }
+                else{
+                    if (jtf1.getText().length()!=0){
+                        requete+= "no_malade = " + jtf1.getText() + " " ;
+                    }
+                    if (jtf2.getText().length()!=0){
+                        requete+= "AND code_service = \"" + jtf2.getText() + "\" ";
+                    }
+                    if (jtf3.getText().length()!=0){
+                        requete+= "AND no_chambre = " + jtf3.getText() + " ";
+                    }
+                    if (jtf4.getText().length()!=0){
+                        requete+= "AND lit = " + jtf4.getText() + " ";
+                    }   
+                    Hospitalisation listhospitalisationrecherche = hospitalisationdao.find(requete);
+                    columnNames = new String[4];
+                    columnNames[0] = "Numero du malade";
+                    columnNames[1] = "Code du service"; 
+                    columnNames[2] = "Numero de la chambre";
+                    columnNames[3] = "Nombre de lits";
+                    data = new Object[2][4];
+                    if(listhospitalisationrecherche!=null)
+                    {
+                        data[0][0] = listhospitalisationrecherche.getNo_malade();
+                        data[0][1] = listhospitalisationrecherche.getCode_service();
+                        data[0][2] = listhospitalisationrecherche.getNo_chambre();
+                        data[0][3] = listhospitalisationrecherche.getLit();
+                    }
+                
+                }
+                table = new JTable(data, columnNames);
+                JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
+            }
+                    
+         }
+                  
         if (e.getActionCommand().equals("Employé")){
             
             DAO<Employe> EmployeDAO = new EmployeDAO();
