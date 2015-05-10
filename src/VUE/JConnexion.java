@@ -28,6 +28,9 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
     private static JControleur jControleur;
     private Image panel;
 
+    /**
+     *
+     */
     public JConnexion() {
         super("Interface ");
         maconnexion = new Connexion();
@@ -78,12 +81,20 @@ public class JConnexion extends JFrame implements ActionListener, WindowListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //allows to close the window directly when we click on the red cross
     }
 
+    /**
+     *
+     * @return
+     */
     public int getConnexionValide() {
 
         return maconnexion.getconnexionok();
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Connexion getConnexion() {
 
         return maconnexion;

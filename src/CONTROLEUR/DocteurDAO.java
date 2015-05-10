@@ -24,7 +24,6 @@ public class DocteurDAO extends DAO<Docteur> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -59,7 +58,7 @@ public class DocteurDAO extends DAO<Docteur> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param id
      * @return
      */
     @Override
@@ -104,7 +103,7 @@ public class DocteurDAO extends DAO<Docteur> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param requete
      * @return
      */
     public Docteur find(String requete) {
@@ -185,7 +184,6 @@ public class DocteurDAO extends DAO<Docteur> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Docteur obj) {
@@ -211,8 +209,7 @@ public class DocteurDAO extends DAO<Docteur> {
      * Méthode delete : Permet de supprimer un elemde la base de donnée en
      * fournissent un obj requete
      *
-     * @param obj
-     * @return
+     * @param selection_de_la_jcombox_mais_ceci_est_lid
      */
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
         ResultSet result = null;

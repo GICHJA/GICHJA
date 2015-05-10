@@ -116,7 +116,6 @@ public class BatimentDAO extends DAO<Batiment> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Batiment obj) {
@@ -142,7 +141,6 @@ public class BatimentDAO extends DAO<Batiment> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override

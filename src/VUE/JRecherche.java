@@ -45,7 +45,9 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
     private JScrollPane scrollpane;
     private String Cursor;
     
-    
+    /**
+     *
+     */
     public JRecherche(){
         
         selection = new JPanel (new BorderLayout());

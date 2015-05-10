@@ -28,11 +28,17 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
     private JUpdate update;
     private JReporting reporting;
     private JPanel  app1, app2, app3, app4;
+
+    /**
+     *
+     */
     public static Connexion maconnexion;
     private JTabbedPane tabbedpane;
    
-    
-    
+    /**
+     *
+     * @param maconnexion
+     */
     public JControleur(Connexion maconnexion) {
         
         super("Interface");

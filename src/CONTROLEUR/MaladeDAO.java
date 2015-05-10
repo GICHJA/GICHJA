@@ -138,7 +138,6 @@ public class MaladeDAO extends DAO<Malade> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Malade obj) {
@@ -163,7 +162,6 @@ public class MaladeDAO extends DAO<Malade> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -195,6 +193,10 @@ public class MaladeDAO extends DAO<Malade> {
         return nbr;
     }
 
+    /**
+     *
+     * @param selection_de_la_jcombox_mais_ceci_est_lid
+     */
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();

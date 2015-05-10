@@ -21,6 +21,9 @@ public class JMenu extends JFrame {
     private JPanel p;
     //private JTabbedPane tabbedpane;
 
+    /**
+     *
+     */
     public JMenu()  {
 
         p = new JPanel(new BorderLayout());

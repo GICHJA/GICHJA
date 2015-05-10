@@ -16,7 +16,6 @@ public class SoigneDAO extends DAO<Soigne> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -40,7 +39,7 @@ public class SoigneDAO extends DAO<Soigne> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id
+     * @param requete
      * @return
      */
     public Soigne find(String requete) {
@@ -76,7 +75,6 @@ public class SoigneDAO extends DAO<Soigne> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Soigne obj) {

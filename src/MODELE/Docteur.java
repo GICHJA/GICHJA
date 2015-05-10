@@ -17,51 +17,100 @@ public class Docteur extends Employe {
     private String specialite;
     private List<RendezVous> listrdv;
 
+    /**
+     *
+     * @param numero
+     */
     public void setNumero(int numero) {
         this.numero = numero;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumero() {
         return numero;
     }
 
+    /**
+     *
+     * @param numero
+     * @param specialite
+     */
     public Docteur(int numero, String specialite) {
         this.numero = numero;
         this.specialite = specialite;
     }
 
+    /**
+     *
+     */
     public Docteur() {
         super();
         this.specialite = "";
         this.listrdv = null;
     }
 
+    /**
+     *
+     * @param specialite
+     * @param listrdv
+     * @param id_employe
+     * @param nom
+     * @param prenom
+     * @param adresse
+     * @param tel
+     */
     public Docteur(String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel) {
         super(id_employe, nom, prenom, adresse, tel);
         this.specialite = specialite;
         this.listrdv = listrdv;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSpecialite() {
         return specialite;
     }
 
+    /**
+     *
+     * @param spe
+     */
     public void setSpecialite(String spe) {
         this.specialite = spe;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<RendezVous> getListsoigne() {
         return this.listrdv;
     }
 
+    /**
+     *
+     * @param list
+     */
     public void setList_soigne(List<RendezVous> list) {
         this.listrdv = list;
     }
 
+    /**
+     *
+     * @param rdv
+     */
     public void ajoutSoigne(RendezVous rdv) {
         this.listrdv.add(rdv);
     }
 
+    /**
+     *
+     */
     public void affiche() {
 
         super.affiche();
@@ -78,8 +127,11 @@ public class Docteur extends Employe {
         }
     }
     
-    
-        public String getstringService() {
+    /**
+     *
+     * @return
+     */
+    public String getstringService() {
         
         return super.getstringService() + "Doc : specialite - " + specialite + "\n";
     }

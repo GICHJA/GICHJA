@@ -24,7 +24,7 @@ public class EmployeDAO extends DAO<Employe> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param id
      * @return
      */
     @Override
@@ -105,7 +105,6 @@ public class EmployeDAO extends DAO<Employe> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Employe obj) {
@@ -130,8 +129,7 @@ public class EmployeDAO extends DAO<Employe> {
      * Méthode delete : Permet de supprimer un elemde la base de donnée en
      * fournissent un obj requete
      *
-     * @param obj
-     * @return
+     * @param id
      */
     public void delete(int id) {
         ResultSet result = null;
@@ -156,6 +154,10 @@ public class EmployeDAO extends DAO<Employe> {
      * @return
      */
   
+    /**
+     * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
+     * @return
+     */
     @Override
     public int[] nbrelem() {
         int nbr[] = null;

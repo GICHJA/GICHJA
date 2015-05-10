@@ -97,7 +97,6 @@ public class MutuelleDAO extends DAO<Mutuelle> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Mutuelle obj) {
@@ -122,7 +121,6 @@ public class MutuelleDAO extends DAO<Mutuelle> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override

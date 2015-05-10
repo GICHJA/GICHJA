@@ -16,10 +16,18 @@ public abstract class DAO<T> {
 
     private Connexion maconnexion;
 
+    /**
+     *
+     * @return
+     */
     public Connexion get_connexion() {
         return maconnexion;
     }
 
+    /**
+     *
+     * @param maconnexion
+     */
     public void set_connexion(Connexion maconnexion) {
         this.maconnexion = maconnexion;
     }
@@ -27,7 +35,6 @@ public abstract class DAO<T> {
       /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     public abstract int[] nbrelem();
@@ -36,7 +43,7 @@ public abstract class DAO<T> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param id
      * @return
      */
     public abstract T find(int id);
@@ -64,7 +71,6 @@ public abstract class DAO<T> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     public abstract void delete(T obj);
 

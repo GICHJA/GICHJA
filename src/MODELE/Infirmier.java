@@ -19,6 +19,14 @@ public class Infirmier extends Employe {
     private double salaire;
     private List<Chambre> listchambresurveillant;
 
+    /**
+     *
+     * @param numero
+     * @param code_service
+     * @param rotation
+     * @param salaire
+     * @param listchambresurveillant
+     */
     public Infirmier(int numero, String code_service, String rotation, double salaire, List<Chambre> listchambresurveillant) {
         this.numero = numero;
         this.code_service = code_service;
@@ -27,9 +35,9 @@ public class Infirmier extends Employe {
         this.listchambresurveillant = listchambresurveillant;
     }
 
-    
-    
-    
+    /**
+     *
+     */
     public Infirmier() {
         super();
         this.rotation = "";
@@ -37,6 +45,17 @@ public class Infirmier extends Employe {
         this.listchambresurveillant = null;
     }
 
+    /**
+     *
+     * @param rotation
+     * @param salaire
+     * @param listchambresurveillant
+     * @param id_employe
+     * @param nom
+     * @param prenom
+     * @param adresse
+     * @param tel
+     */
     public Infirmier(String rotation, double salaire, List<Chambre> listchambresurveillant, int id_employe, String nom, String prenom, String adresse, String tel) {
         super(id_employe, nom, prenom, adresse, tel);
         this.rotation = rotation;
@@ -44,51 +63,97 @@ public class Infirmier extends Employe {
         this.listchambresurveillant = listchambresurveillant;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumero() {
         return numero;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCode_service() {
         return code_service;
     }
 
+    /**
+     *
+     * @param numero
+     */
     public void setNumero(int numero) {
         this.numero = numero;
     }
 
+    /**
+     *
+     * @param code_service
+     */
     public void setCode_service(String code_service) {
         this.code_service = code_service;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public String getRotation() {
         return rotation;
     }
 
+    /**
+     *
+     * @param rotation
+     */
     public void setRotation(String rotation) {
         this.rotation = rotation;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getSalaire() {
         return salaire;
     }
 
+    /**
+     *
+     * @param salaire
+     */
     public void setSalaire(double salaire) {
         this.salaire = salaire;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Chambre> getListchambresurveillant() {
         return listchambresurveillant;
     }
 
+    /**
+     *
+     * @param list
+     */
     public void setListchambresurveillant(List<Chambre> list) {
         this.listchambresurveillant = list;
     }
 
+    /**
+     *
+     * @param chambre
+     */
     public void ajoutChambre(Chambre chambre) {
         this.listchambresurveillant.add(chambre);
     }
 
+    /**
+     *
+     */
     public void affiche() {
         
          super.affiche();
@@ -106,6 +171,10 @@ public class Infirmier extends Employe {
         
     }
 
+    /**
+     *
+     * @return
+     */
     public String getstringService() {
         
         return super.getstringService() + "inf : rotation - " + rotation +  " salaire - " +salaire +  "\n";

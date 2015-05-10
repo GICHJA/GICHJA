@@ -90,7 +90,6 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Hospitalisation obj) {
@@ -115,7 +114,6 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override

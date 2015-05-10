@@ -29,7 +29,7 @@ public class ChambreDAO extends DAO<Chambre> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param id_chambre
      * @return
      */
     public Chambre find(int id_chambre) {
@@ -128,7 +128,6 @@ public class ChambreDAO extends DAO<Chambre> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Chambre obj) {
@@ -152,7 +151,6 @@ public class ChambreDAO extends DAO<Chambre> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -183,6 +181,10 @@ public class ChambreDAO extends DAO<Chambre> {
         return nbr;
     }
 
+    /**
+     *
+     * @param selection_de_la_jcombox_mais_ceci_est_lid
+     */
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
                         ResultSet result = null;
         int[] listelem = this.nbrelem();

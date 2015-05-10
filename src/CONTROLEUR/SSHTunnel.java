@@ -88,6 +88,12 @@ public class SSHTunnel {
     /* ************************
      *    Getters & Setters   *
      ************************ */
+
+    /**
+     *
+     * @return
+     */
+    
     public String getFirstHost() {
         return firstHost;
     }
@@ -96,6 +102,10 @@ public class SSHTunnel {
         this.firstHost = firstHost;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSecondHost() {
         return secondHost;
     }
@@ -104,6 +114,10 @@ public class SSHTunnel {
         this.secondHost = secondHost;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getFirstHostPort() {
         return firstHostPort;
     }
@@ -112,6 +126,10 @@ public class SSHTunnel {
         this.firstHostPort = firstHostPort;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSecondHostPort() {
         return secondHostPort;
     }
@@ -120,6 +138,10 @@ public class SSHTunnel {
         this.secondHostPort = secondHostPort;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }

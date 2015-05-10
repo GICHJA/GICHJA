@@ -46,6 +46,9 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
     private JLabel jl1, jl2, jl3, jl4, jl5, jl6, jl7, jl8;
     private JButton jbvalide1;
 
+    /**
+     *
+     */
     public JUpdate() {
 
         princ = new JPanel(new BorderLayout());

@@ -17,6 +17,9 @@ public class Batiment {
     private String nom_batiment;
     private List<Service> listservice;
 
+    /**
+     *
+     */
     public Batiment() {
          this.id_batiment = 0;
         this.nom_batiment = "";
@@ -24,45 +27,85 @@ public class Batiment {
 
     }
 
+    /**
+     *
+     * @param id_batiment
+     * @param nom_batiment
+     * @param listservice
+     */
     public Batiment(int id_batiment, String nom_batiment, List<Service> listservice) {
         this.id_batiment = id_batiment;
         this.nom_batiment = nom_batiment;
         this.listservice = listservice;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNom_batiment() {
         return nom_batiment;
     }
 
+    /**
+     *
+     * @param nom_batiment
+     */
     public void setNom_batiment(String nom_batiment) {
         this.nom_batiment = nom_batiment;
     }
 
+    /**
+     *
+     * @param listservice
+     */
     public void setListservice(List<Service> listservice) {
         this.listservice = listservice;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public List<Service> getListservice() {
         return listservice;
     }
 
+    /**
+     *
+     * @param list
+     */
     public void setId_batiment(List<Service> list) {
         this.listservice = list;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId_batiment() {
         return id_batiment;
     }
 
+    /**
+     *
+     * @param x
+     */
     public void setId_batiment(int x) {
         this.id_batiment = x;
     }
 
+    /**
+     *
+     * @param service
+     */
     public void ajoutService(Service service) {
         this.listservice.add(service);
     }
 
+    /**
+     *
+     */
     public void affiche() {
        
         System.out.println("Bat : id_batiment - " + id_batiment + " +  nom_batiment - " + nom_batiment + "\n");

@@ -24,7 +24,6 @@ public class InfirmierDAO extends DAO<Infirmier> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -59,7 +58,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id_batiment
+     * @param id
      * @return
      */
     @Override
@@ -169,7 +168,6 @@ public class InfirmierDAO extends DAO<Infirmier> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Infirmier obj) {
@@ -195,8 +193,7 @@ public class InfirmierDAO extends DAO<Infirmier> {
      * Méthode delete : Permet de supprimer un elemde la base de donnée en
      * fournissent un obj requete
      *
-     * @param obj
-     * @return
+     * @param id
      */
     public void deleteint(int id) {
         ResultSet result = null;
@@ -221,6 +218,11 @@ public class InfirmierDAO extends DAO<Infirmier> {
         }
     }
 
+    /**
+     *
+     * @param requete
+     * @return
+     */
     public Infirmier find(String requete) {
         ResultSet result = null;
         Infirmier obj = new Infirmier();

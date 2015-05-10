@@ -92,7 +92,6 @@ public class RendezVousDAO extends DAO<RendezVous> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(RendezVous obj) {
@@ -117,7 +116,6 @@ public class RendezVousDAO extends DAO<RendezVous> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
@@ -148,6 +146,10 @@ public class RendezVousDAO extends DAO<RendezVous> {
         return nbr;
     }
 
+    /**
+     *
+     * @param selection_de_la_jcombox_mais_ceci_est_lid
+     */
     public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
         ResultSet result = null;
         int[] listelem = this.nbrelem();

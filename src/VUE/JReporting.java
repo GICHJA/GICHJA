@@ -34,6 +34,9 @@ public class JReporting extends JFrame implements ActionListener, WindowListener
     private String[] entetes;
     private JFreeChart chart;
 
+    /**
+     *
+     */
     public JReporting() {
 
         princ = new JPanel(new BorderLayout());

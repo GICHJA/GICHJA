@@ -91,7 +91,7 @@ public class ServiceDAO extends DAO<Service> {
      * Méthode find : Permet de retourner la classe entiérement remplie en
      * fournissant un id requete
      *
-     * @param id
+     * @param requete
      * @return
      */
     public Service find(String requete) {
@@ -197,7 +197,6 @@ public class ServiceDAO extends DAO<Service> {
      * fournissent un obj requete
      *
      * @param obj
-     * @return
      */
     @Override
     public void delete(Service obj) {
@@ -222,8 +221,7 @@ public class ServiceDAO extends DAO<Service> {
      * Méthode delete : Permet de supprimer un elemde la base de donnée en
      * fournissent un obj requete
      *
-     * @param obj
-     * @return
+     * @param id
      */
     public void deleteint(int id) {
         ResultSet result = null;
@@ -248,7 +246,6 @@ public class ServiceDAO extends DAO<Service> {
     /**
      * Méthode nbrelem : Retrourne une liste des id de l'objet voulue requete
      *
-     * @param obj
      * @return
      */
     @Override
