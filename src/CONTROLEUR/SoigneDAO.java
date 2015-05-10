@@ -28,6 +28,10 @@ public class SoigneDAO extends DAO<Soigne>  {
     public Soigne find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Soigne find(String requete) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public Soigne create(Soigne obj) {

@@ -11,12 +11,14 @@ import CONTROLEUR.EmployeDAO;
 import CONTROLEUR.HospitalisationDAO;
 import CONTROLEUR.MaladeDAO;
 import CONTROLEUR.ServiceDAO;
+import CONTROLEUR.SoigneDAO;
 import MODELE.Batiment;
 import MODELE.Docteur;
 import MODELE.Employe;
 import MODELE.Malade;
 import MODELE.Service;
 import MODELE.Hospitalisation;
+import MODELE.Soigne;
 import static VUE.JControleur.maconnexion;
 import java.awt.*;
 import java.awt.event.*;
@@ -72,9 +74,6 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
         this.jb7 = new JButton ("Docteur");
         p1.add(this.jb7);
         this.jb7.addActionListener(this);
-        this.jb8 = new JButton ("Soigné");
-        p1.add(this.jb8);
-        this.jb8.addActionListener(this);
         this.jb9 = new JButton ("Batiment");
         p1.add(this.jb9);
         this.jb9.addActionListener(this);
@@ -175,6 +174,33 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             selection.revalidate();
         }
         
+        if (e.getActionCommand().equals("Soigné")){
+           Cursor = "Soigné";
+            
+            this.p1service = new JPanel(new GridLayout(4, 2));
+            this.p2service = new JPanel(new FlowLayout());
+
+            this.jl1 = new JLabel("Numéro du Docteur : ");
+            p1service.add(this.jl1);
+            this.jtf1 = new JTextField(20);
+            this.jtf1.addActionListener(this);
+            p1service.add(this.jtf1);
+
+            this.jl2 = new JLabel("Numéro du Malade : ");
+            p1service.add(this.jl2);
+            this.jtf2 = new JTextField(20);
+            this.jtf2.addActionListener(this);
+            p1service.add(this.jtf2);
+                
+            jbvalide1 = new JButton("Rechercher");
+            this.jbvalide1.addActionListener(this);
+            p2service.add(this.jbvalide1);
+                
+            selection.add("Center", p1service);
+            selection.add("South", p2service);
+            selection.revalidate();
+        }
+        
         
         if (e.getActionCommand().equals("Rechercher")){   
             if (Cursor == "Service"){
@@ -258,8 +284,7 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                     int j = 0;
             
                     for (int i = 0; i < elem.length; i++) {
-                        Hospitalisation hospitalisation = HospitalisationDAO.find(elem[i]);
-               
+                        Hospitalisation hospitalisation = hospitalisationdao.find(elem[i]);               
                         data[j][0] = hospitalisation.getNo_malade();
                         data[j][1] = hospitalisation.getCode_service();
                         data[j][2] = hospitalisation.getNo_chambre();
@@ -302,8 +327,6 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
                 table = new JTable(data, columnNames);
                 JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
             }
-                    
-         }
                   
         if (e.getActionCommand().equals("Employé")){
             
@@ -390,7 +413,8 @@ public class JRecherche extends JFrame implements ActionListener, WindowListener
             JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(data, columnNames)));
         }
         
-    }   
+        }
+    }
     
     
     @Override

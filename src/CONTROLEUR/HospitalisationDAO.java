@@ -50,7 +50,7 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
             result = this.get_connexion().result(Search);
 
             if (result.first()) {
-                hospitalisation = new Hospitalisation(id,result.getInt("lit")); 
+                hospitalisation = new Hospitalisation(result.getInt("id_hospitalisation"), result.getInt("lit")); 
             }
 
         } catch (SQLException ex) {
