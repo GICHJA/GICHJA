@@ -51,6 +51,37 @@ public class MaladeDAO extends DAO<Malade> {
         }
         return malade;
     }
+    
+    public Malade find(String requete) {
+        ResultSet result = null, result2 = null;
+        Malade malade = new Malade();
+        List<RendezVous> listrdv = new LinkedList();
+        try {
+            String Search = "select * from malade, rendezvous WHERE" + requete + " AND  malade.numero =  rendezvous.no_malade";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                result.beforeFirst();
+                while (result.next() && result.getInt("no_rdv") != 0) {
+                    RendezVousDAO rdvDAO = new RendezVousDAO();
+                    rdvDAO.set_connexion(this.get_connexion());
+                    listrdv.add(rdvDAO.find(result.getInt("no_rdv")));
+
+                }
+                result.first();
+                malade = new Malade(result.getInt("numero"),
+                        result.getString("nom"),
+                        result.getString("prenom"),
+                        result.getString("adresse"),
+                        result.getString("tel"),
+                        listrdv
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return malade;
+    }
 
     @Override
     public Malade create(Malade obj) {

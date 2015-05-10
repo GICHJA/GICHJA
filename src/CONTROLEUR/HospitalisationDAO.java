@@ -41,23 +41,6 @@ public class HospitalisationDAO extends DAO<Hospitalisation> {
         }
         return hospitalisation;
     }
-    
-    public Hospitalisation find(String requete) {
-        ResultSet result = null;
-        Hospitalisation hospitalisation = new Hospitalisation();
-        try {
-            String Search = "select * from hospitalisation WHERE " + requete;
-            result = this.get_connexion().result(Search);
-
-            if (result.first()) {
-                hospitalisation = new Hospitalisation(result.getInt("id_hospitalisation"), result.getInt("lit")); 
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return hospitalisation;
-    }
 
     @Override
     public Hospitalisation create(Hospitalisation obj) {

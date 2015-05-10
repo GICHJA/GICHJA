@@ -89,6 +89,40 @@ public class InfirmierDAO extends DAO<Infirmier> {
         }
         return obj;
     }
+    
+    public Infirmier find(String requete) {
+        ResultSet result = null;
+        Infirmier obj = new Infirmier();
+        List<Chambre> listobj = new LinkedList();;
+        try {
+            String Search = "SELECT * FROM employe , infirmier , chambre WHERE" + requete + " AND  employe.numero = infirmier.numero AND chambre.surveillant =  infirmier.numero ";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                result.beforeFirst();
+                while (result.next() && result.getInt("id_chambre") != 0) {
+                    ChambreDAO objDAO = new ChambreDAO();
+                    objDAO.set_connexion(this.get_connexion());
+                    listobj.add(objDAO.find(result.getInt("id_chambre")));
+
+                }
+                result.first();
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                        listobj, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+
+                //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
+            } else {
+                Search = "SELECT * FROM employe , infirmier  WHERE" + requete + " AND  employe.numero = infirmier.numero ";
+                result = this.get_connexion().result(Search);
+                result.first();
+                obj = new Infirmier(result.getString("rotation"), result.getDouble("salaire"),
+                        null, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChambreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 
     @Override
     public Infirmier create(Infirmier obj) {

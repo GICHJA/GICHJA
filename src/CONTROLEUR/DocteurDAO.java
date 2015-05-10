@@ -91,6 +91,43 @@ public class DocteurDAO extends DAO<Docteur> {
         }
         return obj;
     }
+    
+    public Docteur find(String requete) {
+        ResultSet result = null, result2 = null;
+        Docteur obj = new Docteur();
+        List<RendezVous> listobj = new LinkedList();;
+        try {
+            String Search = "SELECT * FROM employe , docteur , rendezvous WHERE " + requete + " AND  employe.numero = docteur.numero AND rendezvous.no_docteur =  docteur.numero ";
+            result = this.get_connexion().result(Search);
+
+            if (result.first()) {
+                result.beforeFirst();
+                while (result.next() && result.getInt("no_rdv") != 0) {
+                    RendezVousDAO objDAO = new RendezVousDAO();
+                    objDAO.set_connexion(this.get_connexion());
+                    listobj.add(objDAO.find(result.getInt("no_rdv")));
+
+                }
+                result.first();
+                obj = new Docteur(result.getString("specialite"),
+                        listobj, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+
+                //String specialite, List<RendezVous> listrdv, int id_employe, String nom, String prenom, String adresse, String tel
+            } else {
+                Search = "SELECT * FROM employe , docteur  WHERE " + requete + " AND  employe.numero = docteur.numero ";
+                result = this.get_connexion().result(Search);
+                if (result.first()) {
+                    result.first();
+                    obj = new Docteur(result.getString("specialite"),
+                            null, result.getInt("numero"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("tel"));
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HospitalisationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 
     @Override
     public Docteur create(Docteur obj) {
