@@ -59,7 +59,7 @@ public class ServiceDAO extends DAO<Service> {
                     objDAO3.set_connexion(this.get_connexion());
                     directeur = objDAO3.find(result.getInt("directeur"));
                     obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, listobj, listobj2);
-                    obj.setId_batiment( result.getInt("id_batiment"));
+                    obj.setId_batiment(result.getInt("id_batiment"));
                     obj.setNo_directeur(result.getInt("directeur"));
                 }
                 //int id_service, String nom, Docteur directeur, List<Infirmier> listinfirmier, List<Chambre> listchambre
@@ -70,9 +70,8 @@ public class ServiceDAO extends DAO<Service> {
 
                 result.first();
                 obj = new Service(id, result.getString("code"), result.getString("nom"), directeur, null, null);
-                obj.setId_batiment( result.getInt("id_batiment"));
+                obj.setId_batiment(result.getInt("id_batiment"));
                 obj.setNo_directeur(result.getInt("directeur"));
-                
 
             }
         } catch (SQLException ex) {
@@ -100,7 +99,7 @@ public class ServiceDAO extends DAO<Service> {
 
     @Override
     public Service update(Service obj) {
-                       ResultSet result = null;
+        ResultSet result = null;
 
         try {
             String Search = "UPDATE service SET "
@@ -108,8 +107,8 @@ public class ServiceDAO extends DAO<Service> {
                     + "nom = '" + obj.getNom() + "' ,"
                     + "id_batiment = '" + obj.getId_batiment() + "' ,"
                     + "directeur = '" + obj.getNo_directeur() + "' "
-                    + "WHERE id_service =  '"+ obj.getId_service()+ "' ";
-            
+                    + "WHERE id_service =  '" + obj.getId_service() + "' ";
+
             System.out.println(Search);
             this.get_connexion().executeUpdate(Search);
 
@@ -152,6 +151,7 @@ public class ServiceDAO extends DAO<Service> {
 
                 Search = "DELETE FROM service WHERE service.id_service = " + id + " ;";
                 this.get_connexion().executeUpdate(Search);
+
             }
 
         } catch (SQLException ex) {

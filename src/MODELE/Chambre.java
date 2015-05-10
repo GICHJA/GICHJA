@@ -113,4 +113,8 @@ public class Chambre {
 
     }
 
+    public String getstringService() {
+        return "Id_chambre - " + id_chambre + " +  nb_lit - " + nb_lit + "\n";
+    }
+
 }

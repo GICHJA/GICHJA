@@ -134,4 +134,27 @@ public class DocteurDAO extends DAO<Docteur> {
         }
     }
 
+    public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
+                        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from docteur WHERE docteur.numero = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                 Search = "DELETE FROM batiment WHERE docteur.numero = " +selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+                this.get_connexion().executeUpdate(Search);
+                
+                EmployeDAO employeDAO = new EmployeDAO();
+                employeDAO.delete(selection_de_la_jcombox_mais_ceci_est_lid);
+            }
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

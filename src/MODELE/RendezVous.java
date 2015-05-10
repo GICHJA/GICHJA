@@ -103,4 +103,8 @@ public class RendezVous {
 
     }
 
+    public String getstringService() {
+        return "RendezVous  : no_rdv - " + no_rdv + " date_arr -  " + date_arr + " date_dep -  " + date_dep + " motif -  " + motif + "\n";
+    }
+
 }

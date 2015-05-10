@@ -15,6 +15,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -32,7 +33,7 @@ public class JControleur extends JFrame implements ActionListener, WindowListene
    
     
     
-    public JControleur(Connexion maconnexion){
+    public JControleur(Connexion maconnexion) {
         
         super("Interface");
         

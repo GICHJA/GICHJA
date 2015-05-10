@@ -157,4 +157,26 @@ public class ChambreDAO extends DAO<Chambre> {
         return nbr;
     }
 
+    public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {
+                        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+             String Search = "select * from chambre WHERE chambre.id_chambre = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                 Search = "DELETE FROM chambre WHERE chambre.id_chambre = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+                this.get_connexion().executeUpdate(Search);
+                
+                
+            }
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

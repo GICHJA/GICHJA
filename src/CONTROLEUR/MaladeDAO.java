@@ -127,4 +127,25 @@ public class MaladeDAO extends DAO<Malade> {
         return nbr;
     }
 
+    public void deleteint(int selection_de_la_jcombox_mais_ceci_est_lid) {           
+        ResultSet result = null;
+        int[] listelem = this.nbrelem();
+        int nextid = listelem[listelem.length - 1] + 1;
+        try {
+            String Search = "select * from malade WHERE malade.numero = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+            result = this.get_connexion().result(Search);
+            if (result.first()) {
+
+                Search = "DELETE FROM malade WHERE malade.numero = " + selection_de_la_jcombox_mais_ceci_est_lid + " ;";
+                this.get_connexion().executeUpdate(Search);
+                
+            }
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

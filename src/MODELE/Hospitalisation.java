@@ -119,5 +119,9 @@ public class Hospitalisation {
         
         System.out.print("Lit d'hospitalisation : " + lit +"\n");
     }
+
+    public Object getstringService() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

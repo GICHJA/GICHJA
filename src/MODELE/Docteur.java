@@ -77,5 +77,11 @@ public class Docteur extends Employe {
             s.affiche();
         }
     }
+    
+    
+        public String getstringService() {
+        
+        return super.getstringService() + "Doc : specialite - " + specialite + "\n";
+    }
 
 }

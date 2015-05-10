@@ -21,7 +21,7 @@ public class JMenu extends JFrame {
     private JPanel p;
     //private JTabbedPane tabbedpane;
 
-    public JMenu() throws BadLocationException {
+    public JMenu()  {
 
         p = new JPanel(new BorderLayout());
         /*tabbedpane = new JTabbFlowLayoutedPane();
