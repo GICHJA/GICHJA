@@ -79,18 +79,18 @@ public class JUpdate extends JFrame implements ActionListener, WindowListener {
         princ.add("Center", affichagecentrale);
 
         this.jb9 = new JButton("Mettre à jour");
-        this.jb9.setBackground(Color.red);
-        this.jb9.setForeground(Color.white);
+        //this.jb9.setBackground(Color.red);
+        this.jb9.setForeground(Color.red);
         p3.add(this.jb9);
         this.jb9.addActionListener(this);
         this.jb10 = new JButton("Insérer");
-        this.jb10.setBackground(Color.red);
-        this.jb10.setForeground(Color.white);
+        //this.jb10.setBackground(Color.red);
+        this.jb10.setForeground(Color.red);
         p3.add(this.jb10);
         this.jb10.addActionListener(this);
         this.jb11 = new JButton("Supprimer");
-        this.jb11.setBackground(Color.red);
-        this.jb11.setForeground(Color.white);
+        //this.jb11.setBackground(Color.red);
+        this.jb11.setForeground(Color.red);
         p3.add(this.jb11);
         this.jb11.addActionListener(this);
         princ.add("South", p3);
